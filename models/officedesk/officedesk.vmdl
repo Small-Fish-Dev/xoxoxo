@@ -43,7 +43,7 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ -20.54146, 0.079442, 39.485867 ]
+						origin = [ 20.456476, 0.079442, 39.485867 ]
 						angles = [ 0.0, 0.0, 0.0 ]
 						dimensions = [ 82.382538, 39.020966, 1.249686 ]
 					},
@@ -56,8 +56,20 @@
 						collision_interact_with = ""
 						collision_interact_exclude = ""
 						radius = 1.6
-						point0 = [ -48.101639, -10.718599, 0.0 ]
-						point1 = [ -48.101639, -10.718599, 38.98151 ]
+						point0 = [ 48.102348, -11.229075, 0.0 ]
+						point1 = [ 48.102348, -11.229075, 38.98151 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "wood.sheet"
+						collision_group = ""
+						collision_interact_as = ""
+						collision_interact_with = ""
+						collision_interact_exclude = ""
+						origin = [ -7.950126, 0.43371, 19.689121 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 21.655685, 27.644644, 39.303185 ]
 					},
 					{
 						_class = "PhysicsShapeCylinder"
@@ -68,20 +80,8 @@
 						collision_interact_with = ""
 						collision_interact_exclude = ""
 						radius = 1.6
-						point0 = [ -48.101639, 11.218901, 0.0 ]
-						point1 = [ -48.101639, 11.218901, 38.98151 ]
-					},
-					{
-						_class = "PhysicsShapeBox"
-						parent_bone = ""
-						surface_prop = "wood.sheet"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
-						origin = [ 7.943408, -0.447071, 19.689121 ]
-						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 21.655685, 27.644644, 39.303185 ]
+						point0 = [ 48.102348, 10.749152, 0.0 ]
+						point1 = [ 48.102348, 10.749152, 38.98151 ]
 					},
 				]
 			},
