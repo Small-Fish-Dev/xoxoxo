@@ -49,6 +49,21 @@ namespace Sandbox
 				pawn.Transform = tx;
 			}
 		}
+
+		/*[Event.Tick.Server]
+		public void ChangeColor()
+		{
+
+			PointLightEntity light = FindByName( "Exit_Light" ) as PointLightEntity;
+
+			if ( light.IsValid() )
+			{
+
+				light.Color = Color.Random;
+
+			}
+
+		}*/
 	}
 
 }
