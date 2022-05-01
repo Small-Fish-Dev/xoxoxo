@@ -253,9 +253,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ -4.388582, -1.865054, 9.86618 ]
+						origin = [ -5.892938, -2.739118, 14.902929 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 3.23095, 17.809391, 11.292019 ]
+						dimensions = [ 3.477032, 26.561134, 16.629913 ]
 					},
 					{
 						_class = "PhysicsShapeBox"
@@ -265,9 +265,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ -3.935544, -1.74796, 0.396801 ]
+						origin = [ -5.827637, -2.628216, 0.640401 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 7.432029, 7.404525, 0.655166 ]
+						dimensions = [ 11.216213, 11.288357, 1.142366 ]
 					},
 					{
 						_class = "PhysicsShapeBox"
@@ -289,9 +289,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ 2.62466, 10.549536, 0.586583 ]
+						origin = [ 4.057852, 15.935589, 0.843985 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 3.648153, 2.393807, 1.034729 ]
+						dimensions = [ 5.507225, 3.398486, 1.549532 ]
 					},
 					{
 						_class = "PhysicsShapeCylinder"
@@ -301,9 +301,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						radius = 0.5
-						point0 = [ -5.824189, -1.848197, 0.643017 ]
-						point1 = [ -5.824189, -1.848197, 11.965035 ]
+						radius = 0.8
+						point0 = [ -8.706968, -2.75567, 0.643017 ]
+						point1 = [ -8.706968, -2.75567, 18.106827 ]
 					},
 				]
 			},
