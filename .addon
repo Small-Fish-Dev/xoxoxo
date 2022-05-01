@@ -1,0 +1,22 @@
+{
+  "Title": "xoxoxo",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "xoxoxo",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": null,
+  "HasCode": true,
+  "CodePath": "/code/",
+  "RootNamespace": "Sandbox",
+  "Metadata": {
+    "MapList": [
+      "xoxoxo_office"
+    ],
+    "GameNetworkType": 1,
+    "MaxPlayers": 1,
+    "MinPlayers": 1,
+    "MapSelect": 3
+  }
+}
