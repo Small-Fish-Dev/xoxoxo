@@ -54,12 +54,21 @@ namespace Sandbox
 		public void ChangeColor()
 		{
 
-			PointLightEntity light = FindByName( "Exit_Light" ) as PointLightEntity;
+			EnvironmentLightEntity light = FindByName( "Sun" ) as EnvironmentLightEntity;
 
 			if ( light.IsValid() )
 			{
 
-				light.Color = Color.Random;
+				var hours = 14f; // From 5am to 7pm
+				var halfDay = hours / 2;
+				var time = Time.Now % hours;
+				var sunRotation = (time - halfDay) / halfDay * 35f + 95f;
+				var sunElevation = (float)Math.Cos( Math.PI / ( 1 + Math.Abs( ( time - halfDay ) / halfDay ) ) ) * 30f - 45f;
+
+
+				var rotation = Rotation.FromYaw( sunRotation );
+				var elevation = Rotation.FromRoll( 0 );
+				light.Rotation = rotation + elevation;
 
 			}
 

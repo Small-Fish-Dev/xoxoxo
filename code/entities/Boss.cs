@@ -16,7 +16,6 @@ public enum BossState
 [Library( "xoxoxo_boss" )]
 [Model( Model = "models/citizen/citizen.vmdl" )]
 [Display( Name = "Boss", GroupName = "xoxoxo", Description = "The boss that walks around the office and looks for employees slacking off." )]
-[Hammer.Line("targetname", "pathtowardsexit")]
 public partial class Boss : AnimEntity
 {
 
@@ -30,6 +29,9 @@ public partial class Boss : AnimEntity
 	public string OfficeDoor { get; set; } = "Office_Door";
 	[Net, Property, FGDType( "target_destination" )]
 	public string ExitDoor { get; set; } = "Exit_Door";
+
+	[Net]
+	public bool IsInsideTrigger { get; set; } = false;
 
 	public Boss()
 	{
@@ -56,7 +58,7 @@ public partial class Boss : AnimEntity
 	public Dictionary<BossState, float> StateSpeed => new Dictionary<BossState, float>()
 	{
 
-		[BossState.Waiting] = 80f,
+		[BossState.Waiting] = 0f,
 		[BossState.Walking] = 45f,
 		[BossState.Shouting] = 0f,
 		[BossState.Attacking] = 130f,
@@ -67,6 +69,7 @@ public partial class Boss : AnimEntity
 	{
 
 		SetModel( "models/citizen/citizen.vmdl" );
+		SetupPhysicsFromOBB( PhysicsMotionType.Dynamic, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
 		EnableDrawing = true;
 		Transmit = TransmitType.Always;
 		Clothes.DressEntity( this );
@@ -80,7 +83,7 @@ public partial class Boss : AnimEntity
 	bool towardsStairs = false;
 
 	[Event.Tick.Server]
-	public void Animations()
+	public void Animations() // TODO: Separate in ComputeAnimation ComputePaths etc...
 	{
 
 		SetAnimParameter( "move_x", StateSpeed[CurrentState] );
@@ -94,7 +97,7 @@ public partial class Boss : AnimEntity
 			MovementPathEntity currentPath = towardsStairs ? stairsPath : exitPath;
 			int currentNode = MathX.FloorToInt( currentProgress % currentPath.PathNodes.Count );
 			int nextNode = (currentNode + 1) % currentPath.PathNodes.Count;
-			float currentSpeed = 80f;
+			float currentSpeed = StateSpeed[ CurrentState ];
 			float currentDistance = currentPath.PathNodes[currentNode].Position.Distance( currentPath.PathNodes[nextNode].Position );
 
 			Vector3 newPosition = currentPath.GetPointBetweenNodes( currentPath.PathNodes[currentNode], currentPath.PathNodes[nextNode], currentProgress % 1 );
@@ -179,6 +182,13 @@ public partial class Boss : AnimEntity
 				}
 
 			}
+
+		}
+
+		if ( IsInsideTrigger )
+		{
+
+			DebugOverlay.Box( this, Color.Red );
 
 		}
 
