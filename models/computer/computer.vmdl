@@ -239,6 +239,17 @@
 							},
 						]
 					},
+					{
+						_class = "MaterialGroup"
+						name = "theboys"
+						remaps = 
+						[
+							{
+								from = "materials/dev_screen/dev_screen.vmat"
+								to = "materials/dev_screen/mungus_boys.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
