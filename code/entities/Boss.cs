@@ -135,8 +135,10 @@ public partial class Boss : AnimEntity
 
 			currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
 
+			if ( currentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
+
 			var wishPosition = currentPath.GetPathPosition( currentProgress );
-			var wishRotation = Rotation.LookAt( wishPosition - Position, Vector3.Up );
+			var wishRotation = Rotation.LookAt( wishPosition.WithZ(0) - Position.WithZ(0), Vector3.Up );
 
 			Position = wishPosition;
 			Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );

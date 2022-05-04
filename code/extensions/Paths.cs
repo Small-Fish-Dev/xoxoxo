@@ -63,6 +63,7 @@ public partial class Path
 		Vector3 position = PathEntity.Position;
 
 		var nodes = PathEntity.PathNodes;
+
 		float lastFraction = 0f;
 		float currentFraction = 0f;
 		int currentNode = 0;

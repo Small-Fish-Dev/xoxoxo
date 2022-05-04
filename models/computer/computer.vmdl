@@ -261,6 +261,17 @@
 							},
 						]
 					},
+					{
+						_class = "MaterialGroup"
+						name = "ruinstream"
+						remaps = 
+						[
+							{
+								from = "materials/dev_screen/dev_screen.vmat"
+								to = "materials/dev_screen/ruin_stream.vmat"
+							},
+						]
+					},
 				]
 			},
 			{
