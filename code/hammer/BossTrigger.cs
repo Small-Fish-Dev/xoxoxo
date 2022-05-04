@@ -20,7 +20,7 @@ public partial class BossTrigger : BaseTrigger
 	{
 
 		if ( !other.IsServer ) return;
-		if ( other is not Boss boss ) return; // Cool code CrayZ! Thanks
+		if ( other is not Boss boss ) return;
 
 		boss.IsInsideTrigger = true;
 
@@ -33,7 +33,7 @@ public partial class BossTrigger : BaseTrigger
 	{
 
 		if ( !other.IsServer ) return;
-		if ( other is not Boss boss ) return; // Cool code CrayZ! Thanks
+		if ( other is not Boss boss ) return;
 
 		boss.IsInsideTrigger = false;
 

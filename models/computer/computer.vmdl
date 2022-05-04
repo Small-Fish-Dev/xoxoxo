@@ -250,6 +250,17 @@
 							},
 						]
 					},
+					{
+						_class = "MaterialGroup"
+						name = "dvd"
+						remaps = 
+						[
+							{
+								from = "materials/dev_screen/dev_screen.vmat"
+								to = "materials/dev_screen/dvd.vmat"
+							},
+						]
+					},
 				]
 			},
 			{

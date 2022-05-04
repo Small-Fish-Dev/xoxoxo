@@ -20,23 +20,28 @@ public partial class Boss : AnimEntity
 {
 
 	public Clothing.Container Clothes = new();
-	public BossState CurrentState = BossState.Waiting;
+	[Net] public BossState CurrentState { get; internal set; } = BossState.Walking;
+
+	[Net] public MovementPathEntity CurrentPath { get; internal set; }
 	[Net, Property, FGDType( "target_destination" )]
-	public string PathTowardsExit { get; set; } = "Exit_Path";
+	public string PathTowardsExit { get; internal set; } = "Exit_Path";
 	[Net, Property, FGDType( "target_destination" )]
-	public string PathTowardsStairs { get; set; } = "Stairs_Path";
+	public string PathTowardsStairs { get; internal set; } = "Stairs_Path";
 	[Net, Property, FGDType( "target_destination" )]
-	public string OfficeDoor { get; set; } = "Office_Door";
+	public string OfficeDoor { get; internal set; } = "Office_Door";
 	[Net, Property, FGDType( "target_destination" )]
-	public string ExitDoor { get; set; } = "Exit_Door";
+	public string ExitDoor { get; internal set; } = "Exit_Door";
 
 	[Net]
 	public bool IsInsideTrigger { get; set; } = false;
+	public Path StairsPath { get; set; }
+	public Path ExitPath { get; set; }
+
 
 	public Boss()
 	{
 
-		Clothes.Toggle( Clothing.FromPath<Clothing>( "models/citizen_clothes/jacket/suitjacket/jacket.suit.clothing") );
+		Clothes.Toggle( Clothing.FromPath<Clothing>( "models/citizen_clothes/jacket/suitjacket/jacket.suit.clothing" ) );
 		Clothes.Toggle( Clothing.FromPath<Clothing>( "models/citizen_clothes/trousers/smarttrousers/trousers.smart.clothing" ) );
 		Clothes.Toggle( Clothing.FromPath<Clothing>( "models/citizen_clothes/hair/eyebrows/eyebrows.clothing" ) );
 		Clothes.Toggle( Clothing.FromPath<Clothing>( "models/citizen_clothes/hair/hair_longbrown/models/hair_longbrown.clothing" ) );
@@ -69,10 +74,12 @@ public partial class Boss : AnimEntity
 	{
 
 		SetModel( "models/citizen/citizen.vmdl" );
-		SetupPhysicsFromOBB( PhysicsMotionType.Dynamic, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
+		SetupPhysicsFromOBB( PhysicsMotionType.Static, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
 		EnableDrawing = true;
 		Transmit = TransmitType.Always;
 		Clothes.DressEntity( this );
+
+		
 
 		base.Spawn();
 
@@ -82,113 +89,104 @@ public partial class Boss : AnimEntity
 	bool backwards = false;
 	bool towardsStairs = false;
 
-	[Event.Tick.Server]
-	public void Animations() // TODO: Separate in ComputeAnimation ComputePaths etc...
+	[Event.Tick]
+	public void ComputeAI()
+	{
+
+		ComputeVisuals();
+		ComputeMovements();
+		ComputeDoor( OfficeDoor, 100f );
+		ComputeDoor( ExitDoor, 100f );
+
+	}
+
+	public void ComputeVisuals()
 	{
 
 		SetAnimParameter( "move_x", StateSpeed[CurrentState] );
-
-		MovementPathEntity exitPath = FindByName( PathTowardsExit ) as MovementPathEntity;
-		MovementPathEntity stairsPath = FindByName( PathTowardsStairs ) as MovementPathEntity;
-
-		if ( exitPath.IsValid() && stairsPath.IsValid() )
-		{
-
-			MovementPathEntity currentPath = towardsStairs ? stairsPath : exitPath;
-			int currentNode = MathX.FloorToInt( currentProgress % currentPath.PathNodes.Count );
-			int nextNode = (currentNode + 1) % currentPath.PathNodes.Count;
-			float currentSpeed = StateSpeed[ CurrentState ];
-			float currentDistance = currentPath.PathNodes[currentNode].Position.Distance( currentPath.PathNodes[nextNode].Position );
-
-			Vector3 newPosition = currentPath.GetPointBetweenNodes( currentPath.PathNodes[currentNode], currentPath.PathNodes[nextNode], currentProgress % 1 );
-
-			Rotation = Rotation.LookAt( newPosition.WithZ(0) - Position.WithZ(0), Vector3.Up );
-			Position = newPosition; 
-			
-			currentProgress += Time.Delta * (currentSpeed / currentDistance) * ( backwards ? -1 : 1 );
-
-			if ( nextNode == currentPath.PathNodes.Count - 1 && backwards == false && currentProgress % 1 >= 0.95f )
-			{
-
-				backwards = true;
-
-			}
-			else if ( currentNode == 0 && backwards == true && currentProgress % 1 <= 0.05f )
-			{
-
-				backwards = false;
-				towardsStairs = !towardsStairs;
-
-			}
-
-		}
-
-		DoorEntity officeDoor = FindByName( OfficeDoor ) as DoorEntity;
-
-		if ( officeDoor.IsValid() )
-		{
-
-			if ( this.Position.Distance( officeDoor.Position ) <= 100f )
-			{
-
-				if ( officeDoor.State == DoorEntity.DoorState.Closed )
-				{
-
-					officeDoor.Open();
-
-				}
-
-			}
-
-			if ( this.Position.Distance( officeDoor.Position ) >= 100f )
-			{
-
-				if ( officeDoor.State == DoorEntity.DoorState.Open )
-				{
-
-					officeDoor.Close();
-
-				}
-
-			}
-
-		}
-
-		DoorEntity exitDoor = FindByName( ExitDoor ) as DoorEntity;
-
-		if ( exitDoor.IsValid() )
-		{
-
-			if ( this.Position.Distance( exitDoor.Position ) <= 100f )
-			{
-
-				if ( exitDoor.State == DoorEntity.DoorState.Closed )
-				{
-
-					exitDoor.Open();
-
-				}
-
-			}
-
-			if ( this.Position.Distance( exitDoor.Position ) >= 90f )
-			{
-
-				if ( exitDoor.State == DoorEntity.DoorState.Open )
-				{
-
-					exitDoor.Close();
-
-				}
-
-			}
-
-		}
+		//TODO Look up or down when on stairs, look towards player
 
 		if ( IsInsideTrigger )
 		{
 
 			DebugOverlay.Box( this, Color.Red );
+
+		}
+
+	}
+
+	public void ComputeMovements()
+	{
+
+		if ( FindByName( PathTowardsExit ) is not MovementPathEntity exitPath ) return;
+		if ( FindByName( PathTowardsStairs ) is not MovementPathEntity stairsPath ) return;
+
+		if ( ExitPath == null ) { ExitPath = new Path( exitPath ); }
+		if ( StairsPath == null ) { StairsPath = new Path( stairsPath ); }
+
+
+		if ( CurrentState == BossState.Walking )
+		{
+
+			var currentPath = towardsStairs ? StairsPath : ExitPath;
+			var currentSpeed = StateSpeed[CurrentState];
+			var pathLength = currentPath.Length;
+			var pathSpeed = currentSpeed / pathLength;
+
+			currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
+
+			var wishPosition = currentPath.GetPathPosition( currentProgress );
+			var wishRotation = Rotation.LookAt( wishPosition - Position, Vector3.Up );
+
+			Position = wishPosition;
+			Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );
+
+			if ( currentProgress == 0.99f )
+			{
+				
+				backwards = !backwards;
+			
+			}
+
+			if ( currentProgress == 0 && backwards )
+			{
+
+				backwards = !backwards;
+				towardsStairs = !towardsStairs;
+			
+			}
+
+		}
+
+	}
+
+
+	public void ComputeDoor( string door, float distance )
+	{
+
+		if ( FindByName( door ) is not DoorEntity doorEnt ) return;
+
+		if ( this.Position.Distance( doorEnt.Position ) <= distance )
+		{
+
+			if ( doorEnt.State == DoorEntity.DoorState.Closed )
+			{
+
+				doorEnt.Open();
+
+			}
+
+		}
+
+		if ( this.Position.Distance( doorEnt.Position ) >= distance )
+		{
+
+			if ( doorEnt.State == DoorEntity.DoorState.Open )
+			{
+
+				doorEnt.Close();
+
+			}
 
 		}
 
