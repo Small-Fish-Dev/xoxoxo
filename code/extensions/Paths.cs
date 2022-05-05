@@ -1,13 +1,15 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 
-public partial class Path
+public partial class Path : Entity
 {
 
 	public MovementPathEntity PathEntity { get; internal set; }
 	public float Length { get; internal set; }
 	public Dictionary<BasePathNode, float> NodeLength { get; internal set; } = new Dictionary<BasePathNode, float>();
 	public Dictionary<BasePathNode, float> NodeFraction { get; internal set; } = new Dictionary<BasePathNode, float>();
+
+	public Path() { } 
 
 	public Path( MovementPathEntity path )
 	{
@@ -34,7 +36,7 @@ public partial class Path
 	public float GetNodeLength( int node )
 	{
 
-		float distance = PathEntity.GetCurveLength( PathEntity.PathNodes[node], PathEntity.PathNodes[node + 1], 10 );
+		float distance = PathEntity.GetCurveLength( PathEntity.PathNodes[node], PathEntity.PathNodes[node + 1], 5 );
 
 		return distance;
 

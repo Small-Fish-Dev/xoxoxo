@@ -23,19 +23,8 @@ public partial class Boss : AnimEntity
 	[Net] public BossState CurrentState { get; internal set; } = BossState.Walking;
 
 	[Net] public MovementPathEntity CurrentPath { get; internal set; }
-	[Net, Property, FGDType( "target_destination" )]
-	public string PathTowardsExit { get; internal set; } = "Exit_Path";
-	[Net, Property, FGDType( "target_destination" )]
-	public string PathTowardsStairs { get; internal set; } = "Stairs_Path";
-	[Net, Property, FGDType( "target_destination" )]
-	public string OfficeDoor { get; internal set; } = "Office_Door";
-	[Net, Property, FGDType( "target_destination" )]
-	public string ExitDoor { get; internal set; } = "Exit_Door";
 
-	[Net]
-	public bool IsInsideTrigger { get; set; } = false;
-	public Path StairsPath { get; set; }
-	public Path ExitPath { get; set; }
+	[Net] public bool IsInsideTrigger { get; set; } = false;
 
 
 	public Boss()
@@ -95,8 +84,7 @@ public partial class Boss : AnimEntity
 
 		ComputeVisuals();
 		ComputeMovements();
-		ComputeDoor( OfficeDoor, 100f );
-		ComputeDoor( ExitDoor, 100f );
+		ComputeDoors();
 
 	}
 
@@ -118,17 +106,13 @@ public partial class Boss : AnimEntity
 	public void ComputeMovements()
 	{
 
-		if ( FindByName( PathTowardsExit ) is not MovementPathEntity exitPath ) return;
-		if ( FindByName( PathTowardsStairs ) is not MovementPathEntity stairsPath ) return;
-
-		if ( ExitPath == null ) { ExitPath = new Path( exitPath ); }
-		if ( StairsPath == null ) { StairsPath = new Path( stairsPath ); }
-
+		if ( Entities.ExitPath == null ) return;
+		if ( Entities.StairsPath == null ) return;
 
 		if ( CurrentState == BossState.Walking )
 		{
 
-			var currentPath = towardsStairs ? StairsPath : ExitPath;
+			var currentPath = towardsStairs ? Entities.StairsPath : Entities.ExitPath;
 			var currentSpeed = StateSpeed[CurrentState];
 			var pathLength = currentPath.Length;
 			var pathSpeed = currentSpeed / pathLength;
@@ -163,10 +147,29 @@ public partial class Boss : AnimEntity
 	}
 
 
-	public void ComputeDoor( string door, float distance )
+	public void ComputeDoors()
 	{
 
-		if ( FindByName( door ) is not DoorEntity doorEnt ) return;
+		if ( Entities.ExitDoor != null )
+		{
+
+			ComputeDoor( Entities.ExitDoor, 100f );
+
+		}
+
+		if ( Entities.OfficeDoor != null )
+		{
+
+			ComputeDoor( Entities.OfficeDoor, 100f );
+
+		}
+
+	
+
+	}
+
+	public void ComputeDoor( DoorEntity doorEnt, float distance )
+	{
 
 		if ( this.Position.Distance( doorEnt.Position ) <= distance )
 		{

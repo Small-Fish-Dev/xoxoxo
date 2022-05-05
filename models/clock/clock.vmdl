@@ -19,7 +19,7 @@
 							},
 							{
 								from = "glass.vmat"
-								to = "models/citizen_props/wineglass02.vmat"
+								to = "models/clock/glass.vmat"
 							},
 							{
 								from = "screen.vmat"
@@ -150,7 +150,7 @@
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "models/clock/clock.vanmgrph"
 		base_model_name = ""
 	}
 }
