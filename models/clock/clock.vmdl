@@ -19,7 +19,7 @@
 							},
 							{
 								from = "glass.vmat"
-								to = "models/citizen_props/wineglass02.vmat"
+								to = "models/clock/glass.vmat"
 							},
 							{
 								from = "screen.vmat"
