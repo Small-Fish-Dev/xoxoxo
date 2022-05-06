@@ -1,0 +1,17 @@
+//
+// Attire
+//
+@BaseClass = Attire : ""
+[
+	skin(string) { editor = "AssetBrowse(clothing)" } : "Skin" :  : ""
+	hat(string) { editor = "AssetBrowse(clothing)" } : "Hat" :  : ""
+	hair(string) { editor = "AssetBrowse(clothing)" } : "Hair" :  : ""
+	eyebrows(string) { editor = "AssetBrowse(clothing)" } : "Eyebrows" :  : ""
+	eyelashes(string) { editor = "AssetBrowse(clothing)" } : "Eyelashes" :  : ""
+	glasses(string) { editor = "AssetBrowse(clothing)" } : "Glasses" :  : ""
+	shirt(string) { editor = "AssetBrowse(clothing)" } : "Shirt" :  : ""
+	jacket(string) { editor = "AssetBrowse(clothing)" } : "Jacket" :  : ""
+	pants(string) { editor = "AssetBrowse(clothing)" } : "Pants" :  : ""
+	shoes(string) { editor = "AssetBrowse(clothing)" } : "Shoes" :  : ""
+]
+

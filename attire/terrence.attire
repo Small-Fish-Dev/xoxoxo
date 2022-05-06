@@ -1,0 +1,16 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		skin = "models/citizen_clothes/skin02.clothing"
+		hat = ""
+		hair = "models/citizen_clothes/hair/hair_looseblonde/hair.loose.brown.clothing"
+		eyebrows = "models/citizen_clothes/hair/eyebrows/eyebrows_black.clothing"
+		eyelashes = ""
+		glasses = ""
+		shirt = "models/citizen_clothes/shirt/flannel_shirt/flannel_shirt.clothing"
+		jacket = "models/citizen_clothes/jacket/office_blazer/office_blazer.clothing"
+		pants = "models/citizen_clothes/trousers/smarttrousers/trousers.smart.clothing"
+		shoes = "models/citizen_clothes/shoes/smartshoes/smartshoes.clothing"
+	}
+}
