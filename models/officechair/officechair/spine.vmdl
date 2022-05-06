@@ -39,9 +39,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ 0.303727, -11.534482, 28.250004 ]
+						origin = [ 0.303727, -9.26406, 23.050003 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 2.834398, 1.477766, 14.593741 ]
+						dimensions = [ 2.834398, 1.331291, 11.810635 ]
 					},
 					{
 						_class = "PhysicsShapeBox"
@@ -51,9 +51,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ 0.303727, -2.305979, 20.079428 ]
+						origin = [ 0.303727, -2.064037, 16.066364 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 2.834398, 17.07276, 2.776417 ]
+						dimensions = [ 2.834398, 14.505003, 2.267809 ]
 					},
 				]
 			},

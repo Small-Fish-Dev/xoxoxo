@@ -39,9 +39,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						radius = 13.5
+						radius = 10.5
 						point0 = [ 0.204006, 0.207454, 0.0 ]
-						point1 = [ 0.204006, 0.207454, 5.290621 ]
+						point1 = [ 0.204006, 0.207454, 4.248622 ]
 					},
 					{
 						_class = "PhysicsShapeCylinder"
@@ -51,9 +51,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						radius = 1.5
-						point0 = [ 0.204006, 0.207454, 5.667887 ]
-						point1 = [ 0.204006, 0.207454, 19.829151 ]
+						radius = 1.1
+						point0 = [ 0.204006, 0.207454, 4.284776 ]
+						point1 = [ 0.204006, 0.207454, 15.794559 ]
 					},
 				]
 			},

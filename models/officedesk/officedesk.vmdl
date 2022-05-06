@@ -43,21 +43,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ 20.456476, 0.079442, 39.485867 ]
+						origin = [ 16.3792, -0.102139, 31.567411 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 82.382538, 39.020966, 1.249686 ]
-					},
-					{
-						_class = "PhysicsShapeCylinder"
-						parent_bone = ""
-						surface_prop = "metal.sheet"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
-						radius = 1.6
-						point0 = [ 48.102348, -11.229075, 0.0 ]
-						point1 = [ 48.102348, -11.229075, 38.98151 ]
+						dimensions = [ 65.683914, 31.130369, 0.952549 ]
 					},
 					{
 						_class = "PhysicsShapeBox"
@@ -67,9 +55,9 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						origin = [ -7.950126, 0.43371, 19.689121 ]
+						origin = [ -6.434717, 0.303778, 15.586181 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 21.655685, 27.644644, 39.303185 ]
+						dimensions = [ 17.199944, 22.046314, 31.097303 ]
 					},
 					{
 						_class = "PhysicsShapeCylinder"
@@ -79,9 +67,21 @@
 						collision_interact_as = ""
 						collision_interact_with = ""
 						collision_interact_exclude = ""
-						radius = 1.6
-						point0 = [ 48.102348, 10.749152, 0.0 ]
-						point1 = [ 48.102348, 10.749152, 38.98151 ]
+						radius = 1.3
+						point0 = [ 38.467529, 8.574723, 0.0 ]
+						point1 = [ 38.467529, 8.574723, 31.139618 ]
+					},
+					{
+						_class = "PhysicsShapeCylinder"
+						parent_bone = ""
+						surface_prop = "metal.sheet"
+						collision_group = ""
+						collision_interact_as = ""
+						collision_interact_with = ""
+						collision_interact_exclude = ""
+						radius = 1.3
+						point0 = [ 38.467529, -8.957684, 0.0 ]
+						point1 = [ 38.467529, -8.957684, 31.139618 ]
 					},
 				]
 			},
