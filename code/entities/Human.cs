@@ -5,7 +5,7 @@ public partial class Human : AnimEntity
 {
 
 	public Clothing.Container Clothes = new();
-	virtual public string AttireName => "terrence";
+	virtual public string AttireName => "";
 	public override void Spawn()
 	{
 
@@ -17,8 +17,13 @@ public partial class Human : AnimEntity
 		EnableDrawing = true;
 		Transmit = TransmitType.Always;
 
-		var attire = Attire.All[AttireName];
-		attire.Dress( this );
+		if ( Attire.All.ContainsKey( AttireName ) )
+		{
+
+			var attire = Attire.All[AttireName];
+			attire.Dress( this );
+
+		}
 
 	}
 
