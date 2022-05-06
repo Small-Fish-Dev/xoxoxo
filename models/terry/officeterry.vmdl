@@ -448,6 +448,16 @@
 					},
 				]
 			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_bodygrouplist.vmdl_prefab"
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
