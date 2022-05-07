@@ -67,6 +67,14 @@
 					{
 						_class = "AnimFile"
 						name = "terrykiss"
+						children = 
+						[
+							{
+								_class = "AnimOffset"
+								translation = [ -5.0, 0.0, 0.0 ]
+								rotation_xyz = [ 0.0, 0.0, 0.0 ]
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -304,6 +312,11 @@
 								_class = "AnimStartLoop"
 								start_loop_frame = 4
 							},
+							{
+								_class = "AnimOffset"
+								translation = [ -5.0, 0.0, 0.0 ]
+								rotation_xyz = [ 0.0, 0.0, 0.0 ]
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -432,6 +445,14 @@
 							},
 						]
 						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "Half_Morph"
+						default_weight = 0.0
+						weights = [  ]
+						master_morph_weight = 0.509881
 						morph_weights = [  ]
 					},
 				]
