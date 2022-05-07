@@ -86,71 +86,63 @@
 						take = 0
 						reverse = false
 					},
-					{
-						_class = "AnimFile"
-						name = "seconds"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/clock/seconds.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "minutes"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models/clock/minutes.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 1.0
-						take = 0
-						reverse = false
-					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "AnimConstraintList"
+				children = 
+				[
+					{
+						_class = "AnimConstraintTiltTwist"
+						children = 
+						[
+							{
+								_class = "AnimConstraintBoneInput"
+								parent_bone = "hours"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 1.0
+							},
+							{
+								_class = "AnimConstraintSlave"
+								parent_bone = "minutes"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 12.28
+							},
+						]
+						input_axis = 2
+						slave_axis = 2
+					},
+					{
+						_class = "AnimConstraintTiltTwist"
+						children = 
+						[
+							{
+								_class = "AnimConstraintBoneInput"
+								parent_bone = "hours"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 1.0
+							},
+							{
+								_class = "AnimConstraintSlave"
+								parent_bone = "seconds"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 736.799988
+							},
+						]
+						input_axis = 2
+						slave_axis = 2
+					},
+				]
 			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "models/clock/clock.vanmgrph"
+		anim_graph_name = ""
 		base_model_name = ""
 	}
 }
