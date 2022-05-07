@@ -21,9 +21,11 @@ public partial class Human : AnimEntity
 		Transmit = TransmitType.Always;
 
 		SetAttire( AttireName );
+		Tags.Add( AttireName );
 
 		OriginalRotation = Rotation;
 		OriginalPosition = Position;
+
 
 	}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Hammer;
+using System.Linq;
 
 
 [Library( "xoxoxo_boss_trigger" )]
@@ -16,7 +17,8 @@ public partial class BossTrigger : BaseTrigger
 
 	}
 
-	public override void Touch( Entity other )
+	/// Only works with dynamic entities, and those suck!
+	/*public override void Touch( Entity other )
 	{
 
 		if ( !other.IsServer ) return;
@@ -36,6 +38,33 @@ public partial class BossTrigger : BaseTrigger
 		if ( other is not Boss boss ) return;
 
 		boss.IsInsideTrigger = false;
+
+
+	}*/
+
+	[Event.Tick]
+	public void SearchBosses()
+	{
+
+		var bosses = Entity.All.OfType<Boss>().ToList();
+
+		foreach ( var boss in bosses )
+		{
+
+			if ( WorldSpaceBounds.Overlaps( boss.WorldSpaceBounds ) )
+			{
+
+				boss.IsInsideTrigger = true;
+
+			}
+			else
+			{
+
+				boss.IsInsideTrigger = false;
+
+			}
+
+		}
 
 
 	}

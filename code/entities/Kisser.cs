@@ -57,6 +57,7 @@ public partial class Kisser : Human
 
 		Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
 		Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
+		
 		Monitor.SetMaterialGroup( IsKissing ? 3 : ( IsLeft ? 4 : 0 ) );
 
 	}

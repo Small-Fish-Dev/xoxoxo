@@ -64,14 +64,14 @@ public partial class Boss : Human
 	{
 
 		SetAnimParameter( "Speed", StateSpeed[CurrentState] );
-		//TODO Look up or down when on stairs, look towards player
 
-		if ( IsInsideTrigger )
-		{
+		if ( Entities.GameCamera == null ) return;
 
-			DebugOverlay.Box( this, Color.Red );
+		var lookAtInsideTrigger = Transform.PointToLocal( Entities.GameCamera.Position - Vector3.Up * 64f );
+		var lookAtOutsideTrigger = new Vector3( 30f, 0f, MathX.Clamp( Velocity.z, -0.1f, 0.1f ) * 300f );
 
-		}
+		SetAnimParameter( "Lookat", IsInsideTrigger ? lookAtInsideTrigger : lookAtOutsideTrigger );
+
 
 	}
 
@@ -95,6 +95,8 @@ public partial class Boss : Human
 
 			var wishPosition = currentPath.GetPathPosition( currentProgress );
 			var wishRotation = Rotation.LookAt( wishPosition.WithZ(0) - Position.WithZ(0), Vector3.Up );
+
+			Velocity = wishPosition - Position;
 
 			Position = wishPosition;
 			Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );
