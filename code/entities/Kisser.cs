@@ -19,6 +19,15 @@ public enum KisserState
 
 public partial class Kisser : Human
 {
+	[Property, FGDType( "target_destination" )]
+	public string SeatName { get; internal set; }
+	public Prop Seat => FindByName( SeatName ) as Prop;
+	[Property, FGDType( "target_destination" )]
+	public string DeskName { get; internal set; }
+	public Prop Desk => FindByName( DeskName ) as Prop;
+	[Property, FGDType( "target_destination" )]
+	public string MonitorName { get; internal set; }
+	public Prop Monitor => FindByName( MonitorName ) as Prop;
 
 	[Net] public KisserState CurrentState { get; internal set; } = KisserState.Working;
 	public bool IsKissing => CurrentState == KisserState.Kissing;
@@ -45,6 +54,10 @@ public partial class Kisser : Human
 			SetAttire( IsLeft ? "terrence" : "theresa" );
 
 		}
+
+		Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
+		Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
+		Monitor.SetMaterialGroup( IsKissing ? 3 : ( IsLeft ? 4 : 0 ) );
 
 	}
 
