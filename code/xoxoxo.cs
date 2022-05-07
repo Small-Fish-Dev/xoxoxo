@@ -62,8 +62,12 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		var caller = ConsoleSystem.Caller;
+		var actor = Entities.KisserLeft;
+		(caller.Pawn as Player).Actor = actor;
 
-		(caller.Pawn as Player).Actor = Entities.KisserLeft;
+		actor.Clothes.LoadFromClient( caller );
+
+		actor.Clothes.DressEntity( actor );
 
 	}
 

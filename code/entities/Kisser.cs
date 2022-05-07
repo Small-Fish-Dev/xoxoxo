@@ -21,21 +21,28 @@ public partial class Kisser : Human
 {
 
 	[Net] public KisserState CurrentState { get; internal set; } = KisserState.Working;
+	public bool IsKissing => CurrentState == KisserState.Kissing;
+	public bool IsLeft => this == Entities.KisserLeft;
 
-	[Event.Tick]
-	public void HandleAnimations()
+	[Event.Tick.Server]
+	public void HandleVisuals()
 	{
 
-		if ( CurrentState != KisserState.Running )
+		SetAnimParameter( "Sitting", CurrentState != KisserState.Running );
+		SetAnimParameter( IsLeft ? "Kissing" : "Kissing2", IsKissing );
+
+		var distance = Entities.KisserLeft.OriginalPosition.Distance( Entities.KisserRight.OriginalPosition ) / 2 - 24.7f;
+
+		var wishRotation = Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : ( IsKissing ? 90f : 0f ) );
+		var wishPosition = OriginalPosition + OriginalRotation.Backward * ( IsKissing ? distance : 0f );
+
+		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.1f );
+		Position = Vector3.Lerp( Position, wishPosition, 0.1f );
+
+		if ( !IsDressed )
 		{
 
-			SetAnimParameter( "Sitting", true );
-
-		}
-		else
-		{
-
-			SetAnimParameter( "Sitting", false );
+			SetAttire( IsLeft ? "terrence" : "theresa" );
 
 		}
 
