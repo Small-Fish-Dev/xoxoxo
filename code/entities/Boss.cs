@@ -63,7 +63,7 @@ public partial class Boss : Human
 	public void ComputeVisuals()
 	{
 
-		SetAnimParameter( "move_x", StateSpeed[CurrentState] );
+		SetAnimParameter( "Speed", StateSpeed[CurrentState] );
 		//TODO Look up or down when on stairs, look towards player
 
 		if ( IsInsideTrigger )

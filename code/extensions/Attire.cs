@@ -33,16 +33,16 @@ public partial class Attire : Asset
 	public void Dress( Human target )
 	{
 
-		if ( Skin != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Skin ) ); Log.Info( $"Loading {Skin}" ); }
-		if ( Hat != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hat ) ); Log.Info( $"Loading {Hat}" ); }
-		if ( Hair != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hair ) ); Log.Info( $"Loading {Hair}" ); }
-		if ( Eyebrows != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyebrows ) ); Log.Info( $"Loading {Eyebrows}" ); }
-		if ( Eyelashes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyelashes ) ); Log.Info( $"Loading {Eyelashes}" ); }
-		if ( Glasses != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Glasses ) ); Log.Info( $"Loading {Glasses}" ); }
-		if ( Shirt != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shirt ) ); Log.Info( $"Loading {Shirt}" ); }
-		if ( Jacket != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Jacket ) ); Log.Info( $"Loading {Jacket}" ); }
-		if ( Pants != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Pants ) ); Log.Info( $"Loading {Pants}" ); }
-		if ( Shoes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shoes ) ); Log.Info( $"Loading {Shoes}" ); }
+		if ( Skin != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Skin ) ); }
+		if ( Hat != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hat ) ); }
+		if ( Hair != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hair ) ); }
+		if ( Eyebrows != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyebrows ) ); }
+		if ( Eyelashes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyelashes ) ); }
+		if ( Glasses != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Glasses ) ); }
+		if ( Shirt != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shirt ) ); }
+		if ( Jacket != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Jacket ) ); }
+		if ( Pants != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Pants ) ); }
+		if ( Shoes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shoes ) ); }
 
 		target.Clothes.DressEntity( target );
 

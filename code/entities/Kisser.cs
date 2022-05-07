@@ -3,50 +3,41 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Hammer;
 
+public enum KisserState
+{
+
+	Working,
+	Kissing,
+	Busted,
+	Running
+
+}
+
 [Library( "xoxoxo_kisser" )]
 [Model( Model = "models/citizen/citizen.vmdl" )]
 [Display( Name = "Kisser", GroupName = "xoxoxo", Description = "The player or their partner" )]
 
-public partial class Kisser : AnimEntity
+public partial class Kisser : Human
 {
 
-	public override void Spawn()
+	[Net] public KisserState CurrentState { get; internal set; } = KisserState.Working;
+
+	[Event.Tick]
+	public void HandleAnimations()
 	{
 
-		base.Spawn();
-
-		SetModel( "models/terry/officeterry.vmdl" );
-
-		EnableDrawing = true;
-
-	}
-
-	public override void Simulate( Client cl )
-	{
-
-		base.Simulate( cl );
-
-		if ( Input.Down( InputButton.Attack1 ) )
+		if ( CurrentState != KisserState.Running )
 		{
 
-			RenderColor = Color.Red;
+			SetAnimParameter( "Sitting", true );
 
 		}
 		else
 		{
 
-			RenderColor = Color.White;
+			SetAnimParameter( "Sitting", false );
 
 		}
-
-	}
-
-	public override void FrameSimulate( Client cl )
-	{
-
-		base.FrameSimulate( cl );
-
-		
 
 	}
 
