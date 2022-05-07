@@ -25,6 +25,9 @@ public partial class Clock : AnimEntity
 	public void Tick()
 	{
 
+		UseAnimGraph = false;
+		CurrentSequence.TimeNormalized = ( ( Time.Now / 12f % ( 1f / 12f * 8f) ) + 1f / 12f * 9f ) % 1f;
+		PlaybackRate = 0;
 
 	}
 
