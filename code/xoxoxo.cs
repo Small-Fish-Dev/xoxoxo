@@ -50,66 +50,7 @@ public partial class xoxoxo : Sandbox.Game
 	private void PostEntitySpawn()
 	{
 
-		var HammerLogic = Entity.All.FirstOrDefault( x => x is Logic ) as Logic;
-
-		Log.Info( Host.IsServer );
-
-		if ( HammerLogic.IsValid() )
-		{
-
-			if ( FindByName( HammerLogic.PathTowardsExit ) is MovementPathEntity exitPath )
-			{
-
-
-				Entities.ExitPath = new Path( exitPath );
-
-			}
-
-			if ( FindByName( HammerLogic.PathTowardsStairs ) is MovementPathEntity stairsPath )
-			{
-
-				Entities.StairsPath = new Path( stairsPath );
-
-			}
-
-			if ( FindByName( HammerLogic.ExitDoor ) is DoorEntity exitDoor )
-			{
-
-				Entities.ExitDoor = exitDoor;
-
-			}
-
-			if ( FindByName( HammerLogic.OfficeDoor ) is DoorEntity officeDoor )
-			{
-
-				Entities.OfficeDoor = officeDoor;
-
-			}
-
-			if ( FindByName( HammerLogic.KisserLeft ) is Kisser kisserLeft )
-			{
-
-				Entities.KisserLeft = kisserLeft;
-
-			}
-
-			if ( FindByName( HammerLogic.KisserRight ) is Kisser kisserRight )
-			{
-
-				Entities.KisserRight = kisserRight;
-
-			}
-
-			if ( FindByName( HammerLogic.GameCamera ) is Entity gameCamera )
-			{
-
-				Entities.GameCamera = gameCamera;
-
-			}
-
-		}
-
-		// TODO: Network those entities to the client
+		
 
 		Sound.FromWorld( "sounds/mungus-meandtheboys_muffled.vsnd", Vector3.Zero );
 

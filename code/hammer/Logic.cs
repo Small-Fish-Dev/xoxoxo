@@ -3,6 +3,7 @@ using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Hammer;
+using System.Linq;
 
 
 [Library( "xoxoxo_logic" )]
@@ -36,7 +37,7 @@ public partial class Logic : Entity
 
 }
 
-public partial class Entities
+public class Entities : Entity
 {
 
 	public static Path ExitPath { get; set; }
@@ -46,6 +47,103 @@ public partial class Entities
 	public static Kisser KisserLeft { get; set; }
 	public static Kisser KisserRight { get; set; }
 	public static Entity GameCamera { get; set; }
+
+	[Event.Tick]
+	public static void LoadEntities()
+	{
+
+		var HammerLogic = Entity.All.FirstOrDefault( x => x is Logic ) as Logic;
+
+		if ( HammerLogic.IsValid() )
+		{
+
+			if ( Entities.ExitPath == null )
+			{
+
+				if ( FindByName( HammerLogic.PathTowardsExit ) is MovementPathEntity exitPath )
+				{
+
+					Entities.ExitPath = new Path( exitPath );
+
+				}
+
+			}
+
+			if ( Entities.StairsPath == null )
+			{
+
+				if ( FindByName( HammerLogic.PathTowardsStairs ) is MovementPathEntity stairsPath )
+				{
+
+					Entities.StairsPath = new Path( stairsPath );
+
+				}
+
+			}
+
+			if ( Entities.ExitDoor == null )
+			{
+
+				if ( FindByName( HammerLogic.ExitDoor ) is DoorEntity exitDoor )
+				{
+
+					Entities.ExitDoor = exitDoor;
+
+				}
+
+			}
+
+			if ( Entities.OfficeDoor == null )
+			{
+
+				if ( FindByName( HammerLogic.OfficeDoor ) is DoorEntity officeDoor )
+				{
+
+					Entities.OfficeDoor = officeDoor;
+
+				}
+
+			}
+
+			if ( Entities.KisserLeft == null )
+			{
+
+				if ( FindByName( HammerLogic.KisserLeft ) is Kisser kisserLeft )
+				{
+
+					Entities.KisserLeft = kisserLeft;
+
+				}
+
+			}
+
+			if ( Entities.KisserRight == null )
+			{
+
+				if ( FindByName( HammerLogic.KisserRight ) is Kisser kisserRight )
+				{
+
+					Entities.KisserRight = kisserRight;
+
+				}
+
+			}
+
+			if ( Entities.GameCamera == null )
+			{
+
+				if ( FindByName( HammerLogic.GameCamera ) is Entity gameCamera )
+				{
+
+					Entities.GameCamera = gameCamera;
+
+				}
+
+			}
+
+		}
+
+	}
 
 }
 

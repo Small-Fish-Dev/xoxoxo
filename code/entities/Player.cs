@@ -22,6 +22,8 @@ public partial class Player : Sandbox.Player
 
 		base.Simulate( cl );
 
+		if ( !Actor.IsValid ) return;
+
 		if ( Input.Down( InputButton.Attack1 ) )
 		{
 
