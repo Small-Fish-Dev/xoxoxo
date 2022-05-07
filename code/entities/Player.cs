@@ -22,18 +22,20 @@ public partial class Player : Sandbox.Player
 
 		base.Simulate( cl );
 
-		if ( !Actor.IsValid ) return;
+		if ( Actor == null ) return;
 
 		if ( Input.Down( InputButton.Attack1 ) )
 		{
 
-			Actor.RenderColor = Color.Red;
+			Actor.CurrentState = KisserState.Kissing;
+			Entities.KisserRight.CurrentState = KisserState.Kissing;
 
 		}
 		else
 		{
 
-			Actor.RenderColor = Color.White;
+			Actor.CurrentState = KisserState.Working;
+			Entities.KisserRight.CurrentState = KisserState.Working;
 
 		}
 

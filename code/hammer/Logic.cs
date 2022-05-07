@@ -137,6 +137,8 @@ public class Entities : Entity
 
 					Entities.GameCamera = gameCamera;
 
+					Sound.FromEntity( "mungus-meandtheboys_muffled", gameCamera );
+
 				}
 
 			}
