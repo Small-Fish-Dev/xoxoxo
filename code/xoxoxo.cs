@@ -20,6 +20,7 @@ public partial class xoxoxo : Sandbox.Game
 		var pawn = new Player();
 		client.Pawn = pawn;
 
+
 	}
 
 	/*[Event.Tick.Server]
@@ -51,8 +52,6 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		
-
-		Sound.FromWorld( "sounds/mungus-meandtheboys_muffled.vsnd", Vector3.Zero );
 
 	}
 
