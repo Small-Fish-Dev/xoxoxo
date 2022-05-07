@@ -8,7 +8,7 @@
 		eyebrows = ""
 		eyelashes = "models/citizen_clothes/hair/eyelashes/eyelashes.clothing"
 		glasses = ""
-		shirt = "models/citizen_clothes/shirt/tanktop/tanktop.clothing"
+		shirt = "models/citizen_clothes/shirt/longsleeve_shirt/longsleeve_shirt.clothing"
 		jacket = "models/citizen_clothes/jacket/office_blazer/office_blazer.clothing"
 		pants = "models/citizen_clothes/dress/office_skirt/office_skirt.clothing"
 		shoes = "models/citizen_clothes/shoes/smartshoes/smartshoes.clothing"
