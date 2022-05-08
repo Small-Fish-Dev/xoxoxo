@@ -7,6 +7,7 @@ public partial class Player : Sandbox.Player
 {
 
 	[Net] public Kisser Actor { get; set; }
+	SoundLoop kissingSound;
 
 	public override void Spawn()
 	{
@@ -22,6 +23,8 @@ public partial class Player : Sandbox.Player
 
 		base.Simulate( cl );
 
+		if ( Host.IsClient ) return;
+
 		if ( Actor == null ) return;
 
 		if ( Input.Down( InputButton.Attack1 ) )
@@ -30,12 +33,27 @@ public partial class Player : Sandbox.Player
 			Actor.CurrentState = KisserState.Kissing;
 			Entities.KisserRight.CurrentState = KisserState.Kissing;
 
+			if ( kissingSound == null )
+			{
+
+				kissingSound = new SoundLoop( "kisses", Actor );
+
+			}
+
 		}
 		else
 		{
 
 			Actor.CurrentState = KisserState.Working;
 			Entities.KisserRight.CurrentState = KisserState.Working;
+
+			if ( kissingSound != null )
+			{
+
+				kissingSound.Stop();
+				kissingSound = null;
+
+			}
 
 		}
 

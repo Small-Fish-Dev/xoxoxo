@@ -19,9 +19,9 @@ public enum BossState
 public partial class Boss : Human
 {
 
-	[Net] public BossState CurrentState { get; internal set; } = BossState.Walking;
-	[Net] public MovementPathEntity CurrentPath { get; internal set; }
-	[Net] public bool IsInsideTrigger { get; set; } = false;
+	[Net] public BossState CurrentState { get; private set; } = BossState.Walking;
+	[Net] public MovementPathEntity CurrentPath { get; private set; }
+	[Net] public bool IsInsideTrigger { get; internal set; } = false;
 
 	public override string AttireName => "boss";
 

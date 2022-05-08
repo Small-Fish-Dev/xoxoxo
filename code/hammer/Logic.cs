@@ -137,8 +137,6 @@ public class Entities : Entity
 
 					Entities.GameCamera = gameCamera;
 
-					Sound.FromEntity( "mungusmeandtheboys", gameCamera );
-
 				}
 
 			}
