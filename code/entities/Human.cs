@@ -26,7 +26,6 @@ public partial class Human : AnimEntity
 		OriginalRotation = Rotation;
 		OriginalPosition = Position;
 
-
 	}
 
 	public void SetAttire( string name )

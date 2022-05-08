@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 public partial class xoxoxo : Sandbox.Game
 {
+
+	public static bool EntitiesLoaded = false;
 	public xoxoxo()
 	{
 	}
@@ -51,7 +53,7 @@ public partial class xoxoxo : Sandbox.Game
 	private void PostEntitySpawn()
 	{
 
-		
+		EntitiesLoaded = true;
 
 	}
 

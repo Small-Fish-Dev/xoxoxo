@@ -43,11 +43,11 @@ public partial class Kisser : Human
 
 		var distance = Entities.KisserLeft.OriginalPosition.Distance( Entities.KisserRight.OriginalPosition ) / 2 - 24.7f;
 
-		var wishRotation = Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : ( IsKissing ? 90f : 0f ) );
-		var wishPosition = OriginalPosition + OriginalRotation.Backward * ( IsKissing ? distance : 0f );
+		var wishRotation = Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : (IsKissing ? 90f : 0f) );
+		var wishPosition = OriginalPosition + OriginalRotation.Backward * (IsKissing ? distance : 0f);
 
-		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.1f );
-		Position = Vector3.Lerp( Position, wishPosition, 0.1f );
+		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.2f );
+		Position = Vector3.Lerp( Position, wishPosition, 0.2f );
 
 		if ( !IsDressed )
 		{
@@ -58,9 +58,42 @@ public partial class Kisser : Human
 
 		Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
 		Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
-		
-		Monitor.SetMaterialGroup( IsKissing ? 3 : ( IsLeft ? 4 : 0 ) );
+
+		Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
+
+		//UnfuckAnimations(); TODO: Uncomment this
 
 	}
+
+	/*
+	// Temporary fix for issue https://github.com/Facepunch/sbox-issues/issues/1807
+	int animationFixed = 3;
+	bool redo = false;
+	public void UnfuckAnimations()
+	{
+
+		if ( animationFixed >= 0 )
+		{
+
+			SetAnimParameter( "Action", animationFixed );
+
+			animationFixed--;
+
+		}
+		else
+		{
+
+			if ( !redo )
+			{
+
+				redo = true;
+				animationFixed = 3;
+
+			}
+
+		}
+
+	}
+	*/
 
 }
