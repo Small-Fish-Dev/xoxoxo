@@ -37,8 +37,9 @@ public partial class Kisser : Human
 	public void HandleVisuals()
 	{
 
-		SetAnimParameter( "Sitting", CurrentState != KisserState.Running );
-		SetAnimParameter( IsLeft ? "Kissing" : "Kissing2", IsKissing );
+		var desiredAnimation = CurrentState != KisserState.Running ? (IsKissing ? (IsLeft ? 3 : 2) : 1) : 0;
+
+		SetAnimParameter( "Action", desiredAnimation );
 
 		var distance = Entities.KisserLeft.OriginalPosition.Distance( Entities.KisserRight.OriginalPosition ) / 2 - 24.7f;
 

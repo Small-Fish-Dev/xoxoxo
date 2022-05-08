@@ -1,0 +1,26 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		sounds = 
+		[
+			"sounds/kiss1.vsnd",
+			"sounds/kiss2.wav",
+			"sounds/kiss3.wav",
+			"sounds/kiss4.wav",
+			"sounds/kiss5.wav",
+			"sounds/kiss6.wav",
+			"sounds/kiss7.wav",
+			"sounds/kiss8.wav",
+			"sounds/kiss9.wav",
+			"sounds/kiss10.wav",
+		]
+		ui = false
+		volume = 1.0
+		volumerandom = 0.2
+		pitch = 1.0
+		pitchrandom = 0.2
+		distancemax = 2000.0
+		selectionmode = "3"
+	}
+}
