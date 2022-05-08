@@ -17,7 +17,7 @@
 		]
 		ui = false
 		volume = 3.0
-		volumerandom = 0.2
+		volumerandom = 0.5
 		pitch = 1.2
 		pitchrandom = 0.2
 		distancemax = 512.0
