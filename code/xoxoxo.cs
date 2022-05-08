@@ -10,8 +10,20 @@ public partial class xoxoxo : Sandbox.Game
 {
 
 	public static bool EntitiesLoaded = false;
+	public static bool Kissing { get; private set; } = false;
+	public static TimeSince KissTimer { get; private set; } = 0f;
+
 	public xoxoxo()
 	{
+
+		if ( IsClient )
+		{
+
+			KissSound.LoadSound();
+			KissSound.PlaySound();
+
+		}
+
 	}
 	public override void ClientJoined( Client client )
 	{
@@ -22,6 +34,28 @@ public partial class xoxoxo : Sandbox.Game
 		var pawn = new Player();
 		client.Pawn = pawn;
 
+
+	}
+
+	[Event.Tick]
+	public void SetTimer()
+	{
+
+		if ( Entities.KisserLeft == null || Entities.KisserRight == null || Entities.GameCamera == null ) return;
+
+		if ( Entities.KisserLeft.IsKissing && Entities.KisserRight.IsKissing )
+		{
+
+			Kissing = true;
+
+		}
+		else
+		{
+
+			Kissing = false;
+			KissTimer = 0f;
+
+		}
 
 	}
 

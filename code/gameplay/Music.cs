@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 public partial class xoxoxo : Sandbox.Game
 {
 
-	Sound? music;
+	Sound? backgroundMusic;
+	Sound? kissingMusic;
 
 	[Event.Tick.Server]
 	public void LoadMusic()
@@ -18,23 +19,30 @@ public partial class xoxoxo : Sandbox.Game
 
 		if ( gameCamera != null )
 		{
-			if ( music == null )
+			if ( backgroundMusic == null )
 			{
 
-				music = Sound.FromEntity( "mungusmeandtheboys", gameCamera );
+				backgroundMusic = Sound.FromEntity( "mungusmeandtheboys", gameCamera );
 
 			}
 			else
 			{
 
-				if ( music.Value.Finished )
+				if ( backgroundMusic.Value.Finished )
 				{
 
-					music = Sound.FromEntity( "mungusmeandtheboys", gameCamera ); // You cannot stop it.
+					backgroundMusic = Sound.FromEntity( "mungusmeandtheboys", gameCamera ); // You cannot stop it.
 
 				}
 
 			}
+
+		}
+
+		if ( Kissing )
+		{
+
+			// TODO Dynamic sound for the porno music, look at the soundstream thing
 
 		}
 
