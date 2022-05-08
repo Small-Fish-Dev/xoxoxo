@@ -16,11 +16,11 @@
 			"sounds/kiss10.wav",
 		]
 		ui = false
-		volume = 1.0
+		volume = 3.0
 		volumerandom = 0.2
-		pitch = 1.0
+		pitch = 1.2
 		pitchrandom = 0.2
-		distancemax = 2000.0
+		distancemax = 512.0
 		selectionmode = "3"
 	}
 }
