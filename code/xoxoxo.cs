@@ -14,14 +14,6 @@ public partial class xoxoxo : Sandbox.Game
 	public xoxoxo()
 	{
 
-		if ( IsClient )
-		{
-
-			KissSound.LoadSound();
-			KissSound.PlaySound();
-
-		}
-
 	}
 	public override void ClientJoined( Client client )
 	{

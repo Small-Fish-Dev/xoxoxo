@@ -22,6 +22,7 @@ public partial class xoxoxo
 			{
 
 				kissingSound = new SoundLoop( "kisses", Entities.KisserLeft );
+				CreateTestSound();
 
 			}
 
@@ -54,6 +55,16 @@ public partial class xoxoxo
 			}
 
 		}
+
+	}
+
+	[ClientRpc]
+	public void CreateTestSound()
+	{
+
+		var sound = new PausableSound( "sounds/pornmusic_uncompressed.wav", Entities.GameCamera.Position );
+		sound.StartSound();
+		sound.Play();
 
 	}
 
