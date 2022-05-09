@@ -2,25 +2,25 @@
 {
 	data = 
 	{
-		sounds = 
+		UI = false
+		Volume = 1
+		VolumeRandom = 0.3
+		Pitch = 1.2
+		PitchRandom = 0.2
+		DistanceMax = 1024
+		Sounds = 
 		[
-			"sounds/kiss1.vsnd",
-			"sounds/kiss2.wav",
-			"sounds/kiss3.wav",
-			"sounds/kiss4.wav",
-			"sounds/kiss5.wav",
-			"sounds/kiss6.wav",
-			"sounds/kiss7.wav",
-			"sounds/kiss8.wav",
-			"sounds/kiss9.wav",
-			"sounds/kiss10.wav",
+			resource:"sounds/kiss1.vsnd",
+			resource:"sounds/kiss2.vsnd",
+			resource:"sounds/kiss3.vsnd",
+			resource:"sounds/kiss4.vsnd",
+			resource:"sounds/kiss5.vsnd",
+			resource:"sounds/kiss6.vsnd",
+			resource:"sounds/kiss7.vsnd",
+			resource:"sounds/kiss8.vsnd",
+			resource:"sounds/kiss9.vsnd",
+			resource:"sounds/kiss10.vsnd",
 		]
-		ui = false
-		volume = 3.0
-		volumerandom = 0.5
-		pitch = 1.2
-		pitchrandom = 0.2
-		distancemax = 512.0
-		selectionmode = "3"
+		SelectionMode = 3
 	}
 }

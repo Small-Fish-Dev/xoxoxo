@@ -55,7 +55,7 @@ public static partial class KissSound
 		if ( xoxoxo.Kissing )
 		{
 
-			var slice = soundData.AsSpan<short>().Slice( (int)(soundData.Length * ( xoxoxo.KissTimer / 60f ) ) );
+			var slice = soundData.AsSpan<short>().Slice( (int)(soundData.Length * (xoxoxo.KissTimer / 60f ) ) );
 			slice.CopyTo( soundCut );
 
 		}
