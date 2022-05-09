@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text.Json;
 using System.Runtime.InteropServices;
 
-public partial class PausableSound
+public partial class PausableSound : Entity
 {
 
 	public string SoundFile { get; private set; }
 	public Sound SoundOrigin { get; private set; }
+	public float SoundSpeed { get; private set; }
 	public float Progress { get; private set; }
+	public float Duration { get; private set; }
 	private SoundStream soundStream { get; set; }
 	private short[] soundData { get; set; }
 	private Vector3 soundPosition { get; set; }
@@ -28,6 +30,7 @@ public partial class PausableSound
 		soundData = LoadSound( file );
 		SoundFile = file;
 		soundPosition = position;
+		Duration = (float)soundData.Length / 44100f;
 
 	}
 
@@ -53,7 +56,6 @@ public partial class PausableSound
 	/// </summary>
 	/// <param name="progress"></param>
 	/// <param name="playSpeed"></param>
-	/// <param name="sampleRate"></param>
 	public void StartSound( float progress = 0f, float playSpeed = 1f )
 	{
 
@@ -61,11 +63,13 @@ public partial class PausableSound
 		playSpeed = Math.Max(playSpeed, 0f);
 
 		Progress = progress;
-		Log.Info( progress );
+		SoundSpeed = playSpeed;
 
-		Sound resutingSound = Sound.FromWorld( "audiostream.default", soundPosition );
-		SoundOrigin = resutingSound; // Using SoundOrigin to create the stream is invalid?
-		soundStream = resutingSound.CreateStream( (int)( 44100 * playSpeed ) );
+		Sound defaultSound = Sound.FromWorld( "audiostream.default", soundPosition );
+		SoundOrigin = defaultSound; // Using SoundOrigin to create the stream is invalid?
+		soundStream = defaultSound.CreateStream( (int)( 44100 * playSpeed ) );
+
+		SoundOrigin.SetVolume( 3 );
 
 		Play();
 
@@ -74,23 +78,18 @@ public partial class PausableSound
 	public void Play()
 	{
 
-		Span<short> soundCut = new Span<short>( new short[soundData.Length] );
+		int sliceSize = (int)( soundData.Length * ( 1f - Progress ) );
+		int sliceStart = (int)( soundData.Length * Progress ) + 1;
+		Span<short> soundCut = new Span<short>( new short[sliceSize] );
 
-		var slice = soundData.AsSpan<short>().Slice( (int)( soundData.Length * Progress ) );
+		var slice = soundData.AsSpan<short>().Slice( sliceStart );
 		slice.CopyTo( soundCut );
 
 		soundStream.WriteData( soundCut );
 
 	}
 
-	public void Stop()
-	{
-
-
-
-	}
-
-	public void Dispose()
+	public void Pause()
 	{
 
 
@@ -98,10 +97,18 @@ public partial class PausableSound
 	}
 
 	[Event.Tick]
-	private void updateProgress()
+	public void Compute()
 	{
 
-		Log.Info( SoundOrigin.ElapsedTime );
+		Progress += (Time.Delta * SoundSpeed) / Duration;
+
+		if ( Progress >= 1 )
+		{
+
+			SoundOrigin.Stop();
+			Delete();
+
+		}
 
 	}
 

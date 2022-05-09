@@ -63,8 +63,8 @@ public partial class xoxoxo
 	{
 
 		var sound = new PausableSound( "sounds/pornmusic_uncompressed.wav", Entities.GameCamera.Position );
+
 		sound.StartSound();
-		sound.Play();
 
 	}
 
