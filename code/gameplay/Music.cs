@@ -39,6 +39,8 @@ public partial class xoxoxo
 
 		}
 
+		backgroundMusic.Value.SetVolume( Math.Max( 1f - KissTimer / 3f, 0f ) );
+
 	}
 
 	[Event("KissingStart")]
@@ -59,7 +61,6 @@ public partial class xoxoxo
 			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.wav", Entities.GameCamera.Position );
 
 			kissingMusic.StartSound();
-			kissingMusic.SetVolume( 3 );
 
 		}
 
@@ -84,7 +85,7 @@ public partial class xoxoxo
 	public void UpdateMusic()
 	{
 
-		if ( IsServer ) return;
+		if ( IsServer ) { return; }
 
 		kissingMusic.SetVolume( Math.Min( KissTimer, 3f ) );
 
