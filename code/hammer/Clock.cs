@@ -18,6 +18,8 @@ public partial class Clock : AnimEntity
 		SetModel( "models/clock/clock.vmdl" );
 
 		EnableDrawing = true;
+		UseAnimGraph = false;
+		PlaybackRate = 0;
 
 	}
 
@@ -25,9 +27,14 @@ public partial class Clock : AnimEntity
 	public void Tick()
 	{
 
-		UseAnimGraph = false;
-		CurrentSequence.TimeNormalized = ( ( Time.Now / 12f % ( 1f / 12f * 8f) ) + 1f / 12f * 9f ) % 1f;
-		PlaybackRate = 0;
+		float secondsPerHour = 15f; // How many seconds for 1 clock hour to pass
+		float startingTime = 9f; // 9am
+		float turnDuration = 8f; // 8 hours
+		float clockHours = 12f;
+		float hourFraction = 1 / clockHours;
+		var time = xoxoxo.Game.RoundTime / secondsPerHour;
+
+		CurrentSequence.TimeNormalized = ( (time / clockHours % (hourFraction * turnDuration ) ) + hourFraction * startingTime ) % 1f;
 
 	}
 
