@@ -80,4 +80,14 @@ public partial class xoxoxo
 
 	}
 
+	[Event( "Kissing" )]
+	public void UpdateMusic()
+	{
+
+		if ( IsServer ) return;
+
+		kissingMusic.SetVolume( Math.Min( KissTimer, 3f ) );
+
+	}
+
 }

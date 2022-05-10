@@ -10,7 +10,8 @@ public partial class xoxoxo : Sandbox.Game
 {
 
 	public static bool Kissing { get; private set; } = false;
-	public static TimeSince KissTimer { get; private set; } = 0f;
+	private static TimeSince _kissTimer { get; set; } = 0f;
+	public static float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
 
 	[Event.Tick]
 	public void SetKissing()
@@ -27,7 +28,11 @@ public partial class xoxoxo : Sandbox.Game
 				Kissing = true;
 				Event.Run( "KissingStart" );
 
+				KissTimer = 0f;
+
 			}
+
+			Event.Run( "Kissing" );
 
 		}
 		else
@@ -38,7 +43,6 @@ public partial class xoxoxo : Sandbox.Game
 
 				Kissing = false;
 				Event.Run( "KissingEnd" );
-				KissTimer = 0f;
 
 			}
 
