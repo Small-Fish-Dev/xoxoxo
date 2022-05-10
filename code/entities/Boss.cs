@@ -65,12 +65,14 @@ public partial class Boss : Human
 
 		SetAnimParameter( "Speed", StateSpeed[CurrentState] );
 
-		if ( Entities.GameCamera == null ) return;
+		if ( xoxoxo.Game.GameCamera == null ) return;
 
-		var lookAtInsideTrigger = Transform.PointToLocal( Entities.GameCamera.Position - Vector3.Up * 64f );
+		var lookAtInsideTrigger = Transform.PointToLocal( xoxoxo.Game.GameCamera.Position - Vector3.Up * 64f );
 		var lookAtOutsideTrigger = new Vector3( 30f, 0f, MathX.Clamp( Velocity.z, -0.1f, 0.1f ) * 300f );
 
 		SetAnimParameter( "Lookat", IsInsideTrigger ? lookAtInsideTrigger : lookAtOutsideTrigger );
+		SetAnimParameter( "Talking", CurrentState == BossState.Shouting );
+		SetAnimParameter( "Angry", CurrentState == BossState.Shouting );
 
 
 	}
@@ -78,44 +80,49 @@ public partial class Boss : Human
 	public void ComputeMovements()
 	{
 
-		if ( Entities.ExitPath == null ) return;
-		if ( Entities.StairsPath == null ) return;
+		if ( xoxoxo.Game.ExitPath == null ) return;
+		if ( xoxoxo.Game.StairsPath == null ) return;
 
-		if ( CurrentState == BossState.Walking )
+		var currentPath = towardsStairs ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath;
+		var currentSpeed = StateSpeed[CurrentState];
+		var pathLength = currentPath.Length;
+		var pathSpeed = currentSpeed / pathLength;
+
+		currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
+
+		if ( currentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
+
+		var wishPosition = currentPath.GetPathPosition( currentProgress );
+
+		var wishRotation = CurrentState switch
 		{
 
-			var currentPath = towardsStairs ? Entities.StairsPath : Entities.ExitPath;
-			var currentSpeed = StateSpeed[CurrentState];
-			var pathLength = currentPath.Length;
-			var pathSpeed = currentSpeed / pathLength;
+			BossState.Walking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
+			BossState.Shouting => Rotation.LookAt( xoxoxo.Game.GameCamera.Position - Position, Vector3.Up ),
+			BossState.Attacking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
+			BossState.Waiting => Rotation,
+			_ => Rotation,
 
-			currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
+		};
 
-			if ( currentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
+		Velocity = wishPosition - Position;
 
-			var wishPosition = currentPath.GetPathPosition( currentProgress );
-			var wishRotation = Rotation.LookAt( wishPosition.WithZ(0) - Position.WithZ(0), Vector3.Up );
+		Position = wishPosition;
+		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );
 
-			Velocity = wishPosition - Position;
-
-			Position = wishPosition;
-			Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );
-
-			if ( currentProgress == 0.99f )
-			{
+		if ( currentProgress == 0.99f )
+		{
 				
-				backwards = !backwards;
+			backwards = !backwards;
 			
-			}
+		}
 
-			if ( currentProgress == 0 && backwards )
-			{
+		if ( currentProgress == 0 && backwards )
+		{
 
-				backwards = !backwards;
-				towardsStairs = !towardsStairs;
+			backwards = !backwards;
+			towardsStairs = !towardsStairs;
 			
-			}
-
 		}
 
 	}
@@ -124,17 +131,17 @@ public partial class Boss : Human
 	public void ComputeDoors()
 	{
 
-		if ( Entities.ExitDoor != null )
+		if ( xoxoxo.Game.ExitDoor != null )
 		{
 
-			ComputeDoor( Entities.ExitDoor, 100f );
+			ComputeDoor( xoxoxo.Game.ExitDoor, 100f );
 
 		}
 
-		if ( Entities.OfficeDoor != null )
+		if ( xoxoxo.Game.OfficeDoor != null )
 		{
 
-			ComputeDoor( Entities.OfficeDoor, 100f );
+			ComputeDoor( xoxoxo.Game.OfficeDoor, 100f );
 
 		}
 

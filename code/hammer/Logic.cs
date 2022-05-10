@@ -37,16 +37,16 @@ public partial class Logic : Entity
 
 }
 
-public class Entities : Entity
+public partial class xoxoxo
 {
 
-	public static Path ExitPath { get; set; }
-	public static Path StairsPath { get; set; }
-	public static DoorEntity ExitDoor { get; set; }
-	public static DoorEntity OfficeDoor { get; set; }
-	public static Kisser KisserLeft { get; set; }
-	public static Kisser KisserRight { get; set; }
-	public static Entity GameCamera { get; set; }
+	public Path ExitPath { get; set; }
+	public Path StairsPath { get; set; }
+	public DoorEntity ExitDoor { get; set; }
+	public DoorEntity OfficeDoor { get; set; }
+	public Kisser KisserLeft { get; set; }
+	public Kisser KisserRight { get; set; }
+	public Entity GameCamera { get; set; }
 
 	[Event.Tick]
 	public static void LoadEntities()
@@ -57,85 +57,85 @@ public class Entities : Entity
 		if ( HammerLogic.IsValid() )
 		{
 
-			if ( Entities.ExitPath == null )
+			if ( xoxoxo.Game.ExitPath == null )
 			{
 
 				if ( FindByName( HammerLogic.PathTowardsExit ) is MovementPathEntity exitPath )
 				{
 
-					Entities.ExitPath = new Path( exitPath );
+					xoxoxo.Game.ExitPath = new Path( exitPath );
 
 				}
 
 			}
 
-			if ( Entities.StairsPath == null )
+			if ( xoxoxo.Game.StairsPath == null )
 			{
 
 				if ( FindByName( HammerLogic.PathTowardsStairs ) is MovementPathEntity stairsPath )
 				{
 
-					Entities.StairsPath = new Path( stairsPath );
+					xoxoxo.Game.StairsPath = new Path( stairsPath );
 
 				}
 
 			}
 
-			if ( Entities.ExitDoor == null )
+			if ( xoxoxo.Game.ExitDoor == null )
 			{
 
 				if ( FindByName( HammerLogic.ExitDoor ) is DoorEntity exitDoor )
 				{
 
-					Entities.ExitDoor = exitDoor;
+					xoxoxo.Game.ExitDoor = exitDoor;
 
 				}
 
 			}
 
-			if ( Entities.OfficeDoor == null )
+			if ( xoxoxo.Game.OfficeDoor == null )
 			{
 
 				if ( FindByName( HammerLogic.OfficeDoor ) is DoorEntity officeDoor )
 				{
 
-					Entities.OfficeDoor = officeDoor;
+					xoxoxo.Game.OfficeDoor = officeDoor;
 
 				}
 
 			}
 
-			if ( Entities.KisserLeft == null )
+			if ( xoxoxo.Game.KisserLeft == null )
 			{
 
 				if ( FindByName( HammerLogic.KisserLeft ) is Kisser kisserLeft )
 				{
 
-					Entities.KisserLeft = kisserLeft;
+					xoxoxo.Game.KisserLeft = kisserLeft;
 
 				}
 
 			}
 
-			if ( Entities.KisserRight == null )
+			if ( xoxoxo.Game.KisserRight == null )
 			{
 
 				if ( FindByName( HammerLogic.KisserRight ) is Kisser kisserRight )
 				{
 
-					Entities.KisserRight = kisserRight;
+					xoxoxo.Game.KisserRight = kisserRight;
 
 				}
 
 			}
 
-			if ( Entities.GameCamera == null )
+			if ( xoxoxo.Game.GameCamera == null )
 			{
 
 				if ( FindByName( HammerLogic.GameCamera ) is Entity gameCamera )
 				{
 
-					Entities.GameCamera = gameCamera;
+					xoxoxo.Game.GameCamera = gameCamera;
 
 				}
 

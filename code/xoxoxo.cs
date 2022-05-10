@@ -10,9 +10,12 @@ public partial class xoxoxo : Sandbox.Game
 {
 
 	public static bool EntitiesLoaded = false;
+	public static xoxoxo Game;
 
 	public xoxoxo()
 	{
+
+		Game = this;
 
 	}
 	public override void ClientJoined( Client client )
@@ -65,7 +68,7 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		var caller = ConsoleSystem.Caller;
-		var actor = Entities.KisserLeft;
+		var actor = xoxoxo.Game.KisserLeft;
 		(caller.Pawn as Player).Actor = actor;
 
 		actor.Clothes.LoadFromClient( caller );

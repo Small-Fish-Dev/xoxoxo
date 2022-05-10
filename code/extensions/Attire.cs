@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 [Library( "Attire" ), AutoGenerate]
-public partial class Attire : Asset
+public partial class Attire : GameResource
 {
 	public static IReadOnlyDictionary<string, Attire> All => _all;
 	internal static Dictionary<string, Attire> _all = new();

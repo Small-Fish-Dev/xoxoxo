@@ -6,7 +6,7 @@
 		hat = ""
 		hair = "models/citizen_clothes/hair/hair_longbrown/models/hair_longbrown.clothing"
 		eyebrows = "models/citizen_clothes/hair/eyebrows/eyebrows.clothing"
-		eyelashes = ""
+		eyelashes = "models/citizen_clothes/hair/stubble/stubble.clothing"
 		glasses = "models/citizen_clothes/glasses/stylish_glasses/stylish_glasses_gold.clothing"
 		shirt = ""
 		jacket = "models/citizen_clothes/jacket/suitjacket/jacket.suit.clothing"

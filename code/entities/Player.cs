@@ -32,7 +32,7 @@ public partial class Player : Sandbox.Player
 			{
 
 				Actor.CurrentState = KisserState.Kissing;
-				Entities.KisserRight.CurrentState = KisserState.Kissing;
+				xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing;
 
 				LastKiss = 0f;
 
@@ -46,7 +46,7 @@ public partial class Player : Sandbox.Player
 			{
 
 				Actor.CurrentState = KisserState.Working;
-				Entities.KisserRight.CurrentState = KisserState.Working;
+				xoxoxo.Game.KisserRight.CurrentState = KisserState.Working;
 
 			}
 
@@ -62,8 +62,8 @@ public class RoomCamera : CameraMode
 	public override void Update()
 	{
 
-		Position = Entities.GameCamera.Position;
-		Rotation = Entities.GameCamera.Rotation;
+		Position = xoxoxo.Game.GameCamera.Position;
+		Rotation = xoxoxo.Game.GameCamera.Rotation;
 
 	}
 

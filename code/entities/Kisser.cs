@@ -31,7 +31,7 @@ public partial class Kisser : Human
 
 	[Net] public KisserState CurrentState { get; internal set; } = KisserState.Working;
 	public bool IsKissing => CurrentState == KisserState.Kissing;
-	public bool IsLeft => this == Entities.KisserLeft;
+	public bool IsLeft => this == xoxoxo.Game.KisserLeft;
 
 	[Event.Tick.Server]
 	public void HandleVisuals()
@@ -41,7 +41,7 @@ public partial class Kisser : Human
 
 		SetAnimParameter( "Action", desiredAnimation );
 
-		var distance = Entities.KisserLeft.OriginalPosition.Distance( Entities.KisserRight.OriginalPosition ) / 2 - 24.7f;
+		var distance = xoxoxo.Game.KisserLeft.OriginalPosition.Distance( xoxoxo.Game.KisserRight.OriginalPosition ) / 2 - 24.7f;
 
 		var wishRotation = Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : (IsKissing ? 90f : 0f) );
 		var wishPosition = OriginalPosition + OriginalRotation.Backward * (IsKissing ? distance : 0f);

@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 public partial class xoxoxo : Sandbox.Game
 {
 
-	public static bool Kissing { get; private set; } = false;
-	private static TimeSince _kissTimer { get; set; } = 0f;
-	public static float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
+	[Net] public bool Kissing { get; private set; } = false;
+	[Net] private TimeSince _kissTimer { get; set; } = 0f;
+	public float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
 
 	[Event.Tick]
 	public void SetKissing()
 	{
 
-		if ( Entities.KisserLeft == null || Entities.KisserRight == null || Entities.GameCamera == null ) return;
+		if ( xoxoxo.Game.KisserLeft == null || xoxoxo.Game.KisserRight == null || xoxoxo.Game.GameCamera == null ) return;
 
-		if ( Entities.KisserLeft.IsKissing && Entities.KisserRight.IsKissing )
+		if ( xoxoxo.Game.KisserLeft.IsKissing && xoxoxo.Game.KisserRight.IsKissing )
 		{
 
 			if ( Kissing == false )
