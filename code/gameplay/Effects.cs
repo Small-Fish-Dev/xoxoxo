@@ -11,60 +11,28 @@ public partial class xoxoxo
 	SoundLoop kissingSound;
 	Particles kissingParticle;
 
-	[Event.Tick.Server]
-	public void Effects()
+
+	[Event("KissingStart")]
+	public void EffectsOnKissStart()
 	{
 
-		if ( Kissing )
-		{ 
+		if ( IsClient ) return;
 
-			if ( kissingSound == null )
-			{
+		kissingSound = new SoundLoop( "kisses", Entities.KisserLeft );
 
-				kissingSound = new SoundLoop( "kisses", Entities.KisserLeft );
-				CreateTestSound();
-
-			}
-
-			if ( kissingParticle == null )
-			{
-
-				var particlePosition = (Entities.KisserLeft.Position + Entities.KisserRight.Position) / 2 + Vector3.Up * 45f;
-				kissingParticle = Particles.Create( "particles/hearts.vpcf", particlePosition );
-
-			}
-
-		}
-		else
-		{
-
-			if ( kissingSound != null )
-			{
-
-				kissingSound.Stop();
-				kissingSound = null;
-
-			}
-
-			if ( kissingParticle != null )
-			{
-
-				kissingParticle.Destroy();
-				kissingParticle = null;
-
-			}
-
-		}
+		var particlePosition = (Entities.KisserLeft.Position + Entities.KisserRight.Position) / 2 + Vector3.Up * 45f;
+		kissingParticle = Particles.Create( "particles/hearts.vpcf", particlePosition );
 
 	}
 
-	[ClientRpc]
-	public void CreateTestSound()
+	[Event("KissingEnd")]
+	public void EffectsOnKissEnd()
 	{
 
-		var sound = new PausableSound( "sounds/pornmusic_uncompressed.wav", Entities.GameCamera.Position );
+		if ( IsClient ) return;
 
-		sound.StartSound();
+		kissingSound.Stop();
+		kissingParticle.Destroy();
 
 	}
 

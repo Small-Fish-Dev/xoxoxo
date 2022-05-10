@@ -15,6 +15,8 @@ public partial class PausableSound : Entity
 	public float SoundSpeed { get; private set; }
 	public float Progress { get; private set; }
 	public float Duration { get; private set; }
+	public bool IsPlaying { get; private set; }
+	public float Volume { get; private set; }
 	private SoundStream soundStream { get; set; }
 	private short[] soundData { get; set; }
 	private Vector3 soundPosition { get; set; }
@@ -56,20 +58,17 @@ public partial class PausableSound : Entity
 	/// </summary>
 	/// <param name="progress"></param>
 	/// <param name="playSpeed"></param>
-	public void StartSound( float progress = 0f, float playSpeed = 1f )
+	/// <param name="volume"></param>
+	public void StartSound( float progress = 0f, float playSpeed = 1f, float volume = 1f )
 	{
 
 		progress = Math.Clamp( progress, 0f, 1f );
-		playSpeed = Math.Max(playSpeed, 0f);
+		playSpeed = Math.Max( playSpeed, 0f );
+		volume = Math.Max( volume, 0f );
 
 		Progress = progress;
 		SoundSpeed = playSpeed;
-
-		Sound defaultSound = Sound.FromWorld( "audiostream.default", soundPosition );
-		SoundOrigin = defaultSound; // Using SoundOrigin to create the stream is invalid?
-		soundStream = defaultSound.CreateStream( (int)( 44100 * playSpeed ) );
-
-		SoundOrigin.SetVolume( 3 );
+		Volume = volume;
 
 		Play();
 
@@ -77,6 +76,12 @@ public partial class PausableSound : Entity
 
 	public void Play()
 	{
+
+		IsPlaying = true;
+
+		Sound defaultSound = Sound.FromWorld( "audiostream.default", soundPosition );
+		SoundOrigin = defaultSound; // Using SoundOrigin to create the stream is invalid?
+		soundStream = defaultSound.CreateStream( (int)( 44100 * SoundSpeed ) );
 
 		int sliceSize = (int)( soundData.Length * ( 1f - Progress ) );
 		int sliceStart = (int)( soundData.Length * Progress ) + 1;
@@ -87,12 +92,27 @@ public partial class PausableSound : Entity
 
 		soundStream.WriteData( soundCut );
 
+		SetVolume( Volume );
+
 	}
 
 	public void Pause()
 	{
 
+		IsPlaying = false;
 
+		SoundOrigin.Stop();
+		soundStream.Stop();
+
+	}
+
+	public void Remove()
+	{
+
+		SoundOrigin.Stop();
+		soundStream.Stop();
+		soundStream.Dispose();
+		Delete();
 
 	}
 
@@ -100,15 +120,27 @@ public partial class PausableSound : Entity
 	public void Compute()
 	{
 
-		Progress += (Time.Delta * SoundSpeed) / Duration;
+		if ( IsPlaying )
+		{
+
+			Progress += Time.Delta * SoundSpeed / Duration;
+
+		}
 
 		if ( Progress >= 1 )
 		{
 
-			SoundOrigin.Stop();
-			Delete();
+			Remove();
 
 		}
+
+	}
+
+	public void SetVolume( float volume )
+	{
+
+		Volume = volume;
+		SoundOrigin.SetVolume( volume );
 
 	}
 

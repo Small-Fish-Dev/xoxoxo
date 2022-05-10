@@ -21,14 +21,26 @@ public partial class xoxoxo : Sandbox.Game
 		if ( Entities.KisserLeft.IsKissing && Entities.KisserRight.IsKissing )
 		{
 
-			Kissing = true;
+			if ( Kissing == false )
+			{
+
+				Kissing = true;
+				Event.Run( "KissingStart" );
+
+			}
 
 		}
 		else
 		{
 
-			Kissing = false;
-			KissTimer = 0f;
+			if ( Kissing == true )
+			{
+
+				Kissing = false;
+				Event.Run( "KissingEnd" );
+				KissTimer = 0f;
+
+			}
 
 		}
 

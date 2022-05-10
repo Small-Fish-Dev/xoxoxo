@@ -9,7 +9,7 @@ public partial class xoxoxo
 {
 
 	Sound? backgroundMusic;
-	Sound? kissingMusic;
+	PausableSound kissingMusic;
 
 	[Event.Tick.Server]
 	public void LoadMusic()
@@ -39,10 +39,42 @@ public partial class xoxoxo
 
 		}
 
-		if ( Kissing )
+	}
+
+	[Event("KissingStart")]
+	public void StartKissingMusic()
+	{
+
+		if ( IsServer ) return;
+
+		if ( kissingMusic.IsValid() )
 		{
 
-			// TODO Dynamic sound for the porno music, look at the soundstream thing
+			kissingMusic.Play();
+
+		}
+		else
+		{
+
+			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.wav", Entities.GameCamera.Position );
+
+			kissingMusic.StartSound();
+			kissingMusic.SetVolume( 3 );
+
+		}
+
+	}
+
+	[Event( "KissingEnd" )]
+	public void StopMusic()
+	{
+
+		if ( IsServer ) return;
+
+		if ( kissingMusic.IsValid() )
+		{
+
+			kissingMusic.Pause();
 
 		}
 
