@@ -62,19 +62,4 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
-
-	[ServerCmd("SetPawn")]
-	public static void SetPawn()
-	{
-
-		var caller = ConsoleSystem.Caller;
-		var actor = xoxoxo.Game.KisserLeft;
-		(caller.Pawn as Player).Actor = actor;
-
-		actor.Clothes.LoadFromClient( caller );
-
-		actor.Clothes.DressEntity( actor );
-
-	}
-
 }

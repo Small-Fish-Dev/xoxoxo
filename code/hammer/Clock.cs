@@ -23,18 +23,20 @@ public partial class Clock : AnimEntity
 
 	}
 
+	const float startingTime = 9f; // 9am
+	const float turnDuration = 7.86689f; // 8 hours ( It shouldn't bother me but the clock isn't perfect, I can't deal with it )
+	const float clockHours = 12f;
+	float hourFraction => 1f / clockHours;
+
 	[Event.Tick]
 	public void Tick()
 	{
 
-		float secondsPerHour = 15f; // How many seconds for 1 clock hour to pass
-		float startingTime = 9f; // 9am
-		float turnDuration = 8f; // 8 hours
-		float clockHours = 12f;
-		float hourFraction = 1 / clockHours;
-		var time = xoxoxo.Game.RoundTime / secondsPerHour;
+		float time = xoxoxo.Game.RoundTimeNormal * turnDuration;
 
-		CurrentSequence.TimeNormalized = ( (time / clockHours % (hourFraction * turnDuration ) ) + hourFraction * startingTime ) % 1f;
+		CurrentSequence.TimeNormalized = ( (time / clockHours ) + hourFraction * startingTime ) % 1f;
+
+		DebugOverlay.Text( Position - Vector3.Up * CollisionBounds.Size.z / 2f, $"RoundTime: {xoxoxo.Game.RoundTime}\nNormalTime: {xoxoxo.Game.RoundTimeNormal}" );
 
 	}
 
