@@ -23,8 +23,8 @@ public partial class Clock : AnimEntity
 
 	}
 
-	const float startingTime = 9f; // 9am
-	const float turnDuration = 7.86689f; // 8 hours ( It shouldn't bother me but the clock isn't perfect, I can't deal with it )
+	const float startingTime = 9.07058f; // 9am
+	const float turnDuration = 7.79628f; // 8 hours ( It really isn't that precise :-/ )
 	const float clockHours = 12f;
 	float hourFraction => 1f / clockHours;
 

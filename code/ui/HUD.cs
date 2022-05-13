@@ -16,17 +16,23 @@ public class WorkClock : Panel
 	{
 
 		time = Add.Label( "09:00", "title" );
-		date = Add.Label( "MON", "subtitle_left" );
-		countdown = Add.Label( "-8H", "subtitle_right" );
+		Panel bottom = Add.Panel( "bottom" );
+		date = bottom.Add.Label( "MON|", "subtitle" );
+		countdown = bottom.Add.Label( "-8H", "subtitle" );
 
 	}
 
 	public override void Tick()
 	{
 
-		time.Text = $"09:00";
-		date.Text = $"{dates[( xoxoxo.Game.CurrentRound ) % dates.Length]}";
-		countdown.Text = $"-{(int)Time.Now % 8}h";
+		// Hardcoded values hooray!
+		int currentHour = (int)( xoxoxo.Game.RoundTimeNormal * 8 + 9 );
+		string hoursFormat = $"{(currentHour < 10 ? "0" : "")}{currentHour}";
+		int currentMinutes = (int)( ( xoxoxo.Game.RoundTimeNormal * 8 + 9 - currentHour ) * 60 );
+		string minutesFormat = $"{(currentMinutes < 10 ? "0" : "")}{currentMinutes}";
+		time.Text = $"{hoursFormat}:{minutesFormat}";
+		date.Text = $"{dates[( xoxoxo.Game.CurrentRound ) % dates.Length]}|";
+		countdown.Text = $"-{ 17 - currentHour}h";
 
 	}
 

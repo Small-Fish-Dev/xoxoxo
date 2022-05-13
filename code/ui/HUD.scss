@@ -10,35 +10,38 @@ RootPanel {
 	align-items: center;
 
 	WorkClock {
+		position: absolute;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		flex-shrink: 0;
-		background-color: rgba( black, 0.2 );
-		border-radius: 30px;
-		backdrop-filter: blur( 15px );
-		width: 220px;
-		height: 120px;
+		background-color: rgb( 210, 220, 240 );
+		border-radius: 30;
+		border: 20px solid rgb( 15, 15, 15 );
+		width: 240px;
+		height: 140px;
 		top: 10px;
+		left: 10px;
 		font-family: "Open 24 Display St";
-		color: white;
+		letter-spacing: 5px;
+		text-shadow: 2px 2px 0px rgba( 0, 0, 0, 0.5);
+		color: rgb( 50, 70, 130 );
 
 		.title {
-			font-size: 40px;
-			text-shadow: 0px 0px 8px rgba( black, 1 );
-			text-stroke: 7px black;
+			font-size: 60px;
+			top: -10px;
 		}
 
-		.subtitle_left {
-			font-size: 25px;
-			text-shadow: 0px 0px 5px rgba( black, 1 );
-			text-stroke: 5px black;
-		}
+		.bottom {
+			flex-direction: row;
+			bottom: 10px;
 
-		.subtitle_right {
-			font-size: 25px;
-			text-shadow: 0px 0px 5px rgba( black, 1 );
-			text-stroke: 5px black;
+			.subtitle {
+				font-size: 33px;
+			}
+
+			.subtitle {
+				font-size: 33px;
+			}
 		}
 
 		&.hidden {
