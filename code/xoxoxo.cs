@@ -16,6 +16,7 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		Game = this;
+		new HUD();
 
 	}
 	public override void ClientJoined( Client client )
