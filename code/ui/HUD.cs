@@ -70,14 +70,26 @@ public class HeartParticle : Panel
 {
 
 	TimeSince lifeTime = 0f;
+	float deathTime;
+	float transitions;
+	float particleSize = Rand.Float( 20, 50 );
+	float rotation = Rand.Float( -10, 10 );
+	float particleSpeed;
 	Vector2 velocity;
 
-	public HeartParticle()
+	public HeartParticle( float duration = 1f, float size = 1f, float speed = 1f )
 	{
+
+		deathTime = duration;
+		transitions = duration / 2;
+		particleSpeed = speed;
+		particleSize = Rand.Float( 20, 50 ) * size;
 
 		Style.Left = Length.Percent( 50 );
 		Style.Top = Length.Percent( 10 );
-		Style.Height = Length.Pixels( Rand.Float( 20, 50 ) );
+		Style.Height = 0;
+		Style.BackgroundAngle = Length.Percent( rotation );
+		Style.ZIndex = (int)( Time.Now * 100 );
 
 		velocity = new Vector2( Rand.Float( -10, 10 ), Rand.Float( -10, 10 ) );
 
@@ -85,12 +97,18 @@ public class HeartParticle : Panel
 
 	public override void Tick()
 	{
+		
+		float velocityStrength = 10f * particleSpeed;
+		float gravityStrength = 1f;
+		velocity = new Vector2( velocity.x, velocity.y + (float)Math.Pow( lifeTime * gravityStrength, 2f ) );
+		Style.Left = Length.Pixels( Style.Left.Value.GetPixels( Screen.Width ) + velocity.x * Time.Delta * velocityStrength );
+		Style.Top = Length.Pixels( Style.Top.Value.GetPixels( Screen.Height ) + velocity.y * Time.Delta * velocityStrength );
 
-		velocity = velocity.WithY( velocity.y + (float)Math.Pow( lifeTime * 5, 2f ) );
-		Style.Left = Length.Pixels( Style.Left.Value.GetPixels( Screen.Width ) + velocity.x );
-		Style.Top = Length.Pixels( Style.Top.Value.GetPixels( Screen.Height ) + velocity.y );
 
-		if ( lifeTime > 1f )
+		Style.Height = Length.Pixels( Math.Min( lifeTime, transitions ) / transitions * particleSize );
+		Style.Opacity = Math.Min( deathTime - lifeTime , transitions ) / transitions;
+
+		if ( lifeTime > deathTime )
 		{
 
 			Delete();
@@ -119,15 +137,18 @@ public partial class HUD : HudEntity<RootPanel>
 
 	}
 
+	TimeSince nextParticle = 0f;
+
 	[Event.Frame]
 	public void SpawnParticles()
 	{
 
-		if ( Time.Now % 1 <= 1f )
+		if ( nextParticle >= 0.05f )
 		{
 
-			var heart = new HeartParticle();
+			var heart = new HeartParticle( 3f, 3f, 5f );
 			RootPanel.AddChild( heart );
+			nextParticle = 0f;
 
 		}
 

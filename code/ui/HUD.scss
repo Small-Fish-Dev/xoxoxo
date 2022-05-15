@@ -107,6 +107,8 @@ RootPanel {
 		position: absolute;
 		background-image: url(ui/heart_stroke.png);
 		background-size: 100%;
+		background-repeat: no-repeat;
+		opacity: 1;
 		height: 40px;
 		aspect-ratio: 1;
 		z-index: 6;
