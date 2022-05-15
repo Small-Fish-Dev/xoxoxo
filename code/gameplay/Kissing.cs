@@ -13,6 +13,7 @@ public partial class xoxoxo : Sandbox.Game
 	[Net] private TimeSince _kissTimer { get; set; } = 0f;
 	public float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
 	[Net] public float KissProgress { get; private set; } = 0f;
+	float kissTarget = 60f; // Seconds, how long to kiss for
 
 	[Event.Tick]
 	public void SetKissing()
@@ -48,6 +49,13 @@ public partial class xoxoxo : Sandbox.Game
 			}
 
 		}
+
+		if ( Kissing )
+		{
+
+			KissProgress = Math.Clamp( KissProgress + Time.Delta / kissTarget, 0, 1 );
+
+		}	 
 
 	}
 

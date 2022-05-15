@@ -57,8 +57,9 @@ public class ProgressBar : Panel
 	public override void Tick()
 	{
 
-		bar.Style.Width = Length.Percent( Math.Max( Time.Now * 10 % 100, 7 ) );
-		heart.Style.Left = Length.Percent( Time.Now * 10 % 100 - 5 );
+		bar.Style.Width = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7 ); // Offset a bit because bar rounding looks ugly otherwide
+		bar.Style.SetBackgroundImage( $"ui/stripes/stripes{(int)(Time.Now * 20) % 8}.png" );
+		heart.Style.Left = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7);
 
 	}
 
@@ -69,22 +70,27 @@ public class HeartParticle : Panel
 {
 
 	TimeSince lifeTime = 0f;
+	Vector2 velocity;
 
 	public HeartParticle()
 	{
 
-		Style.Left = Length.Percent( Rand.Float( 0, 100 ) );
-		Style.ZIndex = (int)( Time.Now * 100 );
-		Style.Height = Length.Pixels( Rand.Float( 40, 100 ) );
+		Style.Left = Length.Percent( 50 );
+		Style.Top = Length.Percent( 10 );
+		Style.Height = Length.Pixels( Rand.Float( 20, 50 ) );
+
+		velocity = new Vector2( Rand.Float( -10, 10 ), Rand.Float( -10, 10 ) );
 
 	}
 
 	public override void Tick()
 	{
 
-		Style.Top = Length.Pixels( (float)Math.Pow( lifeTime * 20, 2f ) );
+		velocity = velocity.WithY( velocity.y + (float)Math.Pow( lifeTime * 5, 2f ) );
+		Style.Left = Length.Pixels( Style.Left.Value.GetPixels( Screen.Width ) + velocity.x );
+		Style.Top = Length.Pixels( Style.Top.Value.GetPixels( Screen.Height ) + velocity.y );
 
-		if ( lifeTime > 5f )
+		if ( lifeTime > 1f )
 		{
 
 			Delete();
