@@ -12,6 +12,7 @@ public partial class xoxoxo : Sandbox.Game
 	[Net] public bool Kissing { get; private set; } = false;
 	[Net] private TimeSince _kissTimer { get; set; } = 0f;
 	public float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
+	[Net] public float KissProgress { get; private set; } = 0f;
 
 	[Event.Tick]
 	public void SetKissing()
