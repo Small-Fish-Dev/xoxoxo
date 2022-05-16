@@ -46,7 +46,8 @@ public partial class PausableSound : Entity
 		for ( int i = 0; i < shortData.Length; i++ )
 		{
 
-			shortData[i] = (short)(byteData[i * 2 + 1] << 8); // Turn 2 Bytes into 1 Short
+			shortData[i] = (short)(byteData[i * 2] | (byteData[i * 2 + 1] << 8)); // Turn 2 Bytes into 1 Short
+
 		}
 
 		return shortData;

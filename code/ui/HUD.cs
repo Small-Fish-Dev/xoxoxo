@@ -54,12 +54,28 @@ public class ProgressBar : Panel
 
 	}
 
+	TimeSince nextParticle = 0f;
+
 	public override void Tick()
 	{
 
 		bar.Style.Width = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7 ); // Offset a bit because bar rounding looks ugly otherwide
 		bar.Style.SetBackgroundImage( $"ui/stripes/stripes{(int)(Time.Now * 20) % 8}.png" );
 		heart.Style.Left = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7);
+
+		if ( nextParticle >= 0.1f )
+		{
+
+			if ( xoxoxo.Game.Kissing )
+			{
+
+				Event.Run( "HeartParticle", heart.Box.Rect.left, heart.Box.Rect.top );
+
+			}
+
+			nextParticle = 0f;
+
+		}
 
 	}
 
@@ -137,20 +153,14 @@ public partial class HUD : HudEntity<RootPanel>
 
 	}
 
-	TimeSince nextParticle = 0f;
-
-	[Event.Frame]
-	public void SpawnParticles()
+	[Event("HeartParticle")]
+	public void CreateHeartParticle( float left, float top )
 	{
 
-		if ( nextParticle >= 0.05f )
-		{
-
-			var heart = new HeartParticle( 3f, 3f, 5f );
-			RootPanel.AddChild( heart );
-			nextParticle = 0f;
-
-		}
+		var heart = new HeartParticle( 3f, 1f, 1f );
+		heart.Style.Left = Length.Pixels( left );
+		heart.Style.Top = Length.Pixels( top );
+		RootPanel.AddChild( heart );
 
 	}
 
