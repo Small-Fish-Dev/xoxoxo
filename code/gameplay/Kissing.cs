@@ -16,9 +16,9 @@ public partial class xoxoxo : Sandbox.Game
 	[Net] private float _kissProgress { get; set; } = 0f;
 	public float KissProgress { get { return _kissProgress; } }
 	float kissTarget = 60f; // Seconds, how long to kiss for
-	[Net] private int _points { get; set; } = 0; // Will this stop people from modifying it via tools mode?
-	public int Points { get { return _points; } }
-	[Net] private float _combo { get; set; } = 1;
+	[Net] private double _points { get; set; } = 0.0;
+	public double Points { get { return _points; } }
+	[Net] private float _combo { get; set; } = 1f;
 	public float Combo { get { return _combo; } }
 
 	[Event.Tick]
@@ -60,6 +60,8 @@ public partial class xoxoxo : Sandbox.Game
 		{
 
 			_kissProgress = Math.Clamp( _kissProgress + Time.Delta / kissTarget, 0, 1 );
+			_combo = (float)Math.Pow( KissTimer, 1.5 ) + 1f ;
+			_points += Combo * Time.Delta;
 
 		}	 
 
