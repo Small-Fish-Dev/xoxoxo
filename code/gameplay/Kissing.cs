@@ -9,11 +9,17 @@ using System.Threading.Tasks;
 public partial class xoxoxo : Sandbox.Game
 {
 
-	[Net] public bool Kissing { get; private set; } = false;
+	[Net] private bool _kissing { get; set; } = false;
+	public bool Kissing { get { return _kissing; } }
 	[Net] private TimeSince _kissTimer { get; set; } = 0f;
-	public float KissTimer { get { return Kissing ? _kissTimer : 0f; } set { _kissTimer = value; } }
-	[Net] public float KissProgress { get; private set; } = 0f;
+	public float KissTimer { get { return Kissing ? _kissTimer : 0f; } }
+	[Net] private float _kissProgress { get; set; } = 0f;
+	public float KissProgress { get { return _kissProgress; } }
 	float kissTarget = 60f; // Seconds, how long to kiss for
+	[Net] private int _points { get; set; } = 0; // Will this stop people from modifying it via tools mode?
+	public int Points { get { return _points; } }
+	[Net] private float _combo { get; set; } = 1;
+	public float Combo { get { return _combo; } }
 
 	[Event.Tick]
 	public void SetKissing()
@@ -27,10 +33,10 @@ public partial class xoxoxo : Sandbox.Game
 			if ( Kissing == false )
 			{
 
-				Kissing = true;
+				_kissing = true;
 				Event.Run( "KissingStart" );
 
-				KissTimer = 0f;
+				_kissTimer = 0f;
 
 			}
 
@@ -43,7 +49,7 @@ public partial class xoxoxo : Sandbox.Game
 			if ( Kissing == true )
 			{
 
-				Kissing = false;
+				_kissing = false;
 				Event.Run( "KissingEnd" );
 
 			}
@@ -53,7 +59,7 @@ public partial class xoxoxo : Sandbox.Game
 		if ( Kissing )
 		{
 
-			KissProgress = Math.Clamp( KissProgress + Time.Delta / kissTarget, 0, 1 );
+			_kissProgress = Math.Clamp( _kissProgress + Time.Delta / kissTarget, 0, 1 );
 
 		}	 
 
