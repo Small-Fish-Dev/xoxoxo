@@ -72,7 +72,7 @@ public partial class PausableSound : Entity
 
 	public void Pause()
 	{
-
+		UpdateProgress();
 		IsPlaying = false;
 
 		SoundOrigin.Stop();
@@ -90,14 +90,20 @@ public partial class PausableSound : Entity
 
 	}
 
+	RealTimeSince lastProgressTick = 0;
+
 	[Event.Tick]
 	public void Compute()
 	{
 
-		if ( IsPlaying )
+		// Unfortunately the access to QueuedSampleCount is somewhat expensive,
+		// such that accessing it every tick has a noticeable impact on FPS.
+		// Let's only access it every 100ms or so
+		if ( IsPlaying && lastProgressTick > 0.1f )
 		{
 
-			Progress += Time.Delta * SoundSpeed / SoundData.Duration;
+			UpdateProgress();
+			lastProgressTick = 0.0f;
 
 		}
 
@@ -107,6 +113,15 @@ public partial class PausableSound : Entity
 			Remove();
 
 		}
+
+	}
+
+	private void UpdateProgress()
+	{
+
+		var frames = SoundData.SampleCount / SoundData.Channels;
+		var remainingFrames = soundStream.QueuedSampleCount * SoundSpeed;
+		Progress = (float)(frames - remainingFrames) / frames;
 
 	}
 
