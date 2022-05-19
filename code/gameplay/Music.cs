@@ -58,7 +58,7 @@ public partial class xoxoxo
 		else
 		{
 
-			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.wav", xoxoxo.Game.GameCamera.Position );
+			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.vsnd", xoxoxo.Game.GameCamera.Position );
 
 			kissingMusic.StartSound( xoxoxo.Game.KissProgress );
 
