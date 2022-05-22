@@ -1,10 +1,10 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 
-public partial class Human : AnimEntity
+public partial class Human : AnimatedEntity
 {
 
-	public Clothing.Container Clothes = new();
+	public ClothingContainer Clothes = new();
 	virtual public string AttireName => "";
 	public bool IsDressed = false;
 	public Rotation OriginalRotation;

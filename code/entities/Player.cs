@@ -1,7 +1,6 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
 
 public partial class Player : Sandbox.Player
 {
@@ -25,7 +24,7 @@ public partial class Player : Sandbox.Player
 
 		if ( Actor == null ) return;
 
-		if ( Input.Down( InputButton.Attack1 ) )
+		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 
 			if ( LastKiss >= 1.1f || Actor.CurrentState == KisserState.Kissing )

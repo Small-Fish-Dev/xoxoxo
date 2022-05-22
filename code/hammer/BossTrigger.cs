@@ -1,8 +1,8 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
 using System.Linq;
+using SandboxEditor;
 
 
 [Library( "xoxoxo_boss_trigger" )]

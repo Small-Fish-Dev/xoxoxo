@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
+using SandboxEditor;
 
 public enum KisserState
 {
@@ -14,6 +14,7 @@ public enum KisserState
 }
 
 [Library( "xoxoxo_kisser" )]
+[HammerEntity]
 [Model( Model = "models/citizen/citizen.vmdl" )]
 [Display( Name = "Kisser", GroupName = "xoxoxo", Description = "The player or their partner" )]
 

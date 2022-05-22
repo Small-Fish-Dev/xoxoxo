@@ -1,13 +1,14 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
+using SandboxEditor;
 
 [Library( "xoxoxo_clock" )]
+[HammerEntity]
 [Model( Model = "models/clock/clock.vmdl" )]
 [Display( Name = "Game Clock", GroupName = "xoxoxo", Description = "Shows you the time of the day, usual shift is from 9am to 5pm" )]
 
-public partial class Clock : AnimEntity
+public partial class Clock : AnimatedEntity
 {
 
 	public override void Spawn()
@@ -36,7 +37,7 @@ public partial class Clock : AnimEntity
 
 		CurrentSequence.TimeNormalized = ( (time / clockHours ) + hourFraction * startingTime ) % 1f;
 
-		DebugOverlay.Text( Position - Vector3.Up * CollisionBounds.Size.z / 2f, $"RoundTime: {xoxoxo.Game.RoundTime}\nNormalTime: {xoxoxo.Game.RoundTimeNormal}" );
+		DebugOverlay.Text( $"RoundTime: {xoxoxo.Game.RoundTime}\nNormalTime: {xoxoxo.Game.RoundTimeNormal}", Position - Vector3.Up * CollisionBounds.Size.z / 2f );
 
 	}
 

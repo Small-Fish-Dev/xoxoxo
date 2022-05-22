@@ -1,13 +1,12 @@
-﻿
-using Sandbox;
+﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
 using System.Linq;
+using SandboxEditor;
 
 
 [Library( "xoxoxo_logic" )]
-[Hammer.VisGroup( Hammer.VisGroup.Logic )]
+[VisGroup( VisGroup.Logic )]
 [Model( Model = "models/computer/computer.vmdl" )]
 [Display( Name = "Logic", GroupName = "xoxoxo", Description = "Every entity will be linked in hammer and accesed here." )]
 public partial class Logic : Entity

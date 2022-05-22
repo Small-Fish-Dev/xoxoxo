@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Hammer;
+using SandboxEditor;
 
 public enum BossState
 {
@@ -14,6 +14,7 @@ public enum BossState
 }
 
 [Library( "xoxoxo_boss" )]
+[HammerEntity]
 [Model( Model = "models/citizen/citizen.vmdl" )]
 [Display( Name = "Boss", GroupName = "xoxoxo", Description = "The boss that walks around the office and looks for employees slacking off." )]
 public partial class Boss : Human

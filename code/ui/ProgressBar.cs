@@ -20,28 +20,33 @@ public class ProgressBar : Panel
 	}
 
 	TimeSince nextParticle = 0f;
+	float stripesPosition = 0f;
 
 	public override void Tick()
 	{
 
+
 		bar.Style.Width = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7 ); // Offset a bit because bar rounding looks ugly otherwide
-		bar.Style.SetBackgroundImage( $"ui/stripes/stripes{(int)(Time.Now * 20) % 8}.png" );
+		bar.Style.SetBackgroundImage( $"ui/stripes/stripes{(int)(stripesPosition % 8)}.png" );
 		heart.Style.Left = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7);
 
-		float heartRate = Math.Max( 0.5f - xoxoxo.Game.Combo / 100f, 0.05f );
 
-		if ( nextParticle >= heartRate )
+		if ( xoxoxo.Game.Kissing )
 		{
 
-			if ( xoxoxo.Game.Kissing )
+			stripesPosition += xoxoxo.Game.Combo * Time.Delta;
+
+			float heartRate = Math.Max( 0.5f - xoxoxo.Game.Combo / 100f, 0.05f );
+
+			if ( nextParticle >= heartRate )
 			{
 
 				Vector2 center = new Vector2( heart.Box.Left * ScaleFromScreen, (heart.Box.Top + heart.Box.Bottom) / 2 * ScaleFromScreen );
 				Event.Run( "HeartParticle", center, heart.Box.Rect.width / 2 * ScaleFromScreen );
 
-			}
+				nextParticle = 0f;
 
-			nextParticle = 0f;
+			}
 
 		}
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-[Library( "Attire" ), AutoGenerate]
+[GameResource( "Attire", "attire", "Dress the humans", Icon = "checkroom" )]
 public partial class Attire : GameResource
 {
 	public static IReadOnlyDictionary<string, Attire> All => _all;
@@ -33,16 +33,16 @@ public partial class Attire : GameResource
 	public void Dress( Human target )
 	{
 
-		if ( Skin != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Skin ) ); }
-		if ( Hat != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hat ) ); }
-		if ( Hair != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Hair ) ); }
-		if ( Eyebrows != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyebrows ) ); }
-		if ( Eyelashes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Eyelashes ) ); }
-		if ( Glasses != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Glasses ) ); }
-		if ( Shirt != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shirt ) ); }
-		if ( Jacket != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Jacket ) ); }
-		if ( Pants != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Pants ) ); }
-		if ( Shoes != "" ) { target.Clothes.Toggle( Clothing.FromPath<Clothing>( Shoes ) ); }
+		if ( Skin != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Skin ) ); }
+		if ( Hat != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Hat ) ); }
+		if ( Hair != "" ) { target.Clothes.Toggle( ResourceLibrary.Get <Clothing>( Hair ) ); }
+		if ( Eyebrows != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Eyebrows ) ); }
+		if ( Eyelashes != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Eyelashes ) ); }
+		if ( Glasses != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Glasses ) ); }
+		if ( Shirt != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Shirt ) ); }
+		if ( Jacket != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Jacket ) ); }
+		if ( Pants != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Pants ) ); }
+		if ( Shoes != "" ) { target.Clothes.Toggle( ResourceLibrary.Get<Clothing>( Shoes ) ); }
 
 		target.Clothes.DressEntity( target );
 

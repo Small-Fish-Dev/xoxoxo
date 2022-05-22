@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 public partial class xoxoxo
 {
 
-	[ServerCmd( "SetPawn" )]
+	[ConCmd.Server( "SetPawn" )]
 	public static void SetPawn()
 	{
 
@@ -23,7 +23,7 @@ public partial class xoxoxo
 
 	}
 
-	[ServerCmd( "StartGame" )]
+	[ConCmd.Server( "StartGame" )]
 	public static void StartGame()
 	{
 

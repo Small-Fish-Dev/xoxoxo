@@ -1,0 +1,5 @@
+C:\Users\uberm\Desktop\Addons\xoxoxo\code\obj\Debug\xoxoxo.csproj.AssemblyReference.cache
+C:\Users\uberm\Desktop\Addons\xoxoxo\code\obj\Debug\xoxoxo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uberm\Desktop\Addons\xoxoxo\code\obj\Debug\xoxoxo.AssemblyInfoInputs.cache
+C:\Users\uberm\Desktop\Addons\xoxoxo\code\obj\Debug\xoxoxo.AssemblyInfo.cs
+C:\Users\uberm\Desktop\Addons\xoxoxo\code\obj\Debug\xoxoxo.csproj.CoreCompileInputs.cache
