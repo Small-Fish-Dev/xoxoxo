@@ -10,15 +10,13 @@ using System.Runtime.InteropServices;
 public partial class PausableSound : Entity
 {
 
-	public string SoundFile { get; private set; }
 	public Sound SoundOrigin { get; private set; }
 	public float SoundSpeed { get; private set; }
 	public float Progress { get; private set; }
-	public float Duration { get; private set; }
 	public bool IsPlaying { get; private set; }
 	public float Volume { get; private set; }
 	private SoundStream soundStream { get; set; }
-	private short[] soundData { get; set; }
+	public SoundData SoundData { get; private set; }
 	private Vector3 soundPosition { get; set; }
 
 	/// <summary>
@@ -29,28 +27,8 @@ public partial class PausableSound : Entity
 	public PausableSound( string file, Vector3 position )
 	{
 
-		soundData = LoadSound( file );
-		SoundFile = file;
+		SoundData = SoundLoader.LoadSamples( file );
 		soundPosition = position;
-		Duration = (float)soundData.Length / 44100f;
-
-	}
-
-	public static short[] LoadSound( string file )
-	{
-
-		// 1 Short = 2 Bytes
-		Span<byte> byteData = FileSystem.Mounted.ReadAllBytes( file );
-		var shortData = new short[byteData.Length / 2];
-
-		for ( int i = 0; i < shortData.Length; i++ )
-		{
-
-			shortData[i] = (short)(byteData[i * 2] | (byteData[i * 2 + 1] << 8)); // Turn 2 Bytes into 1 Short
-
-		}
-
-		return shortData;
 
 	}
 
@@ -82,16 +60,11 @@ public partial class PausableSound : Entity
 
 		Sound defaultSound = Sound.FromWorld( "audiostream.default", soundPosition );
 		SoundOrigin = defaultSound; // Using SoundOrigin to create the stream is invalid?
-		soundStream = defaultSound.CreateStream( (int)( 44100 * SoundSpeed ) );
+		soundStream = defaultSound.CreateStream( (int)( SoundData.SampleRate * SoundSpeed ) );
 
-		int sliceSize = (int)( soundData.Length * ( 1f - Progress ) );
-		int sliceStart = (int)( soundData.Length * Progress ) + 1;
-		Span<short> soundCut = new Span<short>( new short[sliceSize] );
-
-		var slice = soundData.AsSpan<short>().Slice( sliceStart );
-		slice.CopyTo( soundCut );
-
-		soundStream.WriteData( soundCut );
+		int sliceStart = (int)( SoundData.SampleCount * Progress );
+		var slice = SoundData.Samples.AsSpan( sliceStart );
+		soundStream.WriteData( slice );
 
 		SetVolume( Volume );
 
@@ -99,7 +72,7 @@ public partial class PausableSound : Entity
 
 	public void Pause()
 	{
-
+		UpdateProgress();
 		IsPlaying = false;
 
 		SoundOrigin.Stop();
@@ -117,14 +90,20 @@ public partial class PausableSound : Entity
 
 	}
 
+	RealTimeSince lastProgressTick = 0;
+
 	[Event.Tick]
 	public void Compute()
 	{
 
-		if ( IsPlaying )
+		// Unfortunately the access to QueuedSampleCount is somewhat expensive,
+		// such that accessing it every tick has a noticeable impact on FPS.
+		// Let's only access it every 100ms or so
+		if ( IsPlaying && lastProgressTick > 0.1f )
 		{
 
-			Progress += Time.Delta * SoundSpeed / Duration;
+			UpdateProgress();
+			lastProgressTick = 0.0f;
 
 		}
 
@@ -134,6 +113,15 @@ public partial class PausableSound : Entity
 			Remove();
 
 		}
+
+	}
+
+	private void UpdateProgress()
+	{
+
+		var frames = SoundData.SampleCount / SoundData.Channels;
+		var remainingFrames = soundStream.QueuedSampleCount * SoundSpeed;
+		Progress = (float)(frames - remainingFrames) / frames;
 
 	}
 
