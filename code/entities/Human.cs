@@ -15,7 +15,7 @@ public partial class Human : AnimatedEntity
 		base.Spawn();
 
 		SetModel( "models/terry/officeterry.vmdl" );
-		SetupPhysicsFromOBB( PhysicsMotionType.Static, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
+		SetupPhysicsFromOBB( PhysicsMotionType.Keyframed, new Vector3( -8, -8, 0 ), new Vector3( 8, 8, 72 ) );
 
 		EnableDrawing = true;
 		Transmit = TransmitType.Always;

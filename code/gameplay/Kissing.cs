@@ -19,7 +19,7 @@ public partial class xoxoxo : Sandbox.Game
 	[Net] private double _points { get; set; } = 0.0;
 	public double Points { get { return _points; } }
 	[Net] private float _combo { get; set; } = 1f;
-	public float Combo { get { return _combo; } }
+	public float Combo { get { return Kissing ? _combo : 1f; } }
 
 	[Event.Tick]
 	public void SetKissing()

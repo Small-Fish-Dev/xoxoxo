@@ -1,12 +1,12 @@
 ﻿using Sandbox;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System;
 
 public partial class Player : Sandbox.Player
 {
 
 	[Net] public Kisser Actor { get; set; }
 	public TimeSince LastKiss { get; private set; }
+	public StandardPostProcess KissingPostProcess { get; set; }
 
 	public override void Spawn()
 	{
@@ -14,6 +14,16 @@ public partial class Player : Sandbox.Player
 		base.Spawn();
 
 		CameraMode = new RoomCamera();
+
+	}
+
+	public override void ClientSpawn()
+	{
+
+		base.ClientSpawn();
+
+		KissingPostProcess = new StandardPostProcess();
+		PostProcess.Add( KissingPostProcess );
 
 	}
 
@@ -50,6 +60,22 @@ public partial class Player : Sandbox.Player
 			}
 
 		}
+
+		if ( IsClient )
+		{
+
+			ComputePostProcess();
+		}
+
+	}
+
+	public void ComputePostProcess()
+	{
+
+		KissingPostProcess.DepthOfField.Enabled = true;
+		KissingPostProcess.DepthOfField.FocalLength = 340f - Math.Min( ( xoxoxo.Game.Combo - 1f ) * 75f, 150f );
+		KissingPostProcess.DepthOfField.FocalPoint = 30000f;
+		KissingPostProcess.DepthOfField.Radius = MathF.Min( MathF.Pow( xoxoxo.Game.Combo + 0.001f, 1.5f ), 100f );
 
 	}
 

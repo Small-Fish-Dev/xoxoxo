@@ -1029,6 +1029,8 @@
 					m_Stops = [  ]
 				}
 			}
+			m_bCannotBeRefracted = false
+			m_bDisableZBuffering = true
 		},
 	]
 }

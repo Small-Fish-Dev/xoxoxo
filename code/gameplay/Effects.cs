@@ -20,8 +20,8 @@ public partial class xoxoxo
 
 		kissingSound = new SoundLoop( "kisses", xoxoxo.Game.KisserLeft );
 
-		var particlePosition = (xoxoxo.Game.KisserLeft.Position + xoxoxo.Game.KisserRight.Position) / 2 + Vector3.Up * 45f;
-		kissingParticle = Particles.Create( "particles/hearts.vpcf", particlePosition );
+		//var particlePosition = (xoxoxo.Game.KisserLeft.Position + xoxoxo.Game.KisserRight.Position) / 2 + Vector3.Up * 45f;
+		//kissingParticle = Particles.Create( "particles/hearts.vpcf", particlePosition );
 
 	}
 
@@ -32,7 +32,7 @@ public partial class xoxoxo
 		if ( IsClient ) return;
 
 		kissingSound.Stop();
-		kissingParticle.Destroy();
+		//kissingParticle.Destroy();
 
 	}
 

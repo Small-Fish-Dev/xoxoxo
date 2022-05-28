@@ -62,11 +62,11 @@ public partial class Kisser : Human
 
 		Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
 
-		//UnfuckAnimations(); TODO: Uncomment this
+		UnfuckAnimations();
 
 	}
 
-	/*
+	
 	// Temporary fix for issue https://github.com/Facepunch/sbox-issues/issues/1807
 	int animationFixed = 3;
 	bool redo = false;
@@ -95,6 +95,5 @@ public partial class Kisser : Human
 		}
 
 	}
-	*/
 
 }

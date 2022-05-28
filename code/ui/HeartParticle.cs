@@ -11,11 +11,12 @@ public class HeartParticle : Panel
 	float deathTime;
 	float transitions;
 	float particleSize;
-	float rotation;
+	float particleRotation;
 	float particleSpeed;
-	Vector2 velocity;
+	Vector2 particleGravity;
+	Vector2 particleVelocity;
 
-	public HeartParticle( float duration = 1f, float size = 1f, float speed = 1f, Vector2? direction = null )
+	public HeartParticle( float duration = 1f, float size = 1f, float speed = 1f, Vector2? direction = null, Vector2? gravity = null )
 	{
 
 		deathTime = duration;
@@ -24,10 +25,11 @@ public class HeartParticle : Panel
 		particleSize = Rand.Float( 20, 50 ) * size;
 
 		Style.Height = 0;
-		Style.BackgroundAngle = Length.Percent( rotation );
+		Style.BackgroundAngle = Length.Percent( particleRotation );
 		Style.ZIndex = (int)( Time.Now * 100 );
 
-		velocity = direction.Value * Rand.Float( 5f, 10f );
+		particleVelocity = direction.GetValueOrDefault( Vector2.Random.Normal ) * Rand.Float( 5f, 10f );
+		particleGravity = gravity.GetValueOrDefault( new Vector2( 0f, 1f ) );
 
 	}
 
@@ -36,9 +38,9 @@ public class HeartParticle : Panel
 		
 		float velocityStrength = 10f * particleSpeed;
 		float gravityStrength = 1f;
-		velocity = new Vector2( velocity.x, velocity.y + (float)Math.Pow( lifeTime * gravityStrength, 2f ) );
-		Style.Left = Length.Pixels( Style.Left.Value.GetPixels( Screen.Width ) + velocity.x * Time.Delta * velocityStrength );
-		Style.Top = Length.Pixels( Style.Top.Value.GetPixels( Screen.Height ) + velocity.y * Time.Delta * velocityStrength );
+		particleVelocity = new Vector2( particleVelocity.x + (float)Math.Pow( lifeTime * gravityStrength, 2f ) * particleGravity.x, particleVelocity.y + (float)Math.Pow( lifeTime * gravityStrength, 2f ) * particleGravity.y );
+		Style.Left = Length.Pixels( Style.Left.Value.GetPixels( Screen.Width ) + particleVelocity.x * Time.Delta * velocityStrength );
+		Style.Top = Length.Pixels( Style.Top.Value.GetPixels( Screen.Height ) + particleVelocity.y * Time.Delta * velocityStrength );
 
 
 		Style.Height = Length.Pixels( Math.Min( lifeTime, transitions ) / transitions * particleSize );
