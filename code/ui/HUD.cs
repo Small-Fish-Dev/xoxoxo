@@ -16,8 +16,7 @@ public partial class HUD : HudEntity<RootPanel>
 
 		RootPanel.AddChild<WorkClock>();
 		RootPanel.AddChild<ProgressBar>();
-
-		
+		RootPanel.AddChild<Score>();
 
 	}
 
