@@ -39,12 +39,11 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CreateHeartParticle( Vector2 center, float radius )
 	{
 
-		float duration = 1f;
-		float size = Math.Min( xoxoxo.Game.Combo / 20f + 0.5f, 2f );
-		float speed = Math.Min( xoxoxo.Game.Combo / 10f + 0.5f, 5f );
+		float size = Math.Min( xoxoxo.Game.Combo / 20f + 0.5f, 1.5f );
+		float speed = Math.Min( xoxoxo.Game.Combo / 10f + 0.5f, 4f );
 
 		Vector2 direction = Vector2.Random.Normal;
-		var heart = new HeartParticle( duration, size, speed, direction );
+		var heart = new HeartParticle( 1f, size, speed, direction, new Vector2( 3f, -direction.y ) );
 		heart.Style.Left = Length.Pixels( center.x + radius * direction.x * 0.5f );
 		heart.Style.Top = Length.Pixels( center.y + radius * direction.y * 0.5f );
 		RootPanel.AddChild( heart );

@@ -9,7 +9,7 @@ public partial class xoxoxo
 {
 
 	SoundLoop kissingSound;
-	Particles kissingParticle;
+	//Particles kissingParticle;
 
 
 	[Event("KissingStart")]
