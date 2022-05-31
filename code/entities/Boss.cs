@@ -68,12 +68,21 @@ public partial class Boss : Human
 
 		if ( xoxoxo.Game.GameCamera == null ) return;
 
-		var lookAtInsideTrigger = Transform.PointToLocal( xoxoxo.Game.GameCamera.Position - Vector3.Up * 64f );
-		var lookAtOutsideTrigger = new Vector3( 30f, 0f, MathX.Clamp( Velocity.z, -0.1f, 0.1f ) * 300f );
+		var lookAtInsideTrigger = xoxoxo.Game.GameCamera.Position - Vector3.Up * 64f;
+		var lookAtOutsideTrigger = Position + Rotation.Forward + new Vector3( 0f, 0f, MathX.Clamp( Velocity.z, -0.1f, 0.1f ) * 15f );
 
-		SetAnimParameter( "Lookat", IsInsideTrigger ? lookAtInsideTrigger : lookAtOutsideTrigger );
-		SetAnimParameter( "Talking", CurrentState == BossState.Shouting );
-		SetAnimParameter( "Angry", CurrentState == BossState.Shouting );
+		var LookAtPosition = CurrentState switch
+		{
+
+			BossState.Walking => IsInsideTrigger ? lookAtInsideTrigger : lookAtOutsideTrigger,
+			BossState.Shouting => lookAtInsideTrigger,
+			_ => Position + Rotation.Forward,
+
+		};
+
+		SetAnimParameter( "Lookat", Transform.PointToLocal( LookAtPosition ) );
+		//SetAnimParameter( "Talking", CurrentState == BossState.Shouting );
+		//SetAnimParameter( "Angry", CurrentState == BossState.Shouting );
 
 
 	}
@@ -99,7 +108,7 @@ public partial class Boss : Human
 		{
 
 			BossState.Walking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
-			BossState.Shouting => Rotation.LookAt( xoxoxo.Game.GameCamera.Position - Position, Vector3.Up ),
+			BossState.Shouting => Rotation.LookAt( xoxoxo.Game.GameCamera.Position.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
 			BossState.Attacking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
 			BossState.Waiting => Rotation,
 			_ => Rotation,
@@ -127,8 +136,6 @@ public partial class Boss : Human
 		}
 
 	}
-
-
 	public void ComputeDoors()
 	{
 
@@ -176,6 +183,26 @@ public partial class Boss : Human
 			}
 
 		}
+
+	}
+
+	public override void ComputeStartDialogue()
+	{
+
+		base.ComputeStartDialogue();
+
+		LookAtPosition = xoxoxo.Game.GameCamera.Position;
+
+		CurrentState = BossState.Shouting;
+
+	}
+
+	public override void ComputeEndDialogue()
+	{
+
+		base.ComputeEndDialogue();
+
+		CurrentState = BossState.Walking;
 
 	}
 

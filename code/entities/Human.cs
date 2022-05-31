@@ -9,6 +9,8 @@ public partial class Human : AnimatedEntity
 	public bool IsDressed = false;
 	public Rotation OriginalRotation;
 	public Vector3 OriginalPosition;
+	public Vector3 LookAtPosition;
+
 	public override void Spawn()
 	{
 

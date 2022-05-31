@@ -81,14 +81,56 @@ public partial class Player : Sandbox.Player
 
 }
 
-public class RoomCamera : CameraMode
+public partial class RoomCamera : CameraMode
 {
+
+	[Net, Predicted] public Vector3 TargetPosition { get; set; }
+	[Net, Predicted] public Rotation TargetRotation { get; set; }
+	[Net, Predicted] public bool IsDialogue { get; set; } = false;
 
 	public override void Update()
 	{
 
-		Position = xoxoxo.Game.GameCamera.Position;
-		Rotation = xoxoxo.Game.GameCamera.Rotation;
+		if ( !IsDialogue )
+		{
+
+			TargetPosition = xoxoxo.Game.GameCamera.Position;
+			TargetRotation = xoxoxo.Game.GameCamera.Rotation;
+
+		}
+
+		Position = Vector3.Lerp( Position, TargetPosition, Time.Delta * 5, true );
+		Rotation = Rotation.Lerp( Rotation, TargetRotation, Time.Delta * 5, true );
+
+	}
+
+	[Event("StartDialogue")]
+	public void StartDialogue( Dialogue dialogue )
+	{
+
+		IsDialogue = true;
+
+		Human speaker = dialogue.Speaker;
+		Vector3 lookAtPosition = speaker.Position + Vector3.Up * 64f;
+
+		TargetRotation = Rotation.LookAt( lookAtPosition - speaker.LookAtPosition, Vector3.Up );
+		TargetPosition = lookAtPosition + TargetRotation.Backward * 40f;
+
+		/*Log.Info( dialogue.Speaker );
+		Log.Info( dialogue.Text );
+		Log.Info( dialogue.Duration );
+		Log.Info( dialogue.Angry );
+		Log.Info( dialogue.TextSpeed );
+		Log.Info( TargetRotation );
+		Log.Info( TargetPosition );*/
+
+	}
+
+	[Event("EndDialogue")]
+	public void EndDialogue()
+	{
+
+		IsDialogue = false;
 
 	}
 
