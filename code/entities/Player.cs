@@ -7,6 +7,7 @@ public partial class Player : Sandbox.Player
 	[Net] public Kisser Actor { get; set; }
 	public TimeSince LastKiss { get; private set; }
 	public StandardPostProcess KissingPostProcess { get; set; }
+	public bool IsInCutscene { get; private set; } = false;
 
 	public override void Spawn()
 	{
@@ -33,15 +34,25 @@ public partial class Player : Sandbox.Player
 		base.Simulate( cl );
 
 		if ( Actor == null ) return;
+		if ( IsInCutscene ) return;
 
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 
-			if ( LastKiss >= 1.1f || Actor.CurrentState == KisserState.Kissing )
+			if ( LastKiss >= 1.1f )
 			{
 
-				Actor.CurrentState = KisserState.Kissing;
-				xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing;
+				if ( Actor.CurrentState != KisserState.Kissing )
+				{
+
+					StartKissing();
+
+				}
+
+			}
+
+			if ( Actor.CurrentState == KisserState.Kissing )
+			{
 
 				LastKiss = 0f;
 
@@ -51,11 +62,10 @@ public partial class Player : Sandbox.Player
 		else
 		{
 
-			if ( LastKiss >= 0.8f )
+			if ( LastKiss >= 0.8f  && Actor.CurrentState == KisserState.Kissing )
 			{
 
-				Actor.CurrentState = KisserState.Working;
-				xoxoxo.Game.KisserRight.CurrentState = KisserState.Working;
+				EndKissing();
 
 			}
 
@@ -66,6 +76,46 @@ public partial class Player : Sandbox.Player
 
 			ComputePostProcess();
 		}
+
+	}
+
+	public void StartKissing()
+	{
+
+		Actor.CurrentState = KisserState.Kissing;
+		xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing; // TODO: Only in singleplayer
+
+		LastKiss = 0f;
+
+	}
+
+	public void EndKissing()
+	{
+
+		Actor.CurrentState = KisserState.Working;
+		xoxoxo.Game.KisserRight.CurrentState = KisserState.Working; // TODO: Only in singleplayer
+
+		LastKiss = 0f;
+
+	}
+
+	[Event( "StartDialogue" )]
+	public void EndKissingByDialogue( Dialogue dialogue )
+	{
+
+		EndKissing();
+
+		IsInCutscene = true;
+
+	}
+
+	[Event( "EndDialogue" )]
+	public void DialogueEnd()
+	{
+
+		EndKissing(); // Reset the timer again
+
+		IsInCutscene = false;
 
 	}
 
