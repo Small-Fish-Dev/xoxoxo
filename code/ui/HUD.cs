@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public partial class HUD : HudEntity<RootPanel>
 {
 
+	DialogueBox textBox;
+
 	public HUD()
 	{
 
@@ -17,7 +19,6 @@ public partial class HUD : HudEntity<RootPanel>
 		RootPanel.AddChild<WorkClock>();
 		RootPanel.AddChild<ProgressBar>();
 		RootPanel.AddChild<Score>();
-		RootPanel.AddChild<DialogueBox>();
 
 	}
 
@@ -36,7 +37,7 @@ public partial class HUD : HudEntity<RootPanel>
 
 	}
 
-	[Event("HeartParticle")]
+	[Event( "HeartParticle" )]
 	public void CreateHeartParticle( Vector2 center, float radius )
 	{
 
@@ -48,6 +49,28 @@ public partial class HUD : HudEntity<RootPanel>
 		heart.Style.Left = Length.Pixels( center.x + radius * direction.x * 0.5f );
 		heart.Style.Top = Length.Pixels( center.y + radius * direction.y * 0.5f );
 		RootPanel.AddChild( heart );
+
+	}
+
+	[Event( "StartDialogue" )]
+	public void OpenDialogueWindow( Dialogue dialogue )
+	{
+
+		if ( Host.IsServer ) return;
+
+		textBox = new DialogueBox( dialogue.Text, dialogue.TextSpeed, dialogue.Duration );
+
+		RootPanel.AddChild( textBox );
+
+	}
+
+	[Event( "EndDialogue" )]
+	public void CloseDialogueWindow()
+	{
+
+		if ( Host.IsServer ) return;
+
+		textBox.Delete();
 
 	}
 

@@ -38,7 +38,7 @@ public partial class xoxoxo
 		var bosses = Entity.All.OfType<Boss>().ToList();
 
 
-		bosses[0].StartDialogue( "You better stop slacking off or I will murder you in cold blood!!!", 3000, true, 5 );
+		bosses[0].StartDialogue( "You better stop slacking off or I will murder you in cold blood!!!", 3000, true, 30 );
 
 	}
 

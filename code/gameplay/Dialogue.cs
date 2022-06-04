@@ -36,14 +36,19 @@ public partial class Human : AnimatedEntity
 	public async void StartDialogue( string text, int duration, bool angry = false, float textSpeed = 5 )
 	{
 
+		if ( Host.IsServer )
+		{
+
+			BroadcastDialogue( this, text, duration, angry, textSpeed );
+
+		}
+
 		Event.Run( "StartDialogue", new Dialogue( this, text, duration, angry, textSpeed ) );
 		
 		SetAnimParameter( "Talking", true );
 		SetAnimParameter( "Angry", angry );
 
 		ComputeStartDialogue();
-
-		DebugOverlay.Text( text, this.Position + Vector3.Up * 64f , duration / 1000f );
 
 		await Task.Delay( duration );
 
@@ -53,6 +58,14 @@ public partial class Human : AnimatedEntity
 		SetAnimParameter( "Angry", false );
 
 		ComputeEndDialogue();
+
+	}
+
+	[ClientRpc]
+	public void BroadcastDialogue( Human speaker, string text, int duration, bool angry, float textSpeed )
+	{
+
+		speaker.StartDialogue( text, duration, angry, textSpeed );
 
 	}
 
