@@ -52,6 +52,8 @@ public partial class xoxoxo : Sandbox.Game
 				_kissing = false;
 				Event.Run( "KissingEnd" );
 
+				//TODO: Music doesn't stop because it's clientside only and the event is called on serverside
+
 			}
 
 		}

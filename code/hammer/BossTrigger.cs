@@ -46,26 +46,12 @@ public partial class BossTrigger : BaseTrigger
 	public void SearchBosses()
 	{
 
-		var bosses = Entity.All.OfType<Boss>().ToList();
-
-		foreach ( var boss in bosses )
+		foreach ( var boss in Entity.All.OfType<Boss>() )
 		{
 
-			if ( WorldSpaceBounds.Overlaps( boss.WorldSpaceBounds ) )
-			{
-
-				boss.IsInsideTrigger = true;
-
-			}
-			else
-			{
-
-				boss.IsInsideTrigger = false;
-
-			}
+			boss.IsInsideTrigger = WorldSpaceBounds.Overlaps( boss.WorldSpaceBounds );
 
 		}
-
 
 	}
 
