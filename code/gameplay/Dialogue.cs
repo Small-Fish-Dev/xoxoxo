@@ -72,7 +72,7 @@ public partial class Human : AnimatedEntity
 	public virtual void ComputeStartDialogue()
 	{
 
-
+		LookAtPosition = xoxoxo.Game.GameCamera.Position;
 
 	}
 

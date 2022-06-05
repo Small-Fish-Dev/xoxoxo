@@ -33,6 +33,7 @@ public partial class Kisser : Human
 	public KisserState CurrentState { get; internal set; } = KisserState.Working;
 	public bool IsKissing => CurrentState == KisserState.Kissing;
 	public bool IsLeft => this == xoxoxo.Game.KisserLeft;
+	public override string OfficeName => IsLeft ? "Terrence" : "Theresa";
 
 	[Event.Tick.Server]
 	public void HandleVisuals()

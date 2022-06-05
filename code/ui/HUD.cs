@@ -16,9 +16,10 @@ public partial class HUD : HudEntity<RootPanel>
 
 		RootPanel.StyleSheet.Load( "ui/HUD.scss" );
 
-		RootPanel.AddChild<WorkClock>();
-		RootPanel.AddChild<ProgressBar>();
-		RootPanel.AddChild<Score>();
+		RootPanel.AddChild<CharacterSelection>();
+		//RootPanel.AddChild<WorkClock>();
+		//RootPanel.AddChild<ProgressBar>();
+		//RootPanel.AddChild<Score>();
 
 	}
 
@@ -58,7 +59,7 @@ public partial class HUD : HudEntity<RootPanel>
 
 		if ( Host.IsServer ) return;
 
-		textBox = new DialogueBox( dialogue.Text, dialogue.TextSpeed, dialogue.Duration );
+		textBox = new DialogueBox( dialogue.Text, dialogue.Speaker.OfficeName, dialogue.TextSpeed, dialogue.Duration );
 
 		RootPanel.AddChild( textBox );
 

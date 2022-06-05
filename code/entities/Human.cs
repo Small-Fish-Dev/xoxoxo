@@ -6,6 +6,7 @@ public partial class Human : AnimatedEntity
 
 	public ClothingContainer Clothes = new();
 	virtual public string AttireName => "";
+	virtual public string OfficeName => "Human";
 	public bool IsDressed = false;
 	public Rotation OriginalRotation;
 	public Vector3 OriginalPosition;

@@ -25,6 +25,7 @@ public partial class Boss : Human
 	[Net] public bool IsInsideTrigger { get; internal set; } = false;
 
 	public override string AttireName => "boss";
+	public override string OfficeName => "Boss";
 
 
 	public Dictionary<BossState, string> StateAnimations => new Dictionary<BossState, string>()
@@ -81,8 +82,6 @@ public partial class Boss : Human
 		};
 
 		SetAnimParameter( "Lookat", Transform.PointToLocal( LookAtPosition ) );
-		//SetAnimParameter( "Talking", CurrentState == BossState.Shouting );
-		//SetAnimParameter( "Angry", CurrentState == BossState.Shouting );
 
 
 	}
@@ -190,8 +189,6 @@ public partial class Boss : Human
 	{
 
 		base.ComputeStartDialogue();
-
-		LookAtPosition = xoxoxo.Game.GameCamera.Position;
 
 		CurrentState = BossState.Shouting;
 
