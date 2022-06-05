@@ -25,22 +25,26 @@ public partial class xoxoxo : Sandbox.Game
 	public void SetKissing()
 	{
 
+		if ( IsClient ) return;
+
+
 		if ( xoxoxo.Game.KisserLeft == null || xoxoxo.Game.KisserRight == null || xoxoxo.Game.GameCamera == null ) return;
 
 		if ( xoxoxo.Game.KisserLeft.IsKissing && xoxoxo.Game.KisserRight.IsKissing )
 		{
 
+			
 			if ( Kissing == false )
 			{
 
 				_kissing = true;
 				Event.Run( "KissingStart" );
 
+				BroadcastKissingEvent( true );
+
 				_kissTimer = 0f;
 
 			}
-
-			Event.Run( "Kissing" );
 
 		}
 		else
@@ -52,7 +56,7 @@ public partial class xoxoxo : Sandbox.Game
 				_kissing = false;
 				Event.Run( "KissingEnd" );
 
-				//TODO: Music doesn't stop because it's clientside only and the event is called on serverside
+				BroadcastKissingEvent( false );
 
 			}
 
@@ -66,6 +70,14 @@ public partial class xoxoxo : Sandbox.Game
 			_points += Combo * Time.Delta;
 
 		}	 
+
+	}
+
+	[ClientRpc]
+	public void BroadcastKissingEvent( bool kissing )
+	{
+
+		Event.Run( kissing ? "KissingStart" : "KissingEnd" );
 
 	}
 

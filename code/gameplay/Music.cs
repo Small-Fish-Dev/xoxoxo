@@ -81,13 +81,16 @@ public partial class xoxoxo
 
 	}
 
-	[Event( "Kissing" )]
+	[Event.Frame]
 	public void UpdateMusic()
 	{
 
-		if ( IsServer ) { return; }
+		if ( kissingMusic.IsValid() )
+		{
 
-		kissingMusic.SetVolume( Math.Min( KissTimer, 3f ) );
+			kissingMusic.SetVolume( Math.Min( KissTimer, 3f ) );
+
+		}
 
 	}
 

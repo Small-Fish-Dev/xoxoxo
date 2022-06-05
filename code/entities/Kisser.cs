@@ -30,7 +30,7 @@ public partial class Kisser : Human
 	public string MonitorName { get; internal set; }
 	public Prop Monitor => FindByName( MonitorName ) as Prop;
 
-	[Net] public KisserState CurrentState { get; internal set; } = KisserState.Working;
+	public KisserState CurrentState { get; internal set; } = KisserState.Working;
 	public bool IsKissing => CurrentState == KisserState.Kissing;
 	public bool IsLeft => this == xoxoxo.Game.KisserLeft;
 
