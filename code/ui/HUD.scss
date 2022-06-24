@@ -233,26 +233,21 @@ RootPanel {
 				flex-direction: column;
 				justify-content: flex-start;
 				align-items: center;
-				font-size: 40px;
+				font-size: 80px;
 				font-family: "Open 24 Display St";
-				text-shadow: 3px 3px 0px rgba( 0, 0, 0, 0.5);
+				text-shadow: 6px 6px 0px rgba( 0, 0, 0, 0.5);
 				color: white;
 				background: linear-gradient( rgba(30,30,70,0.6), rgba(30,30,70,0.6) 80%, rgba(30,30,70,0) 100%);
 				border-radius: 40px 40px 0px 0px;
 				margin: 20px;
-				width: 25%;
 				height: 100%;
-				
-				.renderBox {
-					height: 80%;
-					width: 100%;
-					background-color: red;
-				}
+				aspect-ratio: 0.8;
 
 				.nameBox {
-					height: 20%;
 					width: 100%;
-					background-color: blue;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
 				}
 			}
 		}

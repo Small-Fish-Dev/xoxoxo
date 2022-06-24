@@ -54,7 +54,7 @@ public partial class Kisser : Human
 		if ( !IsDressed )
 		{
 
-			SetAttire( IsLeft ? "terrence" : "theresa" );
+			SetAttire( IsLeft ? "terence" : "teresa" );
 
 		}
 

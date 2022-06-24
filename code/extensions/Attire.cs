@@ -48,6 +48,26 @@ public partial class Attire : GameResource
 
 	}
 
+	public void DressModel( SceneModel model )
+	{
+
+		var container = new ClothingContainer();
+
+		if ( Skin != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Skin ) ); }
+		if ( Hat != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Hat ) ); }
+		if ( Hair != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Hair ) ); }
+		if ( Eyebrows != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Eyebrows ) ); }
+		if ( Eyelashes != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Eyelashes ) ); }
+		if ( Glasses != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Glasses ) ); }
+		if ( Shirt != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Shirt ) ); }
+		if ( Jacket != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Jacket ) ); }
+		if ( Pants != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Pants ) ); }
+		if ( Shoes != "" ) { container.Toggle( ResourceLibrary.Get<Clothing>( Shoes ) ); }
+
+		container.DressSceneObject( model );
+
+	}
+
 	protected override void PostLoad()
 	{
 		base.PostLoad();
