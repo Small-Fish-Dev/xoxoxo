@@ -203,8 +203,8 @@ public partial class Boss : Human
 
 	}
 
-	[Event( "CharacterSelected" )]
-	public void IntroCutscene( string character )
+	[Event( "StartGame" )]
+	public void IntroCutscene()
 	{
 
 		if ( IsClient ) return;
@@ -216,7 +216,7 @@ public partial class Boss : Human
 	{
 
 		await Task.Delay( 500 );
-		StartDialogue( "I hope nobody is kissing in this office today!", 4000, false, 20 );
+		StartDialogue( "I hope I don't find anyone kissing in the office today, it really makes me want to murder someone.", 4000, false, 30 );
 
 	}
 

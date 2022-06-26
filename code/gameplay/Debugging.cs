@@ -9,15 +9,6 @@ using System.Threading.Tasks;
 public partial class xoxoxo
 {
 
-
-	[ConCmd.Server( "StartGame" )]
-	public static void StartGame()
-	{
-
-		xoxoxo.Game.IsGameRunning = true;
-
-	}
-
 	[ConCmd.Server( "TestSpeak" )]
 	public static void TestSpeak()
 	{

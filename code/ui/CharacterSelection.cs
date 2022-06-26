@@ -65,6 +65,7 @@ public class CharacterBox : Panel
 		{
 
 			Event.Run( "CharacterSelected", character );
+			Event.Run( "StartGame" );
 
 		} );
 
@@ -94,6 +95,7 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		Event.Run( "CharacterSelected", character );
+		Event.Run( "StartGame" );
 
 	}
 

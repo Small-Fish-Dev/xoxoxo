@@ -48,4 +48,12 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
+	[Event( "StartGame" )]
+	public void StartGame()
+	{
+
+		xoxoxo.Game.IsGameRunning = true;
+
+	}
+
 }
