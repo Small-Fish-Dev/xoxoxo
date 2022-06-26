@@ -18,8 +18,11 @@ public class CharacterSelection : Panel
 
 	}
 
-	public override void Tick()
+	[Event( "CharacterSelected" )]
+	public void DeleteOnSelection( string characterSelected )
 	{
+
+		Delete();
 
 	}
 
@@ -34,6 +37,8 @@ public class CharacterBox : Panel
 	float CamDistance = 55;
 	Vector3 CamPos => Vector3.Up * 40 + CamAngles.Direction * -CamDistance;
 
+	SceneModel human;
+
 	public CharacterBox( string character )
 	{
 
@@ -42,12 +47,12 @@ public class CharacterBox : Panel
 		scenePanel.Style.Width = Length.Percent( 100 );
 		scenePanel.Style.Height = Length.Percent( 100 );
 
-		var lightWarm = new SceneSpotLight( world, Vector3.Up * 150f + Vector3.Forward * -150f, new Color( 1f, 0.7f, 0.5f ) * 40f );
-		lightWarm.Rotation = Rotation.LookAt( -lightWarm.Position );
-		lightWarm.SpotCone = new SpotLightCone { Inner = 90, Outer = 90 };
+		var light = new SceneSpotLight( world, Vector3.Up * 150f + Vector3.Forward * -150f, new Color( 1f, 0.7f, 0.5f ) * 40f );
+		light.Rotation = Rotation.LookAt( -light.Position );
+		light.SpotCone = new SpotLightCone { Inner = 90, Outer = 180 };
 
 
-		var human = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
+		human = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
 		human.Rotation = Rotation.FromYaw( 180 );
 		human.Update( Time.Delta );
 
@@ -55,6 +60,40 @@ public class CharacterBox : Panel
 		attire.DressModel( human );
 
 		Add.Panel( "nameBox" ).Add.Label( character );
+
+		AddEventListener( "onclick", () =>
+		{
+
+			Event.Run( "CharacterSelected", character );
+
+		} );
+
+	}
+
+}
+
+
+public partial class xoxoxo : Sandbox.Game
+{
+
+	[Event( "CharacterSelected" )]
+	public void CharactedSelected( string character )
+	{
+
+		if ( IsClient )
+		{
+
+			NetworkSelection( character );
+
+		}
+
+	}
+
+	[ConCmd.Server( "NetworkSelection" )]
+	public static void NetworkSelection( string character )
+	{
+
+		Event.Run( "CharacterSelected", character );
 
 	}
 

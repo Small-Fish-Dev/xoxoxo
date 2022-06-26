@@ -51,19 +51,32 @@ public partial class Kisser : Human
 		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.2f );
 		Position = Vector3.Lerp( Position, wishPosition, 0.2f );
 
-		if ( !IsDressed )
-		{
-
-			SetAttire( IsLeft ? "terence" : "teresa" );
-
-		}
-
 		Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
 		Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
 
 		Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
 
 		UnfuckAnimations();
+
+	}
+
+	[Event( "CharacterSelected" )]
+	public void CharacterSelected( string character )
+	{
+
+		if ( IsLeft )
+		{
+
+			Clothes.LoadFromClient( Client.All[0] ); // Screw it, I don't want this to be multiplayer anyways
+			Clothes.DressEntity( this );
+
+		}
+		else
+		{
+
+			SetAttire( character );
+
+		}
 
 	}
 

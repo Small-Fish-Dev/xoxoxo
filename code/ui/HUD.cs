@@ -17,9 +17,18 @@ public partial class HUD : HudEntity<RootPanel>
 		RootPanel.StyleSheet.Load( "ui/HUD.scss" );
 
 		RootPanel.AddChild<CharacterSelection>();
-		//RootPanel.AddChild<WorkClock>();
-		//RootPanel.AddChild<ProgressBar>();
-		//RootPanel.AddChild<Score>();
+
+	}
+
+	[Event( "CharacterSelected" )]
+	public void CharacterSelected( string character )
+	{
+
+		if ( !IsClient ) return;
+
+		RootPanel.AddChild<WorkClock>();
+		RootPanel.AddChild<ProgressBar>();
+		RootPanel.AddChild<Score>();
 
 	}
 

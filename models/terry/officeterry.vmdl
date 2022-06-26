@@ -219,7 +219,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/citizen/animations/Citizen@IdlePoseDefault.fbx"
+						source_filename = "models/citizen/animations/citizen@idlepose_default.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0

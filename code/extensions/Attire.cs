@@ -72,8 +72,8 @@ public partial class Attire : GameResource
 	{
 		base.PostLoad();
 
-		if ( !_all.ContainsKey( Name ) )
-			_all.Add( Name, this );
+		if ( !_all.ContainsKey( ResourceName ) )
+			_all.Add( ResourceName, this );
 
 	}
 

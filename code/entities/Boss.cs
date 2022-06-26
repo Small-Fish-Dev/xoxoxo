@@ -203,4 +203,21 @@ public partial class Boss : Human
 
 	}
 
+	[Event( "CharacterSelected" )]
+	public void IntroCutscene( string character )
+	{
+
+		if ( IsClient ) return;
+		WaitDialogue();
+
+	}
+
+	public async void WaitDialogue()
+	{
+
+		await Task.Delay( 500 );
+		StartDialogue( "I hope nobody is kissing in this office today!", 4000, false, 20 );
+
+	}
+
 }

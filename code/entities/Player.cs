@@ -83,7 +83,7 @@ public partial class Player : Sandbox.Player
 	{
 
 		Actor.CurrentState = KisserState.Kissing;
-		xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing; // TODO: Only in singleplayer
+		xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing;
 
 		LastKiss = 0f;
 
@@ -93,7 +93,7 @@ public partial class Player : Sandbox.Player
 	{
 
 		Actor.CurrentState = KisserState.Working;
-		xoxoxo.Game.KisserRight.CurrentState = KisserState.Working; // TODO: Only in singleplayer
+		xoxoxo.Game.KisserRight.CurrentState = KisserState.Working;
 
 		LastKiss = 0f;
 
@@ -126,6 +126,14 @@ public partial class Player : Sandbox.Player
 		KissingPostProcess.DepthOfField.FocalLength = 340f - Math.Min( ( xoxoxo.Game.Combo - 1f ) * 75f, 150f );
 		KissingPostProcess.DepthOfField.FocalPoint = 30000f;
 		KissingPostProcess.DepthOfField.Radius = MathF.Min( MathF.Pow( xoxoxo.Game.Combo + 0.001f, 1.5f ), 100f );
+
+	}
+
+	[Event( "CharacterSelected" )]
+	public void CharacterSelected( string character )
+	{
+
+		Actor = xoxoxo.Game.KisserLeft;
 
 	}
 

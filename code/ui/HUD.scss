@@ -191,6 +191,7 @@ RootPanel {
 
 	CharacterSelection {
 		position: absolute;
+		pointer-events: all;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
@@ -241,13 +242,21 @@ RootPanel {
 				border-radius: 40px 40px 0px 0px;
 				margin: 20px;
 				height: 100%;
-				aspect-ratio: 0.8;
+				padding: 10px;
+				aspect-ratio: 0.7;
 
 				.nameBox {
 					width: 100%;
 					flex-direction: column;
 					justify-content: center;
 					align-items: center;
+				}
+
+				&:hover {
+					cursor: pointer;
+					border-radius: 40px;
+					padding: 0px;
+					border: 10px solid rgba( 255, 255, 255, 0.5 );
 				}
 			}
 		}
