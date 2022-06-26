@@ -226,7 +226,10 @@ public partial class Boss : Human
 	{
 
 		await Task.Delay( 500 );
-		StartDialogue( "I hope I don't find anyone kissing in the office today, it really makes me want to murder someone.", 4000, false, 30 );
+		StartDialogue( "If I catch any of you kissing again I'll be forced to take action! You can do that when work finishes at 17:00", 6000, false, 30 );
+		await Task.Delay( 8000 );
+
+		Event.Run( "EndCutscene" );
 
 	}
 

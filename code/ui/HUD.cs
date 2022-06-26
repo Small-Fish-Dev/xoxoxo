@@ -32,6 +32,30 @@ public partial class HUD : HudEntity<RootPanel>
 
 	}
 
+	[ClientRpc]
+	public void BroadcastEndCutscene()
+	{
+
+		Event.Run( "EndCutscene" );
+
+	}
+
+	[Event( "EndCutscene" )]
+	public void AppearHint()
+	{
+
+		if ( !IsClient )
+		{
+
+			BroadcastEndCutscene();
+			return;
+
+		}
+
+		RootPanel.AddChild<KissHint>();
+
+	}
+
 	[Event( "HeartParticle" )]
 	public void KissingHearts( Vector2 center, float radius ) // If we use the 3D particles, they get rendered behind the DOF pass :-(
 	{

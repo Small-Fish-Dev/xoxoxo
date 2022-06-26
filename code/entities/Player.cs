@@ -36,7 +36,7 @@ public partial class Player : Sandbox.Player
 		if ( Actor == null ) return;
 		if ( IsInCutscene ) return;
 
-		if ( Input.Down( InputButton.PrimaryAttack ) )
+		if ( Input.Down( InputButton.Jump ) )
 		{
 
 			if ( LastKiss >= 1.1f )

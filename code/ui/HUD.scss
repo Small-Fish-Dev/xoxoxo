@@ -265,4 +265,49 @@ RootPanel {
 			opacity: 0;
 		}
 	}
+
+	KissHint {
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		background-color: rgb( 30, 30, 70, 0.5 );
+		border-radius: 30px;
+		width: 460px;
+		height: 90px;
+		margin-top: auto;
+		bottom: 40px;
+		right: 10px;
+		font-family: "Franklin Gothic";
+		letter-spacing: 5px;
+		text-shadow: 3px 3px 0px rgba( 0, 0, 0, 0.8);
+		color: rgb( 220, 190, 0 );
+		transition: all 3s ease-out;
+		z-index: 11;
+		opacity: 1;
+
+		.icon {
+			width: 150px;
+			height: 100%;
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.title {
+			padding-right: 30px;
+			font-size: 50px;
+		}
+
+		&:intro {
+			opacity: 0;
+		}
+
+		&:outro {
+			opacity: 0;
+		}
+
+		&.hidden {
+			opacity: 0;
+		}
+	}
 }
