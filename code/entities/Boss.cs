@@ -44,7 +44,7 @@ public partial class Boss : Human
 		[BossState.Waiting] = 0f,
 		[BossState.Walking] = 50f,
 		[BossState.Shouting] = 0f,
-		[BossState.Attacking] = 130f,
+		[BossState.Attacking] = 120f,
 
 	};
 
@@ -59,6 +59,7 @@ public partial class Boss : Human
 		ComputeVisuals();
 		ComputeMovements();
 		ComputeDoors();
+		ComputeGameplay();
 
 	}
 
@@ -83,6 +84,42 @@ public partial class Boss : Human
 
 		SetAnimParameter( "Lookat", Transform.PointToLocal( LookAtPosition ) );
 
+
+	}
+
+	public void ComputeGameplay()
+	{
+
+		if ( IsClient ) return;
+
+		if ( CurrentState == BossState.Walking )
+		{
+
+			if ( IsInsideTrigger )
+			{
+
+				if ( xoxoxo.Game.Kissing )
+				{
+
+					CaughtKissers();
+
+				}
+
+			}
+
+		}
+
+	}
+
+	public async void CaughtKissers()
+	{
+
+		CurrentState = BossState.Shouting;
+		StartDialogue( "YOU BASTARDS! I WILL MURDER YOU!", 5000, true, 10 );
+
+		await Task.Delay( 5000 );
+
+		CurrentState = BossState.Attacking;
 
 	}
 
@@ -226,8 +263,8 @@ public partial class Boss : Human
 	{
 
 		await Task.Delay( 500 );
-		StartDialogue( "If I catch any of you kissing again I'll be forced to take action! You can do that when work finishes at 17:00", 6000, false, 30 );
-		await Task.Delay( 8000 );
+		StartDialogue( "If I catch any of you kissing again I'll be forced to take action! You can do that when work finishes at 17:00", 8000, false, 20 );
+		await Task.Delay( 10000 );
 
 		Event.Run( "EndCutscene" );
 
