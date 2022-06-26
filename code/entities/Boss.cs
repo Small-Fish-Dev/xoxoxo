@@ -42,7 +42,7 @@ public partial class Boss : Human
 	{
 
 		[BossState.Waiting] = 0f,
-		[BossState.Walking] = 45f,
+		[BossState.Walking] = 50f,
 		[BossState.Shouting] = 0f,
 		[BossState.Attacking] = 130f,
 
@@ -185,12 +185,18 @@ public partial class Boss : Human
 
 	}
 
+	SoundLoop shoutingSound;
+
 	public override void ComputeStartDialogue()
 	{
 
 		base.ComputeStartDialogue();
 
 		CurrentState = BossState.Shouting;
+
+		if ( IsClient ) return;
+
+		shoutingSound = new SoundLoop( "grunts", this );
 
 	}
 
@@ -200,6 +206,10 @@ public partial class Boss : Human
 		base.ComputeEndDialogue();
 
 		CurrentState = BossState.Walking;
+
+		if ( IsClient ) return;
+
+		shoutingSound.Stop();
 
 	}
 
