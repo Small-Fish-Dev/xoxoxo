@@ -33,7 +33,6 @@ public partial class xoxoxo : Sandbox.Game
 		if ( xoxoxo.Game.KisserLeft.IsKissing && xoxoxo.Game.KisserRight.IsKissing )
 		{
 
-			
 			if ( Kissing == false )
 			{
 

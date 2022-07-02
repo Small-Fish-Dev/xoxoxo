@@ -11,6 +11,27 @@ public partial class xoxoxo
 	SoundLoop kissingSound;
 	//Particles kissingParticle;
 
+	TimeSince lastPointsSound = 0f;
+
+	[Event.Tick.Server]
+	public void PointsSound()
+	{
+
+		if ( Kissing )
+		{
+			Log.Info( Combo );
+
+			if ( lastPointsSound >= Math.Max( 0.05f, 0.8f - Combo / 8f ) )
+			{
+
+				Sound.FromScreen( "button_click" );
+				lastPointsSound = 0f;
+
+			}
+
+		}
+
+	}
 
 	[Event("KissingStart")]
 	public void EffectsOnKissStart()
