@@ -19,7 +19,6 @@ public partial class xoxoxo
 
 		if ( Kissing )
 		{
-			Log.Info( Combo );
 
 			if ( lastPointsSound >= Math.Max( 0.05f, 0.8f - Combo / 8f ) )
 			{

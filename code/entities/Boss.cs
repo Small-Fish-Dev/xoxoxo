@@ -20,8 +20,8 @@ public enum BossState
 public partial class Boss : Human
 {
 
-	[Net] public BossState CurrentState { get; private set; } = BossState.Walking;
-	[Net] public MovementPathEntity CurrentPath { get; private set; }
+	[Net] public BossState CurrentState { get; private set; } = BossState.Waiting;
+	public Path CurrentPath { get; private set; }
 	[Net] public bool IsInsideTrigger { get; internal set; } = false;
 
 	public override string AttireName => "boss";
@@ -48,8 +48,8 @@ public partial class Boss : Human
 
 	};
 
-	float currentProgress = 0f;
-	bool backwards = false;
+	float currentProgress = 0.5f;
+	bool backwards = true;
 	bool towardsStairs = false;
 
 	[Event.Tick]
@@ -129,16 +129,17 @@ public partial class Boss : Human
 		if ( xoxoxo.Game.ExitPath == null ) return;
 		if ( xoxoxo.Game.StairsPath == null ) return;
 
-		var currentPath = towardsStairs ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath;
+		CurrentPath = towardsStairs ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath;
+
 		var currentSpeed = StateSpeed[CurrentState];
-		var pathLength = currentPath.Length;
+		var pathLength = CurrentPath.Length;
 		var pathSpeed = currentSpeed / pathLength;
 
 		currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
 
-		if ( currentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
+		if ( CurrentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
 
-		var wishPosition = currentPath.GetPathPosition( currentProgress );
+		var wishPosition = CurrentPath.GetPathPosition( currentProgress );
 
 		var wishRotation = CurrentState switch
 		{
