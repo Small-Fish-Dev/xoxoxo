@@ -49,8 +49,7 @@ public partial class Boss : Human
 	};
 
 	float currentProgress = 0.5f;
-	bool backwards = true;
-	bool towardsStairs = false;
+	bool goingBackwards = true;
 
 	[Event.Tick]
 	public void ComputeAI()
@@ -87,10 +86,14 @@ public partial class Boss : Human
 
 	}
 
+	TimeSince lastTrip = 0f;
+	float nextTrip = 0f;
+
 	public void ComputeGameplay()
 	{
 
 		if ( IsClient ) return;
+		if ( !xoxoxo.Game.IsGameRunning ) return;
 
 		if ( CurrentState == BossState.Walking )
 		{
@@ -104,6 +107,25 @@ public partial class Boss : Human
 					CaughtKissers();
 
 				}
+
+			}
+
+		}
+
+		if ( CurrentState == BossState.Waiting )
+		{
+
+			if ( lastTrip >= nextTrip )
+			{
+
+				lastTrip = 0f;
+				nextTrip = Rand.Float( 12, 20 );
+
+				Path targetPath = goingBackwards ?
+					(Rand.Int(1) == 1 ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath) :
+					(CurrentPath == xoxoxo.Game.ExitPath ? xoxoxo.Game.ExitPath : xoxoxo.Game.StairsPath);
+
+				SetPath( targetPath, currentProgress, !goingBackwards );
 
 			}
 
@@ -129,13 +151,13 @@ public partial class Boss : Human
 		if ( xoxoxo.Game.ExitPath == null ) return;
 		if ( xoxoxo.Game.StairsPath == null ) return;
 
-		CurrentPath = towardsStairs ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath;
+		if ( CurrentPath == null ) return;
 
 		var currentSpeed = StateSpeed[CurrentState];
 		var pathLength = CurrentPath.Length;
 		var pathSpeed = currentSpeed / pathLength;
 
-		currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * ( backwards ? -1 : 1 ), 0, 0.99f );
+		currentProgress = MathX.Clamp( currentProgress + Time.Delta * pathSpeed * (goingBackwards ? -1 : 1 ), 0, 0.99f );
 
 		if ( CurrentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
 
@@ -157,19 +179,16 @@ public partial class Boss : Human
 		Position = wishPosition;
 		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.3f );
 
-		if ( currentProgress == 0.99f )
-		{
-				
-			backwards = !backwards;
-			
-		}
-
-		if ( currentProgress == 0 && backwards )
+		if ( CurrentState == BossState.Walking )
 		{
 
-			backwards = !backwards;
-			towardsStairs = !towardsStairs;
-			
+			if ( currentProgress == 0 && goingBackwards || currentProgress == 0.99f && !goingBackwards )
+			{
+
+				CurrentState = BossState.Waiting;
+
+			}
+
 		}
 
 	}
@@ -179,7 +198,7 @@ public partial class Boss : Human
 		if ( xoxoxo.Game.ExitDoor != null )
 		{
 
-			ComputeDoor( xoxoxo.Game.ExitDoor, 100f );
+			ComputeDoor( xoxoxo.Game.ExitDoor, 80f );
 
 		}
 
@@ -252,22 +271,29 @@ public partial class Boss : Human
 	}
 
 	[Event( "StartGame" )]
-	public void IntroCutscene()
+	public async void IntroCutscene()
 	{
 
 		if ( IsClient ) return;
-		WaitDialogue();
 
-	}
-
-	public async void WaitDialogue()
-	{
+		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
 
 		await Task.Delay( 500 );
 		StartDialogue( "If I catch any of you kissing again I'll be forced to take action! You can do that when work finishes at 17:00", 8000, false, 20 );
 		await Task.Delay( 10000 );
 
 		Event.Run( "EndCutscene" );
+
+	}
+
+	public void SetPath( Path path, float progress = 0f, bool backwards = false, bool walk = true )
+	{
+
+		CurrentPath = path;
+		currentProgress = progress;
+		goingBackwards = backwards;
+
+		CurrentState = walk ? BossState.Walking : BossState.Waiting;
 
 	}
 
