@@ -71,7 +71,7 @@ public partial class Kisser : Human
 		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.2f );
 		Position = Vector3.Lerp( Position, wishPosition, 0.2f );
 
-		if ( CurrentState != KisserState.Running )
+		if ( Seat != null )
 		{
 
 			Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
@@ -79,7 +79,7 @@ public partial class Kisser : Human
 
 		}
 
-		if ( xoxoxo.Game.IsGameRunning )
+		if ( Monitor != null )
 		{
 
 			Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
@@ -115,7 +115,7 @@ public partial class Kisser : Human
 	public async void StartRunning()
 	{
 
-		await Task.Delay( 5050 );
+		await Task.Delay( 5100 );
 
 		if ( Host.IsServer )
 		{

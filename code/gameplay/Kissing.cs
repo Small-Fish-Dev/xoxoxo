@@ -72,6 +72,13 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
+	public void SetKissingProgress( float prog )
+	{
+
+		_kissProgress = prog;
+
+	}
+
 	[ClientRpc]
 	public void BroadcastKissingEvent( bool kissing )
 	{

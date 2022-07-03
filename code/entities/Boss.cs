@@ -307,4 +307,19 @@ public partial class Boss : Human
 
 	}
 
+	[Event("RoundWin")]
+	public async void NextRound()
+	{
+
+		if ( IsClient ) return;
+
+		await Task.Delay( 4000 );
+
+		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
+
+		await Task.Delay( 100 );
+		StartDialogue( "FUUUCK!", 1500, false, 50 );
+
+	}
+
 }

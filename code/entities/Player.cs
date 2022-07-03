@@ -35,27 +35,41 @@ public partial class Player : Sandbox.Player
 
 		if ( Actor == null ) return;
 		if ( IsInCutscene ) return;
-		if ( !xoxoxo.Game.IsGameRunning ) return;
-
-		if ( Input.Down( InputButton.Jump ) )
+		if ( xoxoxo.Game.IsGameRunning )
 		{
 
-			if ( LastKiss >= 1.1f )
+			if ( Input.Down( InputButton.Jump ) )
 			{
 
-				if ( Actor.CurrentState != KisserState.Kissing )
+				if ( LastKiss >= 1.1f )
 				{
 
-					StartKissing();
+					if ( Actor.CurrentState != KisserState.Kissing )
+					{
+
+						StartKissing();
+
+					}
+
+				}
+
+				if ( Actor.CurrentState == KisserState.Kissing )
+				{
+
+					LastKiss = 0f;
 
 				}
 
 			}
-
-			if ( Actor.CurrentState == KisserState.Kissing )
+			else
 			{
 
-				LastKiss = 0f;
+				if ( LastKiss >= 0.8f && Actor.CurrentState == KisserState.Kissing )
+				{
+
+					EndKissing();
+
+				}
 
 			}
 
@@ -63,12 +77,7 @@ public partial class Player : Sandbox.Player
 		else
 		{
 
-			if ( LastKiss >= 0.8f  && Actor.CurrentState == KisserState.Kissing )
-			{
-
-				EndKissing();
-
-			}
+			EndKissing();
 
 		}
 
