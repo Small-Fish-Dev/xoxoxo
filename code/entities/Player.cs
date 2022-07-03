@@ -35,6 +35,7 @@ public partial class Player : Sandbox.Player
 
 		if ( Actor == null ) return;
 		if ( IsInCutscene ) return;
+		if ( !xoxoxo.Game.IsGameRunning ) return;
 
 		if ( Input.Down( InputButton.Jump ) )
 		{

@@ -127,12 +127,22 @@ public partial class Boss : Human
 	{
 
 		Event.Run( "RoundLost" );
+		BroadcastLost();
 		CurrentState = BossState.Shouting;
 		StartDialogue( "YOU BASTARDS! I WILL MURDER YOU!", 5000, true, 10 );
 
-		await Task.Delay( 5000 );
+		await Task.Delay( 5050 );
 
+		SetAnimParameter( "Angry", true );
 		CurrentState = BossState.Attacking;
+
+	}
+
+	[ClientRpc]
+	public void BroadcastLost()
+	{
+
+		Event.Run( "RoundLost" );
 
 	}
 

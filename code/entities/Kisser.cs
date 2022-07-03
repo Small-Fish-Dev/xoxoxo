@@ -35,26 +35,57 @@ public partial class Kisser : Human
 	public bool IsLeft => this == xoxoxo.Game.KisserLeft;
 	public override string OfficeName => IsLeft ? "Terrence" : "Theresa";
 
-	[Event.Tick.Server]
+	[Event.Tick]
 	public void HandleVisuals()
 	{
 
 		var desiredAnimation = CurrentState != KisserState.Running ? (IsKissing ? (IsLeft ? 3 : 2) : 1) : 0;
 
 		SetAnimParameter( "Action", desiredAnimation );
+		SetAnimParameter( "Speed", CurrentState == KisserState.Running ? 140f : 0f );
 
 		var distance = xoxoxo.Game.KisserLeft.OriginalPosition.Distance( xoxoxo.Game.KisserRight.OriginalPosition ) / 2 - 24.7f;
 
-		var wishRotation = Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : (IsKissing ? 90f : 0f) );
-		var wishPosition = OriginalPosition + OriginalRotation.Backward * (IsKissing ? distance : 0f);
+		var wishPosition = CurrentState switch
+		{
+
+			KisserState.Working => OriginalPosition + OriginalRotation.Backward * (IsKissing ? distance : 0f),
+			KisserState.Kissing => OriginalPosition + OriginalRotation.Backward * (IsKissing ? distance : 0f),
+			KisserState.Running => Position + Vector3.Right * Time.Delta * 300f,
+			_ => Position,
+
+		};
+
+		var wishRotation = CurrentState switch
+		{
+
+			KisserState.Working => Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : (IsKissing ? 90f : 0f) ),
+			KisserState.Kissing => Rotation.FromYaw( IsLeft ? (IsKissing ? 270f : 180f) : (IsKissing ? 90f : 0f) ),
+			KisserState.Running => Rotation.FromYaw( 270f ),
+			_ => Rotation,
+
+		};
+
+		if ( IsClient ) return;
 
 		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.2f );
 		Position = Vector3.Lerp( Position, wishPosition, 0.2f );
 
-		Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
-		Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
+		if ( CurrentState != KisserState.Running )
+		{
 
-		Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
+			Seat.Rotation = Rotation.RotateAroundAxis( Vector3.Up, -90f );
+			Seat.Position = Position.WithZ( Seat.Position.z ) + Rotation.Backward * 4f;
+
+		}
+
+		if ( xoxoxo.Game.IsGameRunning )
+		{
+
+			Monitor.SetMaterialGroup( IsKissing ? 3 : (IsLeft ? 4 : 0) );
+
+		}
+
 
 		UnfuckAnimations();
 
@@ -77,6 +108,24 @@ public partial class Kisser : Human
 			SetAttire( character );
 
 		}
+
+	}
+
+	[Event( "RoundLost" )]
+	public async void StartRunning()
+	{
+
+		await Task.Delay( 5050 );
+
+		if ( Host.IsServer )
+		{
+
+			Desk.Break();
+			Seat.Break();
+			Monitor.Break();
+
+		}
+		CurrentState = KisserState.Running;
 
 	}
 
