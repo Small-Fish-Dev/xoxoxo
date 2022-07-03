@@ -27,17 +27,6 @@ public partial class Boss : Human
 	public override string AttireName => "boss";
 	public override string OfficeName => "Boss";
 
-
-	public Dictionary<BossState, string> StateAnimations => new Dictionary<BossState, string>()
-	{
-
-		[BossState.Waiting] = "IdleLayer_01",
-		[BossState.Walking] = "Walk_N",
-		[BossState.Shouting] = "Melee_Punch_Attack_Right",
-		[BossState.Attacking] = "",
-
-	};
-
 	public Dictionary<BossState, float> StateSpeed => new Dictionary<BossState, float>()
 	{
 
@@ -137,6 +126,7 @@ public partial class Boss : Human
 	public async void CaughtKissers()
 	{
 
+		Event.Run( "RoundLost" );
 		CurrentState = BossState.Shouting;
 		StartDialogue( "YOU BASTARDS! I WILL MURDER YOU!", 5000, true, 10 );
 
@@ -162,7 +152,16 @@ public partial class Boss : Human
 
 		if ( CurrentPath.PathEntity.PathNodes.Count == 0 ) return; // On client it will randomly have 0 nodes, throw an error, and never happen again. wth?
 
-		var wishPosition = CurrentPath.GetPathPosition( currentProgress );
+		var wishPosition = CurrentState switch
+		{
+
+			BossState.Walking => CurrentPath.GetPathPosition( currentProgress ),
+			BossState.Shouting => Position,
+			BossState.Attacking => Position + ( xoxoxo.Game.KisserLeft.Position - Position ).Normal.WithZ(Position.z) * Time.Delta * currentSpeed,
+			BossState.Waiting => Position,
+			_ => Position,
+
+		};
 
 		var wishRotation = CurrentState switch
 		{

@@ -60,12 +60,38 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
+	[Event("RoundLost")]
+	public async void RoundLost()
+	{
+
+		IsGameRunning = false;
+
+		await Task.Delay( 7000 );
+
+		Event.Run( "GameReset" );
+		BroadcastReset();
+
+		await Task.Delay( 1000 );
+
+		Client.All[0].Kick();
+
+		// Fuck it let's close the game, I'm so done! I'M DONE! I AM SO DONE!
+
+	}
+
 	[ClientRpc]
 	public void BroadcastWin()
 	{
 
-		Log.Info( Host.IsClient );
 		Event.Run( "RoundWin" );
+
+	}
+
+	[ClientRpc]
+	public void BroadcastReset()
+	{
+
+		Event.Run( "GameReset" );
 
 	}
 

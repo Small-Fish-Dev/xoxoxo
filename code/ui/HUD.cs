@@ -109,12 +109,22 @@ public partial class HUD : HudEntity<RootPanel>
 	}
 
 	[Event( "RoundWin" )]
+	public void CreateWinCurtain()
+	{
+
+		if ( Host.IsServer ) return;
+
+		RootPanel.AddChild( new BlackCurtain( 4f ) );
+
+	}
+
+	[Event( "GameReset" )]
 	public void CreateCurtain()
 	{
 
 		if ( Host.IsServer ) return;
 
-		RootPanel.AddChild( new BlackCurtain( 2f ) );
+		RootPanel.AddChild( new BlackCurtain( 4f ) );
 
 	}
 
