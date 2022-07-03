@@ -197,7 +197,7 @@ RootPanel {
 		align-items: center;
 		width: 100%;
 		height: 100%;
-		background-color: rgba( 0, 0, 40, 0.5 );
+		background-color: rgba( 10, 10, 20, 1 );
 		backdrop-filter: blur( 20px );
 		transition: all 1s ease-out;
 		opacity: 1;
@@ -307,6 +307,23 @@ RootPanel {
 		}
 
 		&.hidden {
+			opacity: 0;
+		}
+	}
+
+	BlackCurtain {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: rgba( 0, 0, 0, 1 );
+		transition: all 1s ease-out;
+		z-index: 999999;
+
+		&:intro {
+			opacity: 0;
+		}
+
+		&:outro {
 			opacity: 0;
 		}
 	}

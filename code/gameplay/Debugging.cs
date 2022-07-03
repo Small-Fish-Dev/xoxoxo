@@ -20,4 +20,12 @@ public partial class xoxoxo
 
 	}
 
+	[ConCmd.Client( "RunEvent" )]
+	public static void RunEvent( string runEvent )
+	{
+
+		Event.Run( runEvent );
+
+	}
+
 }

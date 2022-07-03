@@ -40,6 +40,35 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
+	[Event.Tick.Server]
+	public void WinLoseConditions()
+	{
+
+		if ( IsGameRunning )
+		{
+
+			if ( KissProgress >= 1 )
+			{
+
+				Event.Run( "RoundWin" );
+				BroadcastWin();
+				IsGameRunning = false;
+
+			}
+
+		}
+
+	}
+
+	[ClientRpc]
+	public void BroadcastWin()
+	{
+
+		Log.Info( Host.IsClient );
+		Event.Run( "RoundWin" );
+
+	}
+
 	public void SetRound( int round )
 	{
 
