@@ -74,6 +74,8 @@ public partial class xoxoxo : Sandbox.Game
 
 		await Task.Delay( 1000 );
 
+		if ( Host.IsClient ) return;
+
 		Client.All[0].Kick();
 
 		// Fuck it let's close the game, I'm so done! I'M DONE! I AM SO DONE!

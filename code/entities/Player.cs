@@ -35,6 +35,7 @@ public partial class Player : Sandbox.Player
 
 		if ( Actor == null ) return;
 		if ( IsInCutscene ) return;
+
 		if ( xoxoxo.Game.IsGameRunning )
 		{
 
@@ -77,7 +78,12 @@ public partial class Player : Sandbox.Player
 		else
 		{
 
-			EndKissing();
+			if ( xoxoxo.Game.Kissing )
+			{
+
+				EndKissing();
+
+			}
 
 		}
 

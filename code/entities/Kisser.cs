@@ -125,6 +125,7 @@ public partial class Kisser : Human
 			Monitor.Break();
 
 		}
+
 		CurrentState = KisserState.Running;
 
 	}
