@@ -42,7 +42,7 @@ public partial class Player : Sandbox.Player
 			if ( Input.Down( InputButton.Jump ) )
 			{
 
-				if ( LastKiss >= 1.1f )
+				if ( LastKiss >= 0.3f )
 				{
 
 					if ( Actor.CurrentState != KisserState.Kissing )
@@ -65,7 +65,7 @@ public partial class Player : Sandbox.Player
 			else
 			{
 
-				if ( LastKiss >= 0.8f && Actor.CurrentState == KisserState.Kissing )
+				if ( Actor.CurrentState == KisserState.Kissing )
 				{
 
 					EndKissing();

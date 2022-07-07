@@ -31,7 +31,7 @@ public partial class xoxoxo : Sandbox.Game
 			if ( RoundTime >= RoundDuration )
 			{
 
-				Event.Run( "RoundEnd" );
+				Event.Run( "RoundLost" );
 				IsGameRunning = false;
 
 			}
@@ -118,7 +118,13 @@ public partial class xoxoxo : Sandbox.Game
 	{
 
 		CurrentRound = round;
-		// RoundSpeed = 1.1f * round;
+
+		if ( round > 5 )
+		{
+
+			new Boss(); // LOL! idk make it harder
+
+		}
 
 	}
 

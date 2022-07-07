@@ -31,7 +31,7 @@ public partial class Boss : Human
 	{
 
 		[BossState.Waiting] = 0f,
-		[BossState.Walking] = 50f * ( 1f + xoxoxo.Game.CurrentRound / 5f ),
+		[BossState.Walking] = 50f * ( 1f + xoxoxo.Game.CurrentRound / 3f ),
 		[BossState.Shouting] = 0f,
 		[BossState.Attacking] = 120f,
 
@@ -108,7 +108,7 @@ public partial class Boss : Human
 			{
 
 				lastTrip = 0f;
-				float averageTrip = 19f - xoxoxo.Game.CurrentRound * 2f;
+				float averageTrip = 24f - xoxoxo.Game.CurrentRound * 3f;
 				nextTrip = Rand.Float( averageTrip - 4f, averageTrip + 4f );
 
 				Path targetPath = goingBackwards ?
