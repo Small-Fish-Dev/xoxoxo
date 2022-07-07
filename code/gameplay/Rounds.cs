@@ -119,7 +119,7 @@ public partial class xoxoxo : Sandbox.Game
 
 		CurrentRound = round;
 
-		if ( round > 5 )
+		if ( round > 4 )
 		{
 
 			new Boss(); // LOL! idk make it harder

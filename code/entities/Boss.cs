@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using SandboxEditor;
@@ -307,6 +308,17 @@ public partial class Boss : Human
 
 	}
 
+	string[] cutscenePhrases =
+	{
+		"I'm starting a training regimen so I'll be jogging from now on.",
+		"I am feeling better already! I will run 33% faster every day now!",
+		"Keep working on those games! They're not going to scrap themselves!",
+		"You will have to work this saturday, everyone else has been fired!",
+		"My twin is here to help me with work. Please ignore the haunted doors.",
+		"Why are you here, can't you see I'm throwing a party? Whatever, work!",
+		"WORK WORK WORK WORK WORK WORK WORK WORK WORK WORK WORK WORK WORK WORK"
+	};
+
 	[Event("RoundWin")]
 	public async void NextRound()
 	{
@@ -318,7 +330,7 @@ public partial class Boss : Human
 		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
 
 		await Task.Delay( 100 );
-		StartDialogue( "FUUUCK!", 1500, false, 50 );
+		StartDialogue( cutscenePhrases[Math.Min( xoxoxo.Game.CurrentRound - 1, 6 )], 5000, false, 40 );
 
 	}
 
