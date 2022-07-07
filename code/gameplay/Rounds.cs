@@ -114,6 +114,16 @@ public partial class xoxoxo : Sandbox.Game
 
 	}
 
+	[Event("RoundWin")]
+	public void RecordScore()
+	{
+
+		if ( Host.IsClient ) return;
+
+		GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Game.Points );
+
+	}
+
 	public void SetRound( int round )
 	{
 
