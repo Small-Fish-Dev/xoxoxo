@@ -14,9 +14,8 @@ RootPanel {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background-color: rgb( 210, 220, 240 );
-		border-radius: 20px;
-		border: 20px solid rgb( 15, 15, 15 );
+		background-color: rgb( 15, 15, 15 );
+		border-radius: 40px;
 		width: 240px;
 		height: 140px;
 		top: 10px;
@@ -27,26 +26,32 @@ RootPanel {
 		color: rgb( 50, 70, 130 );
 		z-index: 10;
 
-		.title {
-			font-size: 60px;
-			top: -10px;
-		}
+		.inner {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: rgb( 210, 220, 240 );
+			border-radius: 20px;
+			width: 200px;
+			height: 100px;
 
-		.bottom {
-			flex-direction: row;
-			bottom: 10px;
-
-			.subtitle {
-				font-size: 33px;
+			.title {
+				font-size: 60px;
+				top: -10px;
 			}
 
-			.subtitle {
-				font-size: 33px;
-			}
-		}
+			.bottom {
+				flex-direction: row;
+				bottom: 10px;
 
-		&.hidden {
-			opacity: 0;
+				.subtitle {
+					font-size: 33px;
+				}
+
+				.subtitle {
+					font-size: 33px;
+				}
+			}
 		}
 	}
 
@@ -155,10 +160,11 @@ RootPanel {
 		margin-top: auto;
 		padding: 30px;
 		font-family: "Franklin Gothic";
+		text-align: left;
 		letter-spacing: 5px;
 		text-shadow: 3px 3px 0px rgba( 0, 0, 0, 0.8);
 		color: rgb( 255, 255, 255 );
-		z-index: 12;
+		z-index: 16;
 		transition: all 1s ease-out;
 		opacity: 1;
 
@@ -184,8 +190,10 @@ RootPanel {
 		}
 
 		.text {
+			width: 100%;
 			font-size: 35px;
 			font-weight: 200;
+			text-align: left;
 		}
 	}
 
@@ -267,6 +275,7 @@ RootPanel {
 	}
 
 	KissHint {
+		position: absolute;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
@@ -276,7 +285,8 @@ RootPanel {
 		height: 90px;
 		margin-top: auto;
 		bottom: 40px;
-		right: 10px;
+		left: 50%;
+		transform: translateX( -50% );
 		font-family: "Franklin Gothic";
 		letter-spacing: 5px;
 		text-shadow: 3px 3px 0px rgba( 0, 0, 0, 0.8);

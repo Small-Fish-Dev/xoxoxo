@@ -136,6 +136,7 @@ public partial class Boss : Human
 
 		SetAnimParameter( "Angry", true );
 		CurrentState = BossState.Attacking;
+		Sound.FromEntity( "yeti_roar", this );
 
 	}
 
@@ -168,7 +169,7 @@ public partial class Boss : Human
 
 			BossState.Walking => CurrentPath.GetPathPosition( currentProgress ),
 			BossState.Shouting => Position,
-			BossState.Attacking => Position + ( xoxoxo.Game.KisserLeft.Position - Position ).Normal.WithZ(Position.z) * Time.Delta * currentSpeed,
+			BossState.Attacking => Position + ( xoxoxo.Game.KisserLeft.Position - Position ).Normal * Time.Delta * currentSpeed,
 			BossState.Waiting => Position,
 			_ => Position,
 

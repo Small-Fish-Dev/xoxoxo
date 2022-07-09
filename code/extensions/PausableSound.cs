@@ -80,7 +80,6 @@ public partial class PausableSound : Entity
 
 	}
 
-	[Event("RoundEnd")]
 	public void Remove()
 	{
 

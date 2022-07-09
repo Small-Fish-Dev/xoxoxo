@@ -39,6 +39,9 @@ public partial class Kisser : Human
 	public void HandleVisuals()
 	{
 
+		if ( xoxoxo.Game.KisserLeft == null ) return;
+		if ( xoxoxo.Game.KisserRight == null ) return;
+
 		var desiredAnimation = CurrentState != KisserState.Running ? (IsKissing ? (IsLeft ? 3 : 2) : 1) : 0;
 
 		SetAnimParameter( "Action", desiredAnimation );

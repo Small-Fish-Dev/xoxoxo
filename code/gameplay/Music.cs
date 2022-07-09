@@ -81,6 +81,21 @@ public partial class xoxoxo
 
 	}
 
+	[Event( "RoundWin" )]
+	public void StopByWin()
+	{
+
+		if ( IsServer ) return;
+
+		if ( kissingMusic.IsValid() )
+		{
+
+			kissingMusic.Remove();
+
+		}
+
+	}
+
 	[Event.Frame]
 	public void UpdateMusic()
 	{

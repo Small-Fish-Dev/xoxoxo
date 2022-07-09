@@ -16,8 +16,10 @@ public class WorkClock : Panel
 	public WorkClock()
 	{
 
-		time = Add.Label( "09:00", "title" );
-		Panel bottom = Add.Panel( "bottom" );
+		Panel inner = Add.Panel( "inner" );
+
+		time = inner.Add.Label( "09:00", "title" );
+		Panel bottom = inner.Add.Panel( "bottom" );
 		date = bottom.Add.Label( "MON|", "subtitle" );
 		countdown = bottom.Add.Label( "-8H", "subtitle" );
 
