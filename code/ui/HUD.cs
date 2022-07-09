@@ -65,8 +65,8 @@ public partial class HUD : HudEntity<RootPanel>
 		float speed = Math.Min( xoxoxo.Game.Combo / 5f + 1f, 14f );
 
 		var heart = new HeartParticle( duration, size, speed, null, new Vector2( 0f, -0.2f ) );
-		heart.Style.Left = Length.Fraction( 0.6f );
-		heart.Style.Top = Length.Fraction( 0.6f );
+		heart.Style.Left = Length.Pixels( RootPanel.Style.Width.Value.GetPixels( RootPanel.ScaleFromScreen ) / 2 );
+		heart.Style.Top = Length.Pixels( RootPanel.Style.Height.Value.GetPixels( RootPanel.ScaleFromScreen ) / 2 );
 		RootPanel.AddChild( heart );
 
 	}
