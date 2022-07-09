@@ -32,6 +32,7 @@ public partial class xoxoxo : Sandbox.Game
 			{
 
 				Event.Run( "RoundLost" );
+				Event.Run( "Alarm" );
 				IsGameRunning = false;
 
 			}

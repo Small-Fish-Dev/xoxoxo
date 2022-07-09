@@ -55,4 +55,14 @@ public partial class xoxoxo
 		//kissingParticle.Destroy();
 
 	}
+
+	[Event("Alarm")]
+	public void PlayAlarm()
+	{
+
+		if ( IsClient ) return;
+
+		new SoundLoop( "alarm", xoxoxo.Game.GameCamera );
+
+	}
 }
