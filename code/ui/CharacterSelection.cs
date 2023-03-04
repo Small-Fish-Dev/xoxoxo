@@ -35,7 +35,7 @@ public class CharacterBox : Panel
 
 	Angles CamAngles = new( 10.0f, 20.0f, 0.0f );
 	float CamDistance = 55;
-	Vector3 CamPos => Vector3.Up * 40 + CamAngles.Direction * -CamDistance;
+	Vector3 CamPos => Vector3.Up * 40 + CamAngles.Forward * -CamDistance;
 
 	SceneModel human;
 
