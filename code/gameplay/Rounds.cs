@@ -121,7 +121,7 @@ public partial class xoxoxo
 
 		if ( Game.IsClient ) return;
 
-		GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Instance.Points );
+		//GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Instance.Points );
 
 	}
 
