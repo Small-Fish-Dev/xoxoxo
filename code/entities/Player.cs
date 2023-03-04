@@ -82,6 +82,8 @@ public partial class Player : AnimatedEntity
 
 		}
 
+		ComputeCamera();
+
 		if ( Game.IsClient )
 		{
 

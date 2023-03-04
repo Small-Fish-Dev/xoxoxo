@@ -18,8 +18,8 @@ public partial class Player
 
 		}
 
-		Camera.Position = Vector3.Lerp( Position, TargetPosition, Time.Delta * 5, true );
-		Camera.Rotation = Rotation.Lerp( Rotation, TargetRotation, Time.Delta * 5, true );
+		Camera.Position = Vector3.Lerp( Camera.Position, TargetPosition, Time.Delta * 5, true );
+		Camera.Rotation = Rotation.Lerp( Camera.Rotation, TargetRotation, Time.Delta * 5, true );
 
 	}
 
