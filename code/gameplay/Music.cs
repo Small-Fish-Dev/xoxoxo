@@ -96,7 +96,7 @@ public partial class xoxoxo
 
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void UpdateMusic()
 	{
 
