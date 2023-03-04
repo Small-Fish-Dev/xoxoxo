@@ -77,7 +77,7 @@ public partial class xoxoxo
 
 		if ( Game.IsClient ) return;
 
-		Client.All[0].Kick();
+		Game.Clients.First().Kick();
 
 		// Fuck it let's close the game, I'm so done! I'M DONE! I AM SO DONE!
 

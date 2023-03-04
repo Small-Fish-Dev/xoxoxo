@@ -2,6 +2,7 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 public enum KisserState
 {
@@ -99,7 +100,7 @@ public partial class Kisser : Human
 		if ( IsLeft )
 		{
 
-			Clothes.LoadFromClient( Client ); // Screw it, I don't want this to be multiplayer anyways
+			Clothes.LoadFromClient( Game.Clients.First() ); // Screw it, I don't want this to be multiplayer anyways
 			Clothes.DressEntity( this );
 
 		}

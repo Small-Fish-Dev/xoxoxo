@@ -28,7 +28,7 @@ public partial class xoxoxo
 			else
 			{
 
-				if ( backgroundMusic.Value.Finished )
+				if ( !backgroundMusic.Value.IsPlaying )
 				{
 
 					backgroundMusic = Sound.FromEntity( "mungusmeandtheboys", gameCamera ); // You cannot stop it.

@@ -38,7 +38,7 @@ public class SoundLoop : Entity
 		if ( soundReference != null )
 		{
 
-			if ( soundReference.Value.Finished )
+			if ( !soundReference.Value.IsPlaying )
 			{
 
 				soundReference = Sound.FromEntity( SoundName, Source );
