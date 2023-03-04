@@ -110,7 +110,7 @@ public partial class Boss : Human
 
 				lastTrip = 0f;
 				float averageTrip = 24f - xoxoxo.Instance.CurrentRound * 3f;
-				nextTrip = Rand.Float( averageTrip - 4f, averageTrip + 4f );
+				nextTrip = Game.Random.Float( averageTrip - 4f, averageTrip + 4f );
 
 				Path targetPath = goingBackwards ?
 					(Rand.Int(1) == 1 ? xoxoxo.Instance.StairsPath : xoxoxo.Instance.ExitPath) :

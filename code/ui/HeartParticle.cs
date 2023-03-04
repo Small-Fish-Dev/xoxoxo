@@ -22,13 +22,13 @@ public class HeartParticle : Panel
 		deathTime = duration;
 		transitions = duration / 2;
 		particleSpeed = speed;
-		particleSize = Rand.Float( 20, 50 ) * size;
+		particleSize = Game.Random.Float( 20, 50 ) * size;
 
 		Style.Height = 0;
 		Style.BackgroundAngle = Length.Percent( particleRotation );
 		Style.ZIndex = (int)( Time.Now * 100 );
 
-		particleVelocity = direction.GetValueOrDefault( Vector2.Random.Normal ) * Rand.Float( 5f, 10f );
+		particleVelocity = direction.GetValueOrDefault( Vector2.Random.Normal ) * Game.Random.Float( 5f, 10f );
 		particleGravity = gravity.GetValueOrDefault( new Vector2( 0f, 1f ) );
 
 	}
