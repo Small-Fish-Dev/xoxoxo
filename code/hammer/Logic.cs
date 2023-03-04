@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Editor;
+using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Linq;
 
 
 [Library( "xoxoxo_logic" )]
+[HammerEntity]
 [EditorModel( "models/computer/computer.vmdl" )]
 [Display( Name = "Logic", GroupName = "xoxoxo", Description = "Every entity will be linked in hammer and accesed here." )]
 public partial class Logic : Entity

@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Editor;
+using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,8 @@ using System.Linq;
 
 
 [Library( "xoxoxo_boss_trigger" )]
+[HammerEntity]
+[Solid]
 [Display( Name = "Boss Trigger", GroupName = "xoxoxo", Description = "If the boss is inside this trigger he will be able to see you kiss." )]
 public partial class BossTrigger : BaseTrigger
 {
