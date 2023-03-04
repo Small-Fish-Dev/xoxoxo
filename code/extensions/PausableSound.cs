@@ -76,7 +76,7 @@ public partial class PausableSound : Entity
 		IsPlaying = false;
 
 		SoundOrigin.Stop();
-		soundStream.Stop();
+		soundStream.Delete();
 
 	}
 
@@ -84,8 +84,7 @@ public partial class PausableSound : Entity
 	{
 
 		SoundOrigin.Stop();
-		soundStream.Stop();
-		soundStream.Dispose();
+		soundStream.Delete();
 		Delete();
 
 	}
