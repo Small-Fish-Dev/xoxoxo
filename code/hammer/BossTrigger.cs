@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using SandboxEditor;
+
 
 
 [Library( "xoxoxo_boss_trigger" )]

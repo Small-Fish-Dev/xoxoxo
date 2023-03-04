@@ -1,7 +1,8 @@
-﻿using Sandbox;
+﻿using Editor;
+using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using SandboxEditor;
+
 
 public enum KisserState
 {
@@ -13,11 +14,9 @@ public enum KisserState
 
 }
 
-[Library( "xoxoxo_kisser" )]
 [HammerEntity]
-[Model( Model = "models/citizen/citizen.vmdl" )]
+[EditorModel( "models/citizen/citizen.vmdl" )]
 [Display( Name = "Kisser", GroupName = "xoxoxo", Description = "The player or their partner" )]
-
 public partial class Kisser : Human
 {
 	[Property, FGDType( "target_destination" )]

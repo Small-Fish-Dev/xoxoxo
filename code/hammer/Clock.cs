@@ -1,11 +1,12 @@
-﻿using Sandbox;
+﻿using Editor;
+using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using SandboxEditor;
+
 
 [Library( "xoxoxo_clock" )]
+[EditorModel( "models/clock/clock.vmdl" )]
 [HammerEntity]
-[Model( Model = "models/clock/clock.vmdl" )]
 [Display( Name = "Game Clock", GroupName = "xoxoxo", Description = "Shows you the time of the day, usual shift is from 9am to 5pm" )]
 
 public partial class Clock : AnimatedEntity
