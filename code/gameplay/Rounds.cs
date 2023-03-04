@@ -75,7 +75,7 @@ public partial class xoxoxo
 
 		await Task.Delay( 1000 );
 
-		if ( Host.IsClient ) return;
+		if ( Host.Game.IsClient ) return;
 
 		Client.All[0].Kick();
 
@@ -119,7 +119,7 @@ public partial class xoxoxo
 	public void RecordScore()
 	{
 
-		if ( Host.IsClient ) return;
+		if ( Host.Game.IsClient ) return;
 
 		GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Game.Points );
 

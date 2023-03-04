@@ -47,7 +47,7 @@ public partial class xoxoxo
 	public void StartKissingMusic()
 	{
 
-		if ( IsServer ) return;
+		if ( Game.IsServer) return;
 
 		if ( kissingMusic.IsValid() )
 		{
@@ -70,7 +70,7 @@ public partial class xoxoxo
 	public void StopMusic()
 	{
 
-		if ( IsServer ) return;
+		if ( Game.IsServer) return;
 
 		if ( kissingMusic.IsValid() )
 		{
@@ -85,7 +85,7 @@ public partial class xoxoxo
 	public void StopByWin()
 	{
 
-		if ( IsServer ) return;
+		if ( Game.IsServer) return;
 
 		if ( kissingMusic.IsValid() )
 		{

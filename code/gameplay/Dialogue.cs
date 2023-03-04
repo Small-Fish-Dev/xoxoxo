@@ -36,7 +36,7 @@ public partial class Human : AnimatedEntity
 	public async void StartDialogue( string text, int duration, bool angry = false, float textSpeed = 5 )
 	{
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 
 			BroadcastDialogue( this, text, duration, angry, textSpeed );

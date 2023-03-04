@@ -82,7 +82,7 @@ public partial class Boss : Human
 	public void ComputeGameplay()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 		if ( !xoxoxo.Game.IsGameRunning ) return;
 
 		if ( CurrentState == BossState.Walking )
@@ -263,7 +263,7 @@ public partial class Boss : Human
 
 		CurrentState = BossState.Shouting;
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		shoutingSound = new SoundLoop( "grunts", this );
 
@@ -276,7 +276,7 @@ public partial class Boss : Human
 
 		CurrentState = BossState.Walking;
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		shoutingSound.Stop();
 
@@ -286,7 +286,7 @@ public partial class Boss : Human
 	public async void IntroCutscene()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
 
@@ -324,7 +324,7 @@ public partial class Boss : Human
 	public async void NextRound()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		await Task.Delay( 4000 );
 

@@ -25,7 +25,7 @@ public partial class xoxoxo
 	public void SetKissing()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 
 		if ( xoxoxo.Game.KisserLeft == null || xoxoxo.Game.KisserRight == null || xoxoxo.Game.GameCamera == null ) return;

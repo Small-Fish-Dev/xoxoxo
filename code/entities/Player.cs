@@ -28,7 +28,7 @@ public partial class Player : Sandbox.Player
 
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 
 		base.Simulate( cl );
@@ -87,7 +87,7 @@ public partial class Player : Sandbox.Player
 
 		}
 
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 
 			ComputePostProcess();

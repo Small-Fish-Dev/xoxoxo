@@ -81,7 +81,7 @@ public partial class xoxoxo
 	public void CharactedSelected( string character )
 	{
 
-		if ( IsClient )
+		if ( Game.IsClient )
 		{
 
 			NetworkSelection( character );

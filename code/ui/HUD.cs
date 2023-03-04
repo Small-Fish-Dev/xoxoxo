@@ -12,7 +12,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public HUD()
 	{
 
-		if ( !IsClient ) return;
+		if ( !Game.IsClient ) return;
 
 		RootPanel.StyleSheet.Load( "ui/HUD.scss" );
 
@@ -24,7 +24,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CharacterSelected( string character )
 	{
 
-		if ( !IsClient ) return;
+		if ( !Game.IsClient ) return;
 
 		RootPanel.AddChild<WorkClock>();
 		RootPanel.AddChild<ProgressBar>();
@@ -44,7 +44,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void AppearHint()
 	{
 
-		if ( !IsClient )
+		if ( !Game.IsClient )
 		{
 
 			BroadcastEndCutscene();
@@ -90,7 +90,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void OpenDialogueWindow( Dialogue dialogue )
 	{
 
-		if ( Host.IsServer ) return;
+		if ( Game.IsServer ) return;
 
 		textBox = new DialogueBox( dialogue.Text, dialogue.Speaker.OfficeName, dialogue.TextSpeed, dialogue.Duration );
 
@@ -102,7 +102,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CloseDialogueWindow()
 	{
 
-		if ( Host.IsServer ) return;
+		if ( Game.IsServer ) return;
 
 		textBox.Delete();
 
@@ -112,7 +112,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CreateWinCurtain()
 	{
 
-		if ( Host.IsServer ) return;
+		if ( Game.IsServer ) return;
 
 		RootPanel.AddChild( new BlackCurtain( 4f ) );
 
@@ -122,7 +122,7 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CreateCurtain()
 	{
 
-		if ( Host.IsServer ) return;
+		if ( Game.IsServer ) return;
 
 		RootPanel.AddChild( new BlackCurtain( 4f ) );
 

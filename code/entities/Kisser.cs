@@ -68,7 +68,7 @@ public partial class Kisser : Human
 
 		};
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		Rotation = Rotation.Lerp( Rotation, wishRotation, 0.2f );
 		Position = Vector3.Lerp( Position, wishPosition, 0.2f );
@@ -119,7 +119,7 @@ public partial class Kisser : Human
 
 		await Task.Delay( 5100 );
 
-		if ( Host.IsServer )
+		if ( Game.IsServer )
 		{
 
 			Desk.Break();

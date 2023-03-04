@@ -36,7 +36,7 @@ public partial class xoxoxo
 	public void EffectsOnKissStart()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		kissingSound = new SoundLoop( "kisses", xoxoxo.Game.KisserLeft );
 
@@ -49,7 +49,7 @@ public partial class xoxoxo
 	public void EffectsOnKissEnd()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		kissingSound.Stop();
 		//kissingParticle.Destroy();
@@ -60,7 +60,7 @@ public partial class xoxoxo
 	public void PlayAlarm()
 	{
 
-		if ( IsClient ) return;
+		if ( Game.IsClient ) return;
 
 		new SoundLoop( "alarm", xoxoxo.Game.GameCamera );
 

@@ -19,7 +19,7 @@ public partial class xoxoxo : GameManager
 		new HUD();
 
 	}
-	public override void ClientJoined( Client client )
+	public override void ClientJoined( IClient client )
 	{
 
 		base.ClientJoined( client );
