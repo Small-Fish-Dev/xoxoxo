@@ -74,7 +74,7 @@ public class CharacterBox : Panel
 }
 
 
-public partial class xoxoxo : Sandbox.Game
+public partial class xoxoxo
 {
 
 	[Event( "CharacterSelected" )]

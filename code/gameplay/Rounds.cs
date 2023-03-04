@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-public partial class xoxoxo : Sandbox.Game
+public partial class xoxoxo
 {
 
 	[Net] public bool IsGameRunning { get; private set; } = false;
