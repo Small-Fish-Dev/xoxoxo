@@ -57,85 +57,85 @@ public partial class xoxoxo
 		if ( HammerLogic.IsValid() )
 		{
 
-			if ( xoxoxo.Game.ExitPath == null )
+			if ( xoxoxo.Instance.ExitPath == null )
 			{
 
 				if ( FindByName( HammerLogic.PathTowardsExit ) is MovementPathEntity exitPath )
 				{
 
-					xoxoxo.Game.ExitPath = new Path( exitPath );
+					xoxoxo.Instance.ExitPath = new Path( exitPath );
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.StairsPath == null )
+			if ( xoxoxo.Instance.StairsPath == null )
 			{
 
 				if ( FindByName( HammerLogic.PathTowardsStairs ) is MovementPathEntity stairsPath )
 				{
 
-					xoxoxo.Game.StairsPath = new Path( stairsPath );
+					xoxoxo.Instance.StairsPath = new Path( stairsPath );
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.ExitDoor == null )
+			if ( xoxoxo.Instance.ExitDoor == null )
 			{
 
 				if ( FindByName( HammerLogic.ExitDoor ) is DoorEntity exitDoor )
 				{
 
-					xoxoxo.Game.ExitDoor = exitDoor;
+					xoxoxo.Instance.ExitDoor = exitDoor;
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.OfficeDoor == null )
+			if ( xoxoxo.Instance.OfficeDoor == null )
 			{
 
 				if ( FindByName( HammerLogic.OfficeDoor ) is DoorEntity officeDoor )
 				{
 
-					xoxoxo.Game.OfficeDoor = officeDoor;
+					xoxoxo.Instance.OfficeDoor = officeDoor;
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.KisserLeft == null )
+			if ( xoxoxo.Instance.KisserLeft == null )
 			{
 
 				if ( FindByName( HammerLogic.KisserLeft ) is Kisser kisserLeft )
 				{
 
-					xoxoxo.Game.KisserLeft = kisserLeft;
+					xoxoxo.Instance.KisserLeft = kisserLeft;
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.KisserRight == null )
+			if ( xoxoxo.Instance.KisserRight == null )
 			{
 
 				if ( FindByName( HammerLogic.KisserRight ) is Kisser kisserRight )
 				{
 
-					xoxoxo.Game.KisserRight = kisserRight;
+					xoxoxo.Instance.KisserRight = kisserRight;
 
 				}
 
 			}
 
-			if ( xoxoxo.Game.GameCamera == null )
+			if ( xoxoxo.Instance.GameCamera == null )
 			{
 
 				if ( FindByName( HammerLogic.GameCamera ) is Entity gameCamera )
 				{
 
-					xoxoxo.Game.GameCamera = gameCamera;
+					xoxoxo.Instance.GameCamera = gameCamera;
 
 				}
 

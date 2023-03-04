@@ -10,12 +10,12 @@ public partial class xoxoxo : GameManager
 {
 
 	public static bool EntitiesLoaded = false;
-	public static xoxoxo Game;
+	public static xoxoxo Instance;
 
 	public xoxoxo()
 	{
 
-		Game = this;
+		Instance = this;
 		new HUD();
 
 	}

@@ -20,7 +20,7 @@ public class Score : Panel
 	public override void Tick()
 	{
 
-		int score = (int)xoxoxo.Game.Points;
+		int score = (int)xoxoxo.Instance.Points;
 
 		scoreLabel.Text = $"SCORE: {score:00000}";
 

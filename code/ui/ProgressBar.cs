@@ -26,17 +26,17 @@ public class ProgressBar : Panel
 	{
 
 
-		bar.Style.Width = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7 ); // Offset a bit because bar rounding looks ugly otherwide
+		bar.Style.Width = Length.Percent( xoxoxo.Instance.KissProgress * 93 + 7 ); // Offset a bit because bar rounding looks ugly otherwide
 		bar.Style.SetBackgroundImage( $"ui/stripes/stripes{(int)(stripesPosition % 8)}.png" );
-		heart.Style.Left = Length.Percent( xoxoxo.Game.KissProgress * 93 + 7);
+		heart.Style.Left = Length.Percent( xoxoxo.Instance.KissProgress * 93 + 7);
 
 
-		if ( xoxoxo.Game.Kissing )
+		if ( xoxoxo.Instance.Kissing )
 		{
 
-			stripesPosition += xoxoxo.Game.Combo * Time.Delta;
+			stripesPosition += xoxoxo.Instance.Combo * Time.Delta;
 
-			float heartRate = Math.Max( 0.5f - xoxoxo.Game.Combo / 100f, 0.05f );
+			float heartRate = Math.Max( 0.5f - xoxoxo.Instance.Combo / 100f, 0.05f );
 
 			if ( nextParticle >= heartRate )
 			{

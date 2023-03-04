@@ -34,11 +34,11 @@ public partial class Clock : AnimatedEntity
 	public void Tick()
 	{
 
-		float time = xoxoxo.Game.RoundTimeNormal * turnDuration;
+		float time = xoxoxo.Instance.RoundTimeNormal * turnDuration;
 
 		CurrentSequence.TimeNormalized = ( (time / clockHours ) + hourFraction * startingTime ) % 1f;
 
-		//DebugOverlay.Text( $"RoundTime: {xoxoxo.Game.RoundTime}\nNormalTime: {xoxoxo.Game.RoundTimeNormal}", Position - Vector3.Up * CollisionBounds.Size.z / 2f );
+		//DebugOverlay.Text( $"RoundTime: {xoxoxo.Instance.RoundTime}\nNormalTime: {xoxoxo.Instance.RoundTimeNormal}", Position - Vector3.Up * CollisionBounds.Size.z / 2f );
 
 	}
 

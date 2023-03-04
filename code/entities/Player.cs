@@ -36,7 +36,7 @@ public partial class Player : Sandbox.Player
 		if ( Actor == null ) return;
 		if ( IsInCutscene ) return;
 
-		if ( xoxoxo.Game.IsGameRunning )
+		if ( xoxoxo.Instance.IsGameRunning )
 		{
 
 			if ( Input.Down( InputButton.Jump ) )
@@ -78,7 +78,7 @@ public partial class Player : Sandbox.Player
 		else
 		{
 
-			if ( xoxoxo.Game.Kissing )
+			if ( xoxoxo.Instance.Kissing )
 			{
 
 				EndKissing();
@@ -99,7 +99,7 @@ public partial class Player : Sandbox.Player
 	{
 
 		Actor.CurrentState = KisserState.Kissing;
-		xoxoxo.Game.KisserRight.CurrentState = KisserState.Kissing;
+		xoxoxo.Instance.KisserRight.CurrentState = KisserState.Kissing;
 
 		LastKiss = 0f;
 
@@ -109,7 +109,7 @@ public partial class Player : Sandbox.Player
 	{
 
 		Actor.CurrentState = KisserState.Working;
-		xoxoxo.Game.KisserRight.CurrentState = KisserState.Working;
+		xoxoxo.Instance.KisserRight.CurrentState = KisserState.Working;
 
 		LastKiss = 0f;
 
@@ -139,9 +139,9 @@ public partial class Player : Sandbox.Player
 	{
 
 		KissingPostProcess.DepthOfField.Enabled = true;
-		KissingPostProcess.DepthOfField.FocalLength = 340f - Math.Min( ( xoxoxo.Game.Combo - 1f ) * 75f, 150f );
+		KissingPostProcess.DepthOfField.FocalLength = 340f - Math.Min( ( xoxoxo.Instance.Combo - 1f ) * 75f, 150f );
 		KissingPostProcess.DepthOfField.FocalPoint = 30000f;
-		KissingPostProcess.DepthOfField.Radius = MathF.Min( MathF.Pow( xoxoxo.Game.Combo + 0.001f, 1.5f ), 100f );
+		KissingPostProcess.DepthOfField.Radius = MathF.Min( MathF.Pow( xoxoxo.Instance.Combo + 0.001f, 1.5f ), 100f );
 
 	}
 
@@ -149,7 +149,7 @@ public partial class Player : Sandbox.Player
 	public void CharacterSelected( string character )
 	{
 
-		Actor = xoxoxo.Game.KisserLeft;
+		Actor = xoxoxo.Instance.KisserLeft;
 
 	}
 
@@ -168,8 +168,8 @@ public partial class RoomCamera : CameraMode
 		if ( !IsDialogue )
 		{
 
-			TargetPosition = xoxoxo.Game.GameCamera.Position;
-			TargetRotation = xoxoxo.Game.GameCamera.Rotation;
+			TargetPosition = xoxoxo.Instance.GameCamera.Position;
+			TargetRotation = xoxoxo.Instance.GameCamera.Rotation;
 
 		}
 

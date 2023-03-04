@@ -28,9 +28,9 @@ public partial class xoxoxo
 		if ( Game.IsClient ) return;
 
 
-		if ( xoxoxo.Game.KisserLeft == null || xoxoxo.Game.KisserRight == null || xoxoxo.Game.GameCamera == null ) return;
+		if ( xoxoxo.Instance.KisserLeft == null || xoxoxo.Instance.KisserRight == null || xoxoxo.Instance.GameCamera == null ) return;
 
-		if ( xoxoxo.Game.KisserLeft.IsKissing && xoxoxo.Game.KisserRight.IsKissing )
+		if ( xoxoxo.Instance.KisserLeft.IsKissing && xoxoxo.Instance.KisserRight.IsKissing )
 		{
 
 			if ( Kissing == false )

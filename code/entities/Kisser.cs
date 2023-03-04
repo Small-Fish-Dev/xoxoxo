@@ -31,22 +31,22 @@ public partial class Kisser : Human
 
 	public KisserState CurrentState { get; internal set; } = KisserState.Working;
 	public bool IsKissing => CurrentState == KisserState.Kissing;
-	public bool IsLeft => this == xoxoxo.Game.KisserLeft;
+	public bool IsLeft => this == xoxoxo.Instance.KisserLeft;
 	public override string OfficeName => IsLeft ? "Terrence" : "Theresa";
 
 	[Event.Tick]
 	public void HandleVisuals()
 	{
 
-		if ( xoxoxo.Game.KisserLeft == null ) return;
-		if ( xoxoxo.Game.KisserRight == null ) return;
+		if ( xoxoxo.Instance.KisserLeft == null ) return;
+		if ( xoxoxo.Instance.KisserRight == null ) return;
 
 		var desiredAnimation = CurrentState != KisserState.Running ? (IsKissing ? (IsLeft ? 3 : 2) : 1) : 0;
 
 		SetAnimParameter( "Action", desiredAnimation );
 		SetAnimParameter( "Speed", CurrentState == KisserState.Running ? 140f : 0f );
 
-		var distance = xoxoxo.Game.KisserLeft.OriginalPosition.Distance( xoxoxo.Game.KisserRight.OriginalPosition ) / 2 - 24.7f;
+		var distance = xoxoxo.Instance.KisserLeft.OriginalPosition.Distance( xoxoxo.Instance.KisserRight.OriginalPosition ) / 2 - 24.7f;
 
 		var wishPosition = CurrentState switch
 		{

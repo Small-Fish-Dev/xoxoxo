@@ -61,8 +61,8 @@ public partial class HUD : HudEntity<RootPanel>
 	{
 
 		float duration = 1f;
-		float size = Math.Min( xoxoxo.Game.Combo / 15f + 1f, 3f );
-		float speed = Math.Min( xoxoxo.Game.Combo / 5f + 1f, 14f );
+		float size = Math.Min( xoxoxo.Instance.Combo / 15f + 1f, 3f );
+		float speed = Math.Min( xoxoxo.Instance.Combo / 5f + 1f, 14f );
 
 		var heart = new HeartParticle( duration, size, speed, null, new Vector2( 0f, -0.2f ) );
 		heart.Style.Left = Length.Pixels( RootPanel.Style.Width.Value.GetPixels( RootPanel.ScaleFromScreen ) / 2 );
@@ -75,8 +75,8 @@ public partial class HUD : HudEntity<RootPanel>
 	public void CreateHeartParticle( Vector2 center, float radius )
 	{
 
-		float size = Math.Min( xoxoxo.Game.Combo / 20f + 0.5f, 1.5f );
-		float speed = Math.Min( xoxoxo.Game.Combo / 10f + 0.5f, 4f );
+		float size = Math.Min( xoxoxo.Instance.Combo / 20f + 0.5f, 1.5f );
+		float speed = Math.Min( xoxoxo.Instance.Combo / 10f + 0.5f, 4f );
 
 		Vector2 direction = Vector2.Random.Normal;
 		var heart = new HeartParticle( 1f, size, speed, direction, new Vector2( 3f, -direction.y ) );

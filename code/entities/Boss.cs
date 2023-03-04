@@ -32,7 +32,7 @@ public partial class Boss : Human
 	{
 
 		[BossState.Waiting] = 0f,
-		[BossState.Walking] = 50f * ( 1f + xoxoxo.Game.CurrentRound / 3f ),
+		[BossState.Walking] = 50f * ( 1f + xoxoxo.Instance.CurrentRound / 3f ),
 		[BossState.Shouting] = 0f,
 		[BossState.Attacking] = 120f,
 
@@ -57,9 +57,9 @@ public partial class Boss : Human
 
 		SetAnimParameter( "Speed", StateSpeed[CurrentState] );
 
-		if ( xoxoxo.Game.GameCamera == null ) return;
+		if ( xoxoxo.Instance.GameCamera == null ) return;
 
-		var lookAtInsideTrigger = xoxoxo.Game.GameCamera.Position - Vector3.Up * 64f;
+		var lookAtInsideTrigger = xoxoxo.Instance.GameCamera.Position - Vector3.Up * 64f;
 		var lookAtOutsideTrigger = Position + Rotation.Forward + new Vector3( 0f, 0f, MathX.Clamp( Velocity.z, -0.1f, 0.1f ) * 15f );
 
 		var LookAtPosition = CurrentState switch
@@ -83,7 +83,7 @@ public partial class Boss : Human
 	{
 
 		if ( Game.IsClient ) return;
-		if ( !xoxoxo.Game.IsGameRunning ) return;
+		if ( !xoxoxo.Instance.IsGameRunning ) return;
 
 		if ( CurrentState == BossState.Walking )
 		{
@@ -91,7 +91,7 @@ public partial class Boss : Human
 			if ( IsInsideTrigger )
 			{
 
-				if ( xoxoxo.Game.Kissing )
+				if ( xoxoxo.Instance.Kissing )
 				{
 
 					CaughtKissers();
@@ -109,12 +109,12 @@ public partial class Boss : Human
 			{
 
 				lastTrip = 0f;
-				float averageTrip = 24f - xoxoxo.Game.CurrentRound * 3f;
+				float averageTrip = 24f - xoxoxo.Instance.CurrentRound * 3f;
 				nextTrip = Rand.Float( averageTrip - 4f, averageTrip + 4f );
 
 				Path targetPath = goingBackwards ?
-					(Rand.Int(1) == 1 ? xoxoxo.Game.StairsPath : xoxoxo.Game.ExitPath) :
-					(CurrentPath == xoxoxo.Game.ExitPath ? xoxoxo.Game.ExitPath : xoxoxo.Game.StairsPath);
+					(Rand.Int(1) == 1 ? xoxoxo.Instance.StairsPath : xoxoxo.Instance.ExitPath) :
+					(CurrentPath == xoxoxo.Instance.ExitPath ? xoxoxo.Instance.ExitPath : xoxoxo.Instance.StairsPath);
 
 				SetPath( targetPath, currentProgress, !goingBackwards );
 
@@ -151,8 +151,8 @@ public partial class Boss : Human
 	public void ComputeMovements()
 	{
 
-		if ( xoxoxo.Game.ExitPath == null ) return;
-		if ( xoxoxo.Game.StairsPath == null ) return;
+		if ( xoxoxo.Instance.ExitPath == null ) return;
+		if ( xoxoxo.Instance.StairsPath == null ) return;
 
 		if ( CurrentPath == null ) return;
 
@@ -169,7 +169,7 @@ public partial class Boss : Human
 
 			BossState.Walking => CurrentPath.GetPathPosition( currentProgress ),
 			BossState.Shouting => Position,
-			BossState.Attacking => Position + ( xoxoxo.Game.KisserLeft.Position - Position ).Normal * Time.Delta * currentSpeed,
+			BossState.Attacking => Position + ( xoxoxo.Instance.KisserLeft.Position - Position ).Normal * Time.Delta * currentSpeed,
 			BossState.Waiting => Position,
 			_ => Position,
 
@@ -179,7 +179,7 @@ public partial class Boss : Human
 		{
 
 			BossState.Walking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
-			BossState.Shouting => Rotation.LookAt( xoxoxo.Game.GameCamera.Position.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
+			BossState.Shouting => Rotation.LookAt( xoxoxo.Instance.GameCamera.Position.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
 			BossState.Attacking => Rotation.LookAt( wishPosition.WithZ( 0 ) - Position.WithZ( 0 ), Vector3.Up ),
 			BossState.Waiting => Rotation,
 			_ => Rotation,
@@ -207,17 +207,17 @@ public partial class Boss : Human
 	public void ComputeDoors()
 	{
 
-		if ( xoxoxo.Game.ExitDoor != null )
+		if ( xoxoxo.Instance.ExitDoor != null )
 		{
 
-			ComputeDoor( xoxoxo.Game.ExitDoor, 80f );
+			ComputeDoor( xoxoxo.Instance.ExitDoor, 80f );
 
 		}
 
-		if ( xoxoxo.Game.OfficeDoor != null )
+		if ( xoxoxo.Instance.OfficeDoor != null )
 		{
 
-			ComputeDoor( xoxoxo.Game.OfficeDoor, 100f );
+			ComputeDoor( xoxoxo.Instance.OfficeDoor, 100f );
 
 		}
 
@@ -288,7 +288,7 @@ public partial class Boss : Human
 
 		if ( Game.IsClient ) return;
 
-		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
+		SetPath( xoxoxo.Instance.ExitPath, 0.5f, true, true );
 
 		await Task.Delay( 500 );
 		StartDialogue( "If I catch any of you kissing again I'll be forced to take action! You can do that when work finishes at 17:00", 8000, false, 20 );
@@ -328,10 +328,10 @@ public partial class Boss : Human
 
 		await Task.Delay( 4000 );
 
-		SetPath( xoxoxo.Game.ExitPath, 0.5f, true, true );
+		SetPath( xoxoxo.Instance.ExitPath, 0.5f, true, true );
 
 		await Task.Delay( 100 );
-		StartDialogue( cutscenePhrases[Math.Min( xoxoxo.Game.CurrentRound - 1, 6 )], 6000, false, 30 );
+		StartDialogue( cutscenePhrases[Math.Min( xoxoxo.Instance.CurrentRound - 1, 6 )], 6000, false, 30 );
 
 	}
 

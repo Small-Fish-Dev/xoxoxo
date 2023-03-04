@@ -15,7 +15,7 @@ public partial class xoxoxo
 	public void LoadMusic()
 	{
 
-		var gameCamera = xoxoxo.Game.GameCamera;
+		var gameCamera = xoxoxo.Instance.GameCamera;
 
 		if ( gameCamera != null )
 		{
@@ -58,9 +58,9 @@ public partial class xoxoxo
 		else
 		{
 
-			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.vsnd", xoxoxo.Game.GameCamera.Position );
+			kissingMusic = new PausableSound( "sounds/pornmusic_uncompressed.vsnd", xoxoxo.Instance.GameCamera.Position );
 
-			kissingMusic.StartSound( xoxoxo.Game.KissProgress );
+			kissingMusic.StartSound( xoxoxo.Instance.KissProgress );
 
 		}
 

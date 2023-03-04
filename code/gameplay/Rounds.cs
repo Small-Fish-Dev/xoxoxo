@@ -121,7 +121,7 @@ public partial class xoxoxo
 
 		if ( Host.Game.IsClient ) return;
 
-		GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Game.Points );
+		GameServices.SubmitScore( Client.All[0].PlayerId, (float)xoxoxo.Instance.Points );
 
 	}
 
@@ -143,7 +143,7 @@ public partial class xoxoxo
 	public void StartGame()
 	{
 
-		xoxoxo.Game.IsGameRunning = true;
+		xoxoxo.Instance.IsGameRunning = true;
 
 	}
 

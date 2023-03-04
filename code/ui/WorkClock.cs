@@ -29,12 +29,12 @@ public class WorkClock : Panel
 	{
 
 		// Hardcoded values hooray!
-		int currentHour = (int)( xoxoxo.Game.RoundTimeNormal * 8 + 9 );
+		int currentHour = (int)( xoxoxo.Instance.RoundTimeNormal * 8 + 9 );
 		string hoursFormat = $"{(currentHour < 10 ? "0" : "")}{currentHour}";
-		int currentMinutes = (int)( ( xoxoxo.Game.RoundTimeNormal * 8 + 9 - currentHour ) * 60 );
+		int currentMinutes = (int)( ( xoxoxo.Instance.RoundTimeNormal * 8 + 9 - currentHour ) * 60 );
 		string minutesFormat = $"{(currentMinutes < 10 ? "0" : "")}{currentMinutes}";
 		time.Text = $"{hoursFormat}:{minutesFormat}";
-		date.Text = $"{dates[( xoxoxo.Game.CurrentRound ) % dates.Length]}|";
+		date.Text = $"{dates[( xoxoxo.Instance.CurrentRound ) % dates.Length]}|";
 		countdown.Text = $"-{ 17 - currentHour}h";
 
 	}
