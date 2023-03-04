@@ -113,7 +113,7 @@ public partial class Boss : Human
 				nextTrip = Game.Random.Float( averageTrip - 4f, averageTrip + 4f );
 
 				Path targetPath = goingBackwards ?
-					(Rand.Int(1) == 1 ? xoxoxo.Instance.StairsPath : xoxoxo.Instance.ExitPath) :
+					(Game.Random.Int(1) == 1 ? xoxoxo.Instance.StairsPath : xoxoxo.Instance.ExitPath) :
 					(CurrentPath == xoxoxo.Instance.ExitPath ? xoxoxo.Instance.ExitPath : xoxoxo.Instance.StairsPath);
 
 				SetPath( targetPath, currentProgress, !goingBackwards );
