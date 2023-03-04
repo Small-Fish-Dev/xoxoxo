@@ -42,7 +42,7 @@ public class ProgressBar : Panel
 			{
 
 				Vector2 center = new Vector2( heart.Box.Left * ScaleFromScreen, (heart.Box.Top + heart.Box.Bottom) / 2 * ScaleFromScreen );
-				Event.Run( "HeartParticle", center, heart.Box.Rect.width / 2 * ScaleFromScreen );
+				Event.Run( "HeartParticle", center, heart.Box.Rect.Width / 2 * ScaleFromScreen );
 
 				nextParticle = 0f;
 
