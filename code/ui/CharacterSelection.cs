@@ -49,7 +49,8 @@ public class CharacterBox : Panel
 
 		var light = new SceneSpotLight( world, Vector3.Up * 150f + Vector3.Forward * -150f, new Color( 1f, 0.7f, 0.5f ) * 40f );
 		light.Rotation = Rotation.LookAt( -light.Position );
-		light.SpotCone = new SpotLightCone { Inner = 90, Outer = 180 };
+		light.ConeInner = 90;
+		light.ConeOuter = 180;
 
 
 		human = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
