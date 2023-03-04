@@ -2,7 +2,6 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Transactions;
 
 public enum KisserState
 {
