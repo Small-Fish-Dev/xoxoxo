@@ -6,6 +6,16 @@
 		children = 
 		[
 			{
+				_class = "AnimConstraintList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_animconstraintlist.vmdl_prefab"
+					},
+				]
+			},
+			{
 				_class = "ModelModifierList"
 				children = 
 				[
@@ -17,6 +27,36 @@
 						mirror_z = false
 						flip_bone_forward = false
 						swap_left_and_right_bones = false
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_lodgrouplist.vmdl_prefab"
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_materialgrouplist.vmdl_prefab"
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_rendermeshlist.vmdl_prefab"
 					},
 				]
 			},
@@ -118,6 +158,132 @@
 					},
 					{
 						_class = "AnimFile"
+						name = "Expressions_IdleNoiseLayer_02"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizen/animations/face/Citizen@Expressions_IdleNoiseLayer_02.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 5.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "IdleLayer_Breathe"
+						children = 
+						[
+							{
+								_class = "AnimStartLoop"
+								start_loop_frame = 30
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizen/animations/Citizen@IdleLayer_Breathe.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "IdlePose_Default"
+						activity_name = "ACT_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizen/animations/citizen@idlepose_default.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "Run_N"
+						children = 
+						[
+							{
+								_class = "Prefab"
+								target_file = "models/citizen/prefabs/run_process.vmdl_prefab"
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizen/animations/Citizen@Run_N.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "Walk_N"
+						children = 
+						[
+							{
+								_class = "Prefab"
+								target_file = "models/citizen/prefabs/walk_process.vmdl_prefab"
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/citizen/animations/Citizen@Walk_N.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
 						name = "Expressions_Attacking"
 						activity_name = ""
 						activity_weight = 1
@@ -173,10 +339,178 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "Only_UpperBody"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "arm_elbow_helper_L"
+								weight = 0.0
+							},
+							{
+								bone = "arm_elbow_helper_R"
+								weight = 0.0
+							},
+							{
+								bone = "arm_lower_L_twist"
+								weight = 0.0
+							},
+							{
+								bone = "arm_lower_R_twist"
+								weight = 0.0
+							},
+							{
+								bone = "arm_upper_L_twist"
+								weight = 0.0
+							},
+							{
+								bone = "arm_upper_R_twist"
+								weight = 0.0
+							},
+							{
+								bone = "clavicle_L"
+								weight = 1.0
+							},
+							{
+								bone = "clavicle_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_L_IK_target"
+								weight = 1.0
+							},
+							{
+								bone = "hand_R_IK_target"
+								weight = 1.0
+							},
+							{
+								bone = "neck_0"
+								weight = 1.0
+							},
+							{
+								bone = "spine_0"
+								weight = 1.0
+							},
+							{
+								bone = "spine_1"
+								weight = 1.0
+							},
+							{
+								bone = "spine_2"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "Only_Eyelids"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "eye_L"
+								weight = 0.0
+							},
+							{
+								bone = "eye_R"
+								weight = 0.0
+							},
+							{
+								bone = "face_lid_lower_L"
+								weight = 1.0
+							},
+							{
+								bone = "face_lid_lower_R"
+								weight = 1.0
+							},
+							{
+								bone = "face_lid_upper_L"
+								weight = 1.0
+							},
+							{
+								bone = "face_lid_upper_R"
+								weight = 1.0
+							},
+							{
+								bone = "head"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "Half_Morph"
+						default_weight = 0.0
+						weights = [  ]
+						master_morph_weight = 0.509881
+						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "LookAtChain"
+						name = "LookChain"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 0.6
+								},
+								{
+									name = "neck_0"
+									weight = 0.35
+								},
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "forward_reference"
+						parent_bone = "head"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 90.0, 90.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "Prefab"
+						target_file = "models/citizen/prefabs/citizen_bodygrouplist.vmdl_prefab"
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/terry/officeterry.vanmgrph"
-		base_model_name = "models/citizen/citizen.vmdl"
+		base_model_name = ""
 	}
 }
