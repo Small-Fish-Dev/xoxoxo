@@ -135,7 +135,7 @@ public partial class Kisser : Human
 	
 	// Temporary fix for issue https://github.com/Facepunch/sbox-issues/issues/1807
 	int animationFixed = 3;
-	bool redo = false;
+	int redo = 5;
 	public void UnfuckAnimations()
 	{
 
@@ -150,10 +150,10 @@ public partial class Kisser : Human
 		else
 		{
 
-			if ( !redo )
+			if ( redo >= 0 )
 			{
 
-				redo = true;
+				redo--;
 				animationFixed = 3;
 
 			}
