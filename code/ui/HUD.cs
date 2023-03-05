@@ -15,7 +15,6 @@ public partial class HUD : HudEntity<RootPanel>
 		if ( !Game.IsClient ) return;
 
 		RootPanel.StyleSheet.Load( "ui/HUD.scss" );
-
 		RootPanel.AddChild<CharacterSelection>();
 
 	}

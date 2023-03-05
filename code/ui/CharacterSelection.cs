@@ -47,11 +47,11 @@ public class CharacterBox : Panel
 		scenePanel.Style.Width = Length.Percent( 100 );
 		scenePanel.Style.Height = Length.Percent( 100 );
 
-		var light = new SceneSpotLight( world, Vector3.Up * 150f + Vector3.Forward * -150f, new Color( 1f, 0.7f, 0.5f ) * 40f );
-		light.Rotation = Rotation.LookAt( -light.Position );
-		light.ConeInner = 90;
-		light.ConeOuter = 180;
-
+		var lightWarm = new SceneSpotLight( world, Vector3.Backward * 100f + Vector3.Up * 30f + Vector3.Left * 100f, new Color( 1f, 0.95f, 0.8f ) * 10f );
+		lightWarm.Rotation = Rotation.LookAt( -lightWarm.Position );
+		lightWarm.Radius = 200f;
+		lightWarm.ConeInner = 90f;
+		lightWarm.ConeOuter = 90f;
 
 		human = new SceneModel( world, "models/citizen/citizen.vmdl", Transform.Zero );
 		human.Rotation = Rotation.FromYaw( 180 );

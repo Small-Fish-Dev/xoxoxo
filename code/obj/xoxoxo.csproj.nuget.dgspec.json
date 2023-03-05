@@ -4,12 +4,12 @@
     "C:\\Users\\uberm\\Desktop\\Addons\\xoxoxo\\code\\xoxoxo.csproj": {}
   },
   "projects": {
-    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\base.csproj": {
+    "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\base.csproj",
+        "projectUniqueName": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base.csproj",
         "projectName": "Base",
-        "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\base.csproj",
+        "projectPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\Base.csproj",
         "packagesPath": "C:\\Users\\uberm\\.nuget\\packages\\",
         "outputPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\sbox\\addons\\base\\code\\obj\\",
         "projectStyle": "PackageReference",

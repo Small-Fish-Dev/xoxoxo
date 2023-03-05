@@ -16,7 +16,10 @@ public partial class xoxoxo : GameManager
 	{
 
 		Instance = this;
-		new HUD();
+		if( Game.IsClient )
+		{
+			new HUD();
+		}
 
 	}
 	public override void ClientJoined( IClient client )
