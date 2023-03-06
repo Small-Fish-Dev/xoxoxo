@@ -3,8 +3,8 @@ using System;
 
 public partial class Player
 {
-	[Net] public Vector3 TargetPosition { get; set; }
-	[Net] public Rotation TargetRotation { get; set; }
+	[Net, Predicted] public Vector3 TargetPosition { get; set; }
+	[Net, Predicted] public Rotation TargetRotation { get; set; }
 	[Net] public bool IsDialogue { get; set; } = false;
 
 	public void ComputeCamera()
@@ -18,9 +18,10 @@ public partial class Player
 
 		}
 
+		if ( !Game.IsClient ) return;
+
 		Camera.Position = Vector3.Lerp( Camera.Position, TargetPosition, Time.Delta * 5, true );
 		Camera.Rotation = Rotation.Lerp( Camera.Rotation, TargetRotation, Time.Delta * 5, true );
-		Log.Error( Camera.Position );
 
 	}
 

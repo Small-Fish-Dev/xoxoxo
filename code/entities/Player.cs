@@ -82,14 +82,14 @@ public partial class Player : AnimatedEntity
 
 		}
 
+	}
 
-		if ( Game.IsClient )
-		{
+	public override void FrameSimulate( IClient cl )
+	{
+		base.FrameSimulate( cl );
 
-			ComputeCamera();
-			ComputePostProcess();
-		}
-
+		ComputeCamera();
+		ComputePostProcess();
 	}
 
 	public void StartKissing()
