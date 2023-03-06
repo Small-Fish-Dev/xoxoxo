@@ -22,7 +22,7 @@ public partial class xoxoxo
 			if ( backgroundMusic == null )
 			{
 
-				backgroundMusic = Sound.FromEntity( "mungusmeandtheboys", gameCamera );
+				backgroundMusic = Sound.FromEntity( "sounds/mungusmeandtheboys.sound", gameCamera );
 
 			}
 			else
@@ -31,7 +31,7 @@ public partial class xoxoxo
 				if ( !backgroundMusic.Value.IsPlaying )
 				{
 
-					backgroundMusic = Sound.FromEntity( "mungusmeandtheboys", gameCamera ); // You cannot stop it.
+					backgroundMusic = Sound.FromEntity( "sounds/mungusmeandtheboys.sound", gameCamera ); // You cannot stop it.
 
 				}
 
